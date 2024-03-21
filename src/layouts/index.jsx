@@ -22,6 +22,7 @@ const MainLayout = () => {
                     margin: 10,
                     padding: 10,
                     background: "#FFFFFF",
+                    height: "calc(100% - 60px - 60px)",
                     // boxShadow: "0px 3px 14px rgba(226, 225, 225, 0.75)"
                 }}>
                 <Outlet/>

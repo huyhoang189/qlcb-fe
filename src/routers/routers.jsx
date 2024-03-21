@@ -4,6 +4,7 @@ import MainLayout from "../layouts";
 import QuanLyChucDanhKhoaHoc from "../pages/quan-ly-chuc-danh-khoa-hoc/index.jsx";
 import NotFound from "../pages/not-found/index.jsx";
 
+
 export const router = createBrowserRouter([
     //   {
     //     path: "login",
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
             {
                 path: "",
                 element: <Home/>,
+
             },
             {
                 path: "quan-tri-danh-muc",

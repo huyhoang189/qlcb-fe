@@ -10,6 +10,7 @@ const Header = () => {
 
     const collapseSiderbar = () => {
         dispatch(appSlice.actions.toggleSiderbar())
+
     }
     return (
         <Flex

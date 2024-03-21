@@ -1,6 +1,11 @@
-import {BarsOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
+import {BarsOutlined, HomeOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
 
 export const publicRouter = [
+    {
+        key: "",
+        icon: <HomeOutlined/>,
+        label: "Trang chủ",
+    },
     {
         key: "quan-ly-ho-so-can-bo",
         icon: <UserOutlined/>,
