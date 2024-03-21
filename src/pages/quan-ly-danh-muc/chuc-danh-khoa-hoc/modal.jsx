@@ -1,8 +1,8 @@
-import CustomeModal from "../../components/Form/modal.jsx";
+import CustomeModal from "../../../components/Form/modal.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import chucDanhKhoaHocSlice from "../../toolkits/quan-ly-chuc-danh-khoa-hoc/slice.js"
-import {ACTION_NAME} from "../../utils/common.js";
-import TextInput from "../../components/Form/textinput.jsx";
+import chucDanhKhoaHocSlice from "../../../toolkits/chuc-danh-khoa-hoc/slice.js"
+import {ACTION_NAME} from "../../../utils/common.js";
+import TextInput from "../../../components/Form/textinput.jsx";
 
 const ModalItem = () => {
 

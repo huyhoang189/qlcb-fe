@@ -7,7 +7,7 @@ export const publicRouter = [
         label: "Trang chủ",
     },
     {
-        key: "quan-ly-ho-so-can-bo",
+        key: "quan-ly-ho-so-don-vi",
         icon: <UserOutlined/>,
         children: [],
         label: "Quản lý hồ sơ cán bộ",
@@ -17,8 +17,12 @@ export const publicRouter = [
         icon: <BarsOutlined/>,
         children: [
             {
-                key: "quan-ly-chuc-danh-khoa-hoc",
+                key: "chuc-danh-khoa-hoc",
                 label: "Quản lý chức danh khoa học",
+            },
+            {
+                key: "don-vi",
+                label: "Quản lý đơn vị",
             },
         ],
         label: "Quản trị danh mục",

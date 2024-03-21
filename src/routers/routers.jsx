@@ -1,7 +1,8 @@
 import {createBrowserRouter} from "react-router-dom";
 import Home from "../pages/home";
 import MainLayout from "../layouts";
-import QuanLyChucDanhKhoaHoc from "../pages/quan-ly-chuc-danh-khoa-hoc/index.jsx";
+import QuanLyChucDanhKhoaHoc from "../pages/quan-ly-danh-muc/chuc-danh-khoa-hoc/index.jsx";
+import DonVi from "../pages/quan-ly-danh-muc/don-vi/index.jsx";
 import NotFound from "../pages/not-found/index.jsx";
 
 
@@ -24,7 +25,11 @@ export const router = createBrowserRouter([
                 path: "quan-tri-danh-muc",
                 children: [
                     {
-                        path: "quan-ly-chuc-danh-khoa-hoc",
+                        path: "don-vi",
+                        element: <DonVi/>
+                    },
+                    {
+                        path: "chuc-danh-khoa-hoc",
                         element: <QuanLyChucDanhKhoaHoc/>
                     }
                 ]

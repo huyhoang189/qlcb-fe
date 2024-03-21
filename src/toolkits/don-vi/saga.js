@@ -1,19 +1,19 @@
 import {all, call, put, takeEvery} from "redux-saga/effects";
-import chucDanhKhoaHocSlice from "./slice";
+import donViSlice from "./slice";
 import {ACTION_NAME,} from "../../utils/common.js";
-import {create, deleteItem, getAll, update} from "../../apis/quan-ly-chuc-danh-khoa-hoc.api.js";
+import {create, deleteItem, getAll, update} from "../../apis/don-vi.js";
 
 function* _getAll({payload}) {
     try {
         const {data, status} = yield call(getAll, payload);
         const {metadata} = data
         if (status === 200 || status === 201) {
-            yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocsSuccess(metadata));
+            yield put(donViSlice.actions.getDonVisSuccess(metadata));
         } else {
-            yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocsError([]));
+            yield put(donViSlice.actions.getDonVisError([]));
         }
     } catch (error) {
-        yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocsError([]));
+        yield put(donViSlice.actions.getDonVisError([]));
     }
 }
 
@@ -34,21 +34,21 @@ function* _handleItem({payload}) {
 
         yield put(
             isSuccess
-                ? chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHocSuccess()
-                : chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHocError([])
+                ? donViSlice.actions.handleDonViSuccess()
+                : donViSlice.actions.handleDonViError([])
         );
 
         if (isSuccess) {
-            yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs(payload));
+            yield put(donViSlice.actions.getDonVis(payload));
         }
     } catch (error) {
-        yield put(chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHocError());
+        yield put(donViSlice.actions.handleDonViError());
     }
 }
 
 export default function* saga() {
     yield all([
-        yield takeEvery(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs().type, _getAll),
-        yield takeEvery(chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHoc().type, _handleItem),
+        yield takeEvery(donViSlice.actions.getDonVis().type, _getAll),
+        yield takeEvery(donViSlice.actions.handleDonVi().type, _handleItem),
     ]);
 }

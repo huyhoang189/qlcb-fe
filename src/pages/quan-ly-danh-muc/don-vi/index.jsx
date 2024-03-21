@@ -1,13 +1,13 @@
-import CustomBreadcrumb from "../../components/breadcrumb.jsx";
-import {ContentWrapper} from "../../assets/styles/contentWrapper.style.js";
-import CustomeTable from "../../components/Table/table.jsx";
+import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
+import {ContentWrapper} from "../../../assets/styles/contentWrapper.style.js";
+import CustomeTable from "../../../components/Table/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import chucDanhKhoaHocSlice from "../../toolkits/quan-ly-chuc-danh-khoa-hoc/slice.js"
+import donViSlice from "../../../toolkits/don-vi/slice.js"
 import {useEffect, useState} from "react";
 import {Space} from "antd";
-import {CreateButton, DeleteButton, UpdateButton} from "../../components/Button/index.jsx";
-import Header from "../../components/Table/header.jsx";
-import TextInput from "../../components/Form/textinput.jsx";
+import {CreateButton, DeleteButton, UpdateButton} from "../../../components/Button/index.jsx";
+import Header from "../../../components/Table/header.jsx";
+import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
 
 const pageHeader = {
@@ -20,7 +20,7 @@ const pageHeader = {
             title: "Quản lý danh mục",
         },
         {
-            title: "Quản lý chức danh khoa học",
+            title: "Quản lý danh mục đơn vị",
         },
     ],
 };
@@ -33,11 +33,31 @@ const baseColumns = [
         width: 50,
         align: "center",
     },
-
     {
-        title: "Tên chức danh",
-        dataIndex: "ten_chuc_danh",
-        key: "ten_chuc_danh",
+        title: "Mã đơn vị",
+        dataIndex: "ma_don_vi",
+        key: "ma_don_vi",
+        align: "center",
+    },
+    {
+        title: "Tên đơn vị",
+        dataIndex: "ten_don_vi",
+        key: "ten_don_vi",
+        align: "center",
+    },
+    {
+        title: "Đơn vị cha",
+        dataIndex: "don_vi",
+        key: "don_vi",
+        align: "center",
+        render: (text, record) => {
+            return record?.don_vi?.ten_don_vi
+        }
+    },
+    {
+        title: "Số thứ tự",
+        dataIndex: "so_thu_tu",
+        key: "so_thu_tu",
         align: "center",
     },
     {
@@ -50,16 +70,15 @@ const baseColumns = [
 ]
 
 
-const QuanLyChucDanhKhoaHoc = () => {
+const DonVi = () => {
     const dispatch = useDispatch()
     const {
-        modalActive,
-        chucDanhKhoaHocs,
+        donVis,
         isLoading,
         totalItem,
         pageNumber,
         pageSize
-    } = useSelector(state => state.chucDanhKhoaHocs)
+    } = useSelector(state => state.donVis)
 
     const [keyword, setKeyword] = useState("");
 
@@ -70,7 +89,7 @@ const QuanLyChucDanhKhoaHoc = () => {
 
     const handlePaginationChange = (current, pageSize) => {
         dispatch(
-            chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
+            donViSlice.actions.getDonVis({
                 keyword,
                 pageSize: pageSize,
                 pageNumber: current,
@@ -80,7 +99,7 @@ const QuanLyChucDanhKhoaHoc = () => {
 
 
     const handleModal = (_item) => {
-        dispatch(chucDanhKhoaHocSlice.actions.toggleModal(_item))
+        dispatch(donViSlice.actions.toggleModal(_item))
     }
 
 
@@ -102,7 +121,7 @@ const QuanLyChucDanhKhoaHoc = () => {
                     <DeleteButton
                         onConfirm={() => {
                             dispatch(
-                                chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHoc({
+                                donViSlice.actions.handleDonVi({
                                     item: record,
                                     actionName: "DELETE",
                                     pageSize: pageSize,
@@ -123,7 +142,7 @@ const QuanLyChucDanhKhoaHoc = () => {
 
     //side effect
     useEffect(() => {
-        dispatch(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs(
+        dispatch(donViSlice.actions.getDonVis(
             {
                 keyword,
                 pageSize: 10,
@@ -147,7 +166,7 @@ const QuanLyChucDanhKhoaHoc = () => {
                     />
                     <CreateButton onClick={() => handleModal(null)}/>
                 </Header>}
-            data={chucDanhKhoaHocs}
+            data={donVis}
             columns={columns}
             isLoading={isLoading}
             pagination={{
@@ -161,4 +180,4 @@ const QuanLyChucDanhKhoaHoc = () => {
     </ContentWrapper>
 }
 
-export default QuanLyChucDanhKhoaHoc
+export default DonVi
