@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {RouterProvider} from "react-router-dom";
@@ -12,16 +11,21 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         theme={{
             token: {
                 colorBgBase: "#F1F1F1",
-                colorBgHeader: "#00193B",
+                colorBgHeader: "#78b43d",
                 colorBase: "#fff",
                 borderRadius: 2,
                 colorBorderSecondary: "#d6d9dc",
                 colorBorder: "#d6d9dc",
-                fontSize: 13,
+                fontSize: 11,
                 fontFamily: "Archivo",
-                // colorPrimary: "#00193B",
+                colorPrimary: "#3c811e",
             },
-            components: {}
+            components: {
+                Table: {
+                    rowHoverBg: "#fff"
+                },
+                Tree: {}
+            }
         }}
     >
         <Provider store={store}>

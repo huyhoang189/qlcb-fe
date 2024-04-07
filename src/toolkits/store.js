@@ -3,9 +3,10 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
 
 import appSlice from "./app/slice";
-import chucDanhKhoaHocSlice from "./chuc-danh-khoa-hoc/slice.js"
-import donViSlice from "./don-vi/slice.js"
-
+import chucDanhKhoaHocSlice from "./quanLyDanhMuc/chucDanhKhoaHoc/slice.js"
+import donViSlice from "./quanLyDanhMuc/donVi/slice.js"
+import canBoCoBanSlice from "./quanLyCanBo/thongTinCoBan/slice.js"
+import lyLichKhoaHocSlice from "./quanLyCanBo/lyLichKhoaHoc/slice.js";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +14,9 @@ export const store = configureStore({
     reducer: {
         app: appSlice.reducer,
         chucDanhKhoaHocs: chucDanhKhoaHocSlice.reducer,
-        donVis: donViSlice.reducer
+        donVis: donViSlice.reducer,
+        canBoCoBans: canBoCoBanSlice.reducer,
+        lyLichKhoaHocs: lyLichKhoaHocSlice.reducer
 
     },
     middleware: (getDefaultMiddleware) =>

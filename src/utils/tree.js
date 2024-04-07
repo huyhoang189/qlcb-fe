@@ -1,51 +1,70 @@
-//function for create tree
-const generateChildNodes = (arr, ma_don_vi_cha) => {
-    let outputs = [];
-    let index = 1;
-    for (let element of arr) {
-        if (element.don_vi?.id === ma_don_vi_cha) {
-            let children = generateChildNodes(arr, element.id);
+const generateChildNodes = (arr, ma_don_vi_cha, parentKey) => {
+  let outputs = [];
+  let index = 0;
+  for (let element of arr) {
+    if (element.don_vi?.id === ma_don_vi_cha) {
+      let children = generateChildNodes(
+        arr,
+        element.id,
+        `${parentKey}-${index}`
+      );
 
-            let node = {
-                title: `${element?.ten_don_vi} - ${element?.don_vi?.ma_don_vi || "BQP"}`,
-                value: element.id,
-                ...element,
-            };
+      let node = {
+        title: `${element?.ten_don_vi} `,
+        value: element.id,
+        key: `${parentKey}-${index}`,
+        ...element,
+      };
 
-            if (children) {
-                node.children = children;
-            }
+      if (children.length > 0) {
+        node.children = children;
+      }
 
-            outputs.push(node);
-            // eslint-disable-next-line no-unused-vars
-            index++;
-        }
+      outputs.push(node);
+      index++;
     }
-    return outputs;
+  }
+  return outputs;
 };
 
 const generateTrees = (arr) => {
-    let trees = [];
-    let index = 1;
-    for (let element of arr) {
-        if (element.don_vi === null) {
-            let node = {
-                children: [],
-                value: element.id,
-                title: `${element?.ten_don_vi} - ${element?.don_vi?.ma_don_vi || "BQP"}`,
-                ...element,
-            };
-            trees.push(node);
-            // eslint-disable-next-line no-unused-vars
-            index++;
-        }
+  let trees = [];
+  let index = 0;
+  for (let element of arr) {
+    if (element.don_vi === null) {
+      let node = {
+        children: [],
+        value: element.id,
+        title: `${element?.ten_don_vi}`,
+        key: `${index}`,
+        ...element,
+      };
+      trees.push(node);
+      index++;
     }
-    trees.forEach((element, index) => {
-        let child = generateChildNodes(arr, element.id);
-        trees[index].children = [...child];
-    });
-    return trees;
+  }
+  trees.forEach((element, index) => {
+    let child = generateChildNodes(arr, element.id, `${index}`);
+    trees[index].children = [...child];
+  });
+  return trees;
 };
 
+const getKeysByTitle = (tree, value) => {
+  const matchingKeys = [];
 
-export {generateTrees};
+  const search = (node) => {
+    if (node.title.includes(value)) {
+      matchingKeys.push(node.key);
+    }
+    if (node.children) {
+      node.children.forEach((child) => search(child));
+    }
+  };
+
+  tree.forEach((node) => search(node));
+
+  return matchingKeys;
+};
+
+export { generateTrees, getKeysByTitle };

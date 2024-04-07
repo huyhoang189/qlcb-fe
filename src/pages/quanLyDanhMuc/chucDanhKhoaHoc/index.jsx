@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import {ContentWrapper} from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import chucDanhKhoaHocSlice from "../../../toolkits/chuc-danh-khoa-hoc/slice.js"
+import chucDanhKhoaHocSlice from "../../../toolkits/quanLyDanhMuc/chucDanhKhoaHoc/slice.js"
 import {useEffect, useState} from "react";
 import {Space} from "antd";
 import {CreateButton, DeleteButton, UpdateButton} from "../../../components/Button/index.jsx";

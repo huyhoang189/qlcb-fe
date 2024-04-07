@@ -2,12 +2,13 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import {ContentWrapper} from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import donViSlice from "../../../toolkits/don-vi/slice.js"
+import lyLichKhoaHocSlice from "../../../toolkits/quanLyCanBo/lyLichKhoaHoc/slice.js"
+import canBoCoBanSlice from "../../../toolkits/quanLyCanBo/thongTinCoBan/slice.js"
 import {useEffect, useState} from "react";
 import {Space} from "antd";
 import {CreateButton, DeleteButton, UpdateButton} from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
-import TextInput from "../../../components/Form/textinput.jsx";
+import {useParams} from "react-router-dom";
 import ModalItem from "./modal.jsx";
 
 const pageHeader = {
@@ -17,11 +18,10 @@ const pageHeader = {
             href: "/"
         },
         {
-            title: "Quản lý danh mục",
+            title: "Quản lý hồ sơ cán bộ",
+            href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo"
         },
-        {
-            title: "Quản lý danh mục đơn vị",
-        },
+
     ],
 };
 
@@ -33,32 +33,27 @@ const baseColumns = [
         width: 50,
         align: "center",
     },
+
     {
-        title: "Mã đơn vị",
-        dataIndex: "ma_don_vi",
-        key: "ma_don_vi",
+        title: "Chuyên ngành",
+        dataIndex: "chuyen_nganh",
+        key: "chuyen_nganh",
         align: "center",
     },
     {
-        title: "Tên đơn vị",
-        dataIndex: "ten_don_vi",
-        key: "ten_don_vi",
+        title: "Thời gian",
+        dataIndex: "thoi_gian",
+        key: "thoi_gian",
         align: "center",
     },
     {
-        title: "Đơn vị cha",
-        dataIndex: "don_vi",
-        key: "don_vi",
+        title: "Chức danh",
+        dataIndex: "chuc_danh_khoa_hoc",
+        key: "chuc_danh_khoa_hoc",
         align: "center",
         render: (text, record) => {
-            return record?.don_vi?.ten_don_vi
+            return record?.chuc_danh_khoa_hoc?.ten_chuc_danh
         }
-    },
-    {
-        title: "Số thứ tự",
-        dataIndex: "so_thu_tu",
-        key: "so_thu_tu",
-        align: "center",
     },
     {
         title: "Ghi chú",
@@ -70,17 +65,23 @@ const baseColumns = [
 ]
 
 
-const DonVi = () => {
-    const dispatch = useDispatch()
+const LyLichKhoaHoc = () => {
+    const dispatch = useDispatch();
+    const params = useParams()
     const {
-        donVis,
+        lyLichKhoaHocs,
         isLoading,
         totalItem,
         pageNumber,
         pageSize
-    } = useSelector(state => state.donVis)
+    } = useSelector(state => state.lyLichKhoaHocs)
+
+    const {selectedCanBoCoBan} = useSelector(state => state.canBoCoBans)
 
     const [keyword, setKeyword] = useState("");
+
+
+    const {ma_can_bo} = params
 
 
     const onChangeKeywordInput = (key, event) => {
@@ -89,22 +90,24 @@ const DonVi = () => {
 
     const handlePaginationChange = (current, pageSize) => {
         dispatch(
-            donViSlice.actions.getDonVis({
+            lyLichKhoaHocSlice.actions.getLyLichKhoaHocs({
                 keyword,
                 pageSize: pageSize,
                 pageNumber: current,
             })
         );
+
     };
 
 
     const handleModal = (_item) => {
-        dispatch(donViSlice.actions.toggleModal(_item))
+        dispatch(lyLichKhoaHocSlice.actions.toggleModal(_item))
     }
 
 
     const columns = [
         ...baseColumns,
+
         {
             title: "Công cụ",
             key: "tool",
@@ -115,13 +118,15 @@ const DonVi = () => {
                     direction="horizontal"
                     style={{width: "100%", justifyContent: "center"}}
                 >
+
                     <UpdateButton
                         onClick={() => handleModal(record)}
                     />
                     <DeleteButton
                         onConfirm={() => {
                             dispatch(
-                                donViSlice.actions.handleDonVi({
+                                lyLichKhoaHocSlice.actions.handleLyLichKhoaHoc({
+                                    ma_can_bo,
                                     item: record,
                                     actionName: "DELETE",
                                     pageSize: pageSize,
@@ -142,31 +147,34 @@ const DonVi = () => {
 
     //side effect
     useEffect(() => {
-        dispatch(donViSlice.actions.getDonVis(
+        dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({id: ma_can_bo}))
+        dispatch(lyLichKhoaHocSlice.actions.getLyLichKhoaHocs(
             {
                 keyword,
                 pageSize: 10,
                 pageNumber: 1,
+                ma_can_bo
             }
         ))
     }, [dispatch, keyword]);
 
 
     return <ContentWrapper>
-        <CustomBreadcrumb items={pageHeader.breadcrumb}/>
+        <CustomBreadcrumb
+            items={[...pageHeader.breadcrumb, {title: `Lý lịch khoa học / ${selectedCanBoCoBan?.ho_ten_khai_sinh} - Số hiệu: ${selectedCanBoCoBan?.so_hieu_quan_nhan}`}]}/>
         <CustomeTable
             header={
-                <Header>
+                <Header justify={"flex-end"}>
 
-                    <TextInput
-                        placeholder={"Nhập vào từ khoá tìm kiếm"}
-                        onChange={onChangeKeywordInput}
-                        property={"keyword"}
-                        width={20}
-                    />
+                    {/*<TextInput*/}
+                    {/*    placeholder={"Nhập vào từ khoá tìm kiếm"}*/}
+                    {/*    onChange={onChangeKeywordInput}*/}
+                    {/*    property={"keyword"}*/}
+                    {/*    width={20}*/}
+                    {/*/>*/}
                     <CreateButton onClick={() => handleModal(null)}/>
                 </Header>}
-            data={donVis}
+            data={lyLichKhoaHocs}
             columns={columns}
             isLoading={isLoading}
             pagination={{
@@ -180,4 +188,4 @@ const DonVi = () => {
     </ContentWrapper>
 }
 
-export default DonVi
+export default LyLichKhoaHoc

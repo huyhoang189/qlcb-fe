@@ -1,9 +1,11 @@
 import {createBrowserRouter} from "react-router-dom";
 import Home from "../pages/home";
 import MainLayout from "../layouts";
-import QuanLyChucDanhKhoaHoc from "../pages/quan-ly-danh-muc/chuc-danh-khoa-hoc/index.jsx";
-import DonVi from "../pages/quan-ly-danh-muc/don-vi/index.jsx";
-import NotFound from "../pages/not-found/index.jsx";
+import QuanLyChucDanhKhoaHoc from "../pages/quanLyDanhMuc/chucDanhKhoaHoc/index.jsx";
+import DonVi from "../pages/quanLyDanhMuc/donVi/index.jsx";
+import NotFound from "../pages/notFound/index.jsx";
+import CanBoCoBan from "../pages/quanLyCanBo/thongTinCoBan/index.jsx";
+import LyLichKhoaHoc from "../pages/quanLyCanBo/lyLichKhoaHoc/index.jsx";
 
 
 export const router = createBrowserRouter([
@@ -33,7 +35,23 @@ export const router = createBrowserRouter([
                         element: <QuanLyChucDanhKhoaHoc/>
                     }
                 ]
-            }
+            },
+            {
+                path: "quan-ly-ho-so-can-bo",
+                children: [
+                    {
+                        path: "danh-sach-can-bo",
+                        element: <CanBoCoBan/>,
+
+                    },
+                    {
+                        path: "danh-sach-can-bo/:ma_can_bo/ly-lich-khoa-hoc",
+                        element: <LyLichKhoaHoc/>,
+                    }
+
+
+                ]
+            },
 
         ],
     },

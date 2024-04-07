@@ -1,6 +1,6 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import donViSlice from "../../../toolkits/don-vi/slice.js"
+import donViSlice from "../../../toolkits/quanLyDanhMuc/donVi/slice.js"
 import {ACTION_NAME} from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 import {useEffect, useState} from "react";
@@ -67,8 +67,6 @@ const ModalItem = () => {
         if (donVis) (
             setTree(generateTrees(donVis))
         )
-
-
     }, [donVis]);
 
     return <CustomeModal
@@ -126,15 +124,6 @@ const ModalItem = () => {
         />
 
 
-        {/*<TreeSelect*/}
-        {/*    treeLine={true}*/}
-        {/*    style={{*/}
-        {/*        width: "100%",*/}
-        {/*    }}*/}
-        {/*    treeData={tree}*/}
-        {/*    value={selectedDonVi?.ma_don_vi_cha}*/}
-        {/*    onChange={(e) => onRecordSelectInputChange("ma_don_vi_cha", e)}*/}
-        {/*/>*/}
     </CustomeModal>
 }
 

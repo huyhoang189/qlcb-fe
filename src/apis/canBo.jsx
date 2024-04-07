@@ -2,16 +2,26 @@ import createAPIServices from "../apis/base.api.js";
 
 const api = createAPIServices();
 
-export const getAll = (payload) => {
+export const getAllBase = (payload) => {
     return api.makeRequest({
-        url: `/chuc-danh-khoa-hoc?pageSize=${payload?.pageSize || 10}&pageNumber=${payload?.pageNumber || 1}&filter=${payload?.keyword || ""}`,
+        url: `/can-bo/getAllBase?pageSize=${payload?.pageSize || 10}&pageNumber=${payload?.pageNumber || 1}&filter=${payload?.keyword || ""}`,
         method: "GET",
+    });
+
+};
+
+export const getById = (payload) => {
+    return api.makeRequest({
+        url: `/can-bo/${payload?.id}`,
+        method: "GET",
+        data: payload,
     });
 };
 
+
 export const create = (payload) => {
     return api.makeRequest({
-        url: `/chuc-danh-khoa-hoc`,
+        url: `/can-bo`,
         method: "POST",
         data: payload,
     });
@@ -19,7 +29,7 @@ export const create = (payload) => {
 
 export const update = (payload) => {
     return api.makeRequest({
-        url: `/chuc-danh-khoa-hoc/${payload?.id}`,
+        url: `/can-bo/${payload?.id}`,
         method: "PUT",
         data: payload,
     });
@@ -27,7 +37,7 @@ export const update = (payload) => {
 
 export const deleteItem = (payload) => {
     return api.makeRequest({
-        url: `/chuc-danh-khoa-hoc/${payload?.id}`,
+        url: `/can-bo/${payload?.id}`,
         method: "DELETE",
     });
 };

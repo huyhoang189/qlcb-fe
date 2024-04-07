@@ -1,19 +1,19 @@
 import {all, call, put, takeEvery} from "redux-saga/effects";
-import chucDanhKhoaHocSlice from "./slice";
-import {ACTION_NAME,} from "../../utils/common.js";
-import {create, deleteItem, getAll, update} from "../../apis/chuc-danh-khoa-hoc.api.js";
+import lyLichKhoaHocSlice from "./slice.js";
+import {ACTION_NAME,} from "../../../utils/common.js";
+import {create, deleteItem, getAll, update} from "../../../apis/lyLichKhoaHoc.js";
 
 function* _getAll({payload}) {
     try {
         const {data, status} = yield call(getAll, payload);
         const {metadata} = data
         if (status === 200 || status === 201) {
-            yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocsSuccess(metadata));
+            yield put(lyLichKhoaHocSlice.actions.getLyLichKhoaHocsSuccess(metadata));
         } else {
-            yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocsError([]));
+            yield put(lyLichKhoaHocSlice.actions.getLyLichKhoaHocsError([]));
         }
     } catch (error) {
-        yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocsError([]));
+        yield put(lyLichKhoaHocSlice.actions.getLyLichKhoaHocsError([]));
     }
 }
 
@@ -34,21 +34,21 @@ function* _handleItem({payload}) {
 
         yield put(
             isSuccess
-                ? chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHocSuccess()
-                : chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHocError([])
+                ? lyLichKhoaHocSlice.actions.handleLyLichKhoaHocSuccess()
+                : lyLichKhoaHocSlice.actions.handleLyLichKhoaHocError([])
         );
 
         if (isSuccess) {
-            yield put(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs(payload));
+            yield put(lyLichKhoaHocSlice.actions.getLyLichKhoaHocs(item));
         }
     } catch (error) {
-        yield put(chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHocError());
+        yield put(lyLichKhoaHocSlice.actions.handleLyLichKhoaHocError());
     }
 }
 
 export default function* saga() {
     yield all([
-        yield takeEvery(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs().type, _getAll),
-        yield takeEvery(chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHoc().type, _handleItem),
+        yield takeEvery(lyLichKhoaHocSlice.actions.getLyLichKhoaHocs().type, _getAll),
+        yield takeEvery(lyLichKhoaHocSlice.actions.handleLyLichKhoaHoc().type, _handleItem),
     ]);
 }

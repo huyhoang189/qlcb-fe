@@ -26,9 +26,9 @@ const Header = () => {
 
         >
             <Button
-                icon={<MenuOutlined style={{color: "#007aff"}}/>}
+                icon={<MenuOutlined style={{color: "#3c811e",}}/>}
                 type="none"
-                style={{border: "1px solid #007aff"}}
+                style={{border: "2px solid #3c811e"}}
                 onClick={collapseSiderbar}
             />
         </Flex>

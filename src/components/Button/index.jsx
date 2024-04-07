@@ -1,6 +1,6 @@
 import {Button, Popconfirm, Tooltip} from "antd";
 import PropTypes from "prop-types";
-import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusOutlined} from "@ant-design/icons";
 
 const CreateButton = (
     {
@@ -11,7 +11,8 @@ const CreateButton = (
     }) => {
 
     return (
-        <Button type="primary" icon={icon} disabled={disabled} onClick={onClick}>
+        <Button type="primary" icon={icon} disabled={disabled} onClick={onClick}
+                style={{marginBottom: 5, marginTop: 5}}>
             {text}
         </Button>
     )
@@ -26,6 +27,35 @@ CreateButton.propTypes = {
     disabled: PropTypes.bool
 }
 
+
+const DetailButton = (
+    {
+        onClick,
+        title = "Chi tiết dữ liệu",
+        icon = <InfoCircleOutlined/>,
+        disabled = false,
+        name = "",
+    }) => {
+    return (
+        <Tooltip title={title}>
+            <Button
+                icon={icon}
+                onClick={onClick}
+                disabled={disabled}
+            >
+                {name}
+            </Button>
+        </Tooltip>
+    )
+}
+
+DetailButton.propTypes = {
+    onClick: PropTypes.func,
+    title: PropTypes.string,
+    name: PropTypes.string,
+    icon: PropTypes.element,
+    disabled: PropTypes.bool
+}
 
 const UpdateButton = (
     {
@@ -90,5 +120,6 @@ DeleteButton.propTypes = {
 export {
     CreateButton,
     UpdateButton,
-    DeleteButton
+    DeleteButton,
+    DetailButton
 }
