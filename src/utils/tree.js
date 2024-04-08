@@ -67,4 +67,25 @@ const getKeysByTitle = (tree, value) => {
   return matchingKeys;
 };
 
-export { generateTrees, getKeysByTitle };
+const getNodeByKey = (tree, key) => {
+  let result = null;
+
+  const search = (node) => {
+    if (node?.key === key) {
+      result = node;
+      return;
+    }
+
+    if (node?.children) {
+      node.children.forEach((child) => search(child));
+    }
+  };
+
+  tree.forEach((node) => search(node));
+
+  return result;
+};
+
+const treeToList = (tree) => {};
+
+export { generateTrees, getKeysByTitle, getNodeByKey };

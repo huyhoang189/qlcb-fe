@@ -3,13 +3,18 @@ import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import { useDispatch, useSelector } from "react-redux";
 import donViSlice from "../../../toolkits/quanLyDanhMuc/donVi/slice.js";
 import { useEffect, useMemo, useState } from "react";
-import { Col, Row, Space, Tree } from "antd";
+import { Col, Row, Space, Tree, Collapse, Flex, Divider } from "antd";
 import {
+  CreateButton,
   DeleteButton,
   UpdateButton,
 } from "../../../components/Button/index.jsx";
 import ModalItem from "./modal.jsx";
-import { generateTrees, getKeysByTitle } from "../../../utils/tree.js";
+import {
+  generateTrees,
+  getKeysByTitle,
+  getNodeByKey,
+} from "../../../utils/tree.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 
 const pageHeader = {
@@ -79,8 +84,9 @@ const DonVi = () => {
 
   const [keyword, setKeyword] = useState("");
   const [trees, setTrees] = useState([]);
-  const [expandedKeys, setExpandedKeys] = useState([]);
+  const [expandedKeys, setExpandedKeys] = useState(["0"]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
+  const [selectedNode, setSelectedNode] = useState({});
 
   const onExpand = (newExpandedKeys) => {
     setExpandedKeys(newExpandedKeys);
@@ -93,15 +99,11 @@ const DonVi = () => {
     setAutoExpandParent(true);
     setKeyword(value);
   };
-
-  const handlePaginationChange = (current, pageSize) => {
-    dispatch(
-      donViSlice.actions.getDonVis({
-        keyword,
-        pageSize: pageSize,
-        pageNumber: current,
-      })
-    );
+  const onSelected = (e) => {
+    if (e) {
+      const node = getNodeByKey(trees, e[0]);
+      setSelectedNode(node);
+    }
   };
 
   const handleModal = (_item) => {
@@ -145,7 +147,7 @@ const DonVi = () => {
   useEffect(() => {
     dispatch(
       donViSlice.actions.getDonVis({
-        pageSize: 1000,
+        pageSize: 10000,
         pageNumber: 1,
       })
     );
@@ -193,12 +195,12 @@ const DonVi = () => {
     <ContentWrapper>
       <CustomBreadcrumb items={pageHeader.breadcrumb} />
       <Row gutter={16}>
-        <Col span={8}>
+        <Col span={10}>
           <TextInput
             placeholder={"Nhập vào từ khoá tìm kiếm"}
             onChange={onChangeKeywordInput}
             property={"keyword"}
-            // width={20}
+            width={50}
           />
           <Tree
             treeData={treeData}
@@ -206,9 +208,49 @@ const DonVi = () => {
             onExpand={onExpand}
             expandedKeys={expandedKeys}
             autoExpandParent={autoExpandParent}
+            onSelect={onSelected}
           />
         </Col>
-        <Col span={12}></Col>
+        <Col span={14}>
+          <Flex
+            style={{ width: "100%", height: 32 }}
+            align="center"
+            justify="space-between"
+          >
+            <span>{`Danh sách đơn vị trực thuộc ${
+              selectedNode?.ten_don_vi || ""
+            }`}</span>
+            <Space>
+              <CreateButton
+                onClick={() =>
+                  handleModal({
+                    id: "",
+                    ma_don_vi: "",
+                    ten_don_vi: "",
+                    ma_don_vi_cha: selectedNode?.id,
+                    ghi_chu: "",
+                    so_thu_tu: 0,
+                  })
+                }
+                text=""
+              />
+              <UpdateButton onClick={() => handleModal(selectedNode)} />
+              <DeleteButton
+                onConfirm={() => {
+                  dispatch(
+                    donViSlice.actions.handleDonVi({
+                      item: selectedNode,
+                      actionName: "DELETE",
+                      pageSize: pageSize,
+                      pageNumber: pageNumber,
+                    })
+                  );
+                }}
+              />
+            </Space>
+          </Flex>
+          <Divider style={{ marginTop: 10 }} />
+        </Col>
       </Row>
 
       <ModalItem />
