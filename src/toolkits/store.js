@@ -2,11 +2,11 @@ import {configureStore} from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
 
-import appSlice from "./app/slice";
-import chucDanhKhoaHocSlice from "./quanLyDanhMuc/chucDanhKhoaHoc/slice.js"
-import donViSlice from "./quanLyDanhMuc/donVi/slice.js"
-import canBoCoBanSlice from "./quanLyCanBo/thongTinCoBan/slice.js"
-import lyLichKhoaHocSlice from "./quanLyCanBo/lyLichKhoaHoc/slice.js";
+import appSlice from "./App/slice";
+import chucDanhKhoaHocSlice from "./QuanLyDanhMuc/ChucDanhKhoaHoc/slice.js"
+import donViSlice from "./QuanLyDanhMuc/DonVi/slice.js"
+import canBoCoBanSlice from "./QuanLyCanBo/ThongTinCoBan/slice.js"
+import lyLichKhoaHocSlice from "./QuanLyCanBo/LyLichKhoaHoc/slice.js";
 
 const sagaMiddleware = createSagaMiddleware();
 

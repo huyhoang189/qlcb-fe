@@ -1,6 +1,6 @@
 import {Flex, Image, Menu, Typography} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import appSlice from "../../toolkits/app/slice.js"
+import appSlice from "../../toolkits/App/slice.js"
 import {publicRouter} from "../../routers/pageRouter.jsx";
 import {DrawerWrapper} from "./style.js";
 import {useNavigate} from "react-router-dom";

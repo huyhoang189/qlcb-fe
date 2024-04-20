@@ -2,8 +2,8 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import {ContentWrapper} from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import lyLichKhoaHocSlice from "../../../toolkits/quanLyCanBo/lyLichKhoaHoc/slice.js"
-import canBoCoBanSlice from "../../../toolkits/quanLyCanBo/thongTinCoBan/slice.js"
+import lyLichKhoaHocSlice from "../../../toolkits/QuanLyCanBo/LyLichKhoaHoc/slice.js"
+import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js"
 import {useEffect, useState} from "react";
 import {Space} from "antd";
 import {CreateButton, DeleteButton, UpdateButton} from "../../../components/Button/index.jsx";
@@ -94,6 +94,7 @@ const LyLichKhoaHoc = () => {
                 keyword,
                 pageSize: pageSize,
                 pageNumber: current,
+                ma_can_bo
             })
         );
 

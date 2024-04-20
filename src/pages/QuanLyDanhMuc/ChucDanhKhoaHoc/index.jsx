@@ -2,10 +2,10 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import {ContentWrapper} from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import chucDanhKhoaHocSlice from "../../../toolkits/quanLyDanhMuc/chucDanhKhoaHoc/slice.js"
+import chucDanhKhoaHocSlice from "../../../toolkits/QuanLyDanhMuc/ChucDanhKhoaHoc/slice.js";
 import {useEffect, useState} from "react";
 import {Space} from "antd";
-import {CreateButton, DeleteButton, UpdateButton} from "../../../components/Button/index.jsx";
+import {CreateButton, DeleteButton, UpdateButton,} from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
@@ -14,7 +14,7 @@ const pageHeader = {
     breadcrumb: [
         {
             title: "Trang chủ",
-            href: "/"
+            href: "/",
         },
         {
             title: "Quản lý danh mục",
@@ -46,26 +46,18 @@ const baseColumns = [
         key: "ghi_chu",
         align: "center",
     },
-
-]
-
+];
 
 const QuanLyChucDanhKhoaHoc = () => {
-    const dispatch = useDispatch()
-    const {
-        chucDanhKhoaHocs,
-        isLoading,
-        totalItem,
-        pageNumber,
-        pageSize
-    } = useSelector(state => state.chucDanhKhoaHocs)
+    const dispatch = useDispatch();
+    const {chucDanhKhoaHocs, isLoading, totalItem, pageNumber, pageSize} =
+        useSelector((state) => state.chucDanhKhoaHocs);
 
     const [keyword, setKeyword] = useState("");
 
-
     const onChangeKeywordInput = (key, event) => {
-        setKeyword(event.target.value)
-    }
+        setKeyword(event.target.value);
+    };
 
     const handlePaginationChange = (current, pageSize) => {
         dispatch(
@@ -77,11 +69,9 @@ const QuanLyChucDanhKhoaHoc = () => {
         );
     };
 
-
     const handleModal = (_item) => {
-        dispatch(chucDanhKhoaHocSlice.actions.toggleModal(_item))
-    }
-
+        dispatch(chucDanhKhoaHocSlice.actions.toggleModal(_item));
+    };
 
     const columns = [
         ...baseColumns,
@@ -90,14 +80,12 @@ const QuanLyChucDanhKhoaHoc = () => {
             key: "tool",
             align: "center",
             width: 140,
-            render: (text, record) =>
+            render: (text, record) => (
                 <Space
                     direction="horizontal"
                     style={{width: "100%", justifyContent: "center"}}
                 >
-                    <UpdateButton
-                        onClick={() => handleModal(record)}
-                    />
+                    <UpdateButton onClick={() => handleModal(record)}/>
                     <DeleteButton
                         onConfirm={() => {
                             dispatch(
@@ -112,52 +100,52 @@ const QuanLyChucDanhKhoaHoc = () => {
                                 })
                             );
                         }}
-
                     />
                 </Space>
-
-        }
-    ]
-
+            ),
+        },
+    ];
 
     //side effect
     useEffect(() => {
-        dispatch(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs(
-            {
+        dispatch(
+            chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
                 keyword,
                 pageSize: 10,
                 pageNumber: 1,
-            }
-        ))
+            })
+        );
     }, [dispatch, keyword]);
 
+    return (
+        <ContentWrapper>
+            <CustomBreadcrumb items={pageHeader.breadcrumb}/>
+            <CustomeTable
+                header={
+                    <Header>
+                        <TextInput
+                            placeholder={"Nhập vào từ khoá tìm kiếm"}
+                            onChange={onChangeKeywordInput}
+                            property={"keyword"}
+                            width={20}
+                        />
+                        <CreateButton onClick={() => handleModal(null)}/>
+                    </Header>
+                }
+                data={chucDanhKhoaHocs}
+                columns={columns}
+                isLoading={isLoading}
+                pagination={{
+                    current: pageNumber,
+                    pageSize: pageSize,
+                    total: totalItem,
+                    onChange: handlePaginationChange,
+                }}
+            />
 
-    return <ContentWrapper>
-        <CustomBreadcrumb items={pageHeader.breadcrumb}/>
-        <CustomeTable
-            header={
-                <Header>
+            <ModalItem/>
+        </ContentWrapper>
+    );
+};
 
-                    <TextInput
-                        placeholder={"Nhập vào từ khoá tìm kiếm"}
-                        onChange={onChangeKeywordInput}
-                        property={"keyword"}
-                        width={20}
-                    />
-                    <CreateButton onClick={() => handleModal(null)}/>
-                </Header>}
-            data={chucDanhKhoaHocs}
-            columns={columns}
-            isLoading={isLoading}
-            pagination={{
-                current: pageNumber,
-                pageSize: pageSize,
-                total: totalItem,
-                onChange: handlePaginationChange,
-            }}/>
-
-        <ModalItem/>
-    </ContentWrapper>
-}
-
-export default QuanLyChucDanhKhoaHoc
+export default QuanLyChucDanhKhoaHoc;

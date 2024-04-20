@@ -1,9 +1,9 @@
 import {all} from "redux-saga/effects";
 
-import chucDanhKhoaHocSaga from "./quanLyDanhMuc/chucDanhKhoaHoc/saga.js"
-import donViSaga from "./quanLyDanhMuc/donVi/saga.js"
-import canBoCoBanSaga from "./quanLyCanBo/thongTinCoBan/saga.js"
-import lyLichKhoaHocSaga from "../toolkits/quanLyCanBo/lyLichKhoaHoc/saga.js";
+import chucDanhKhoaHocSaga from "./QuanLyDanhMuc/ChucDanhKhoaHoc/saga.js"
+import donViSaga from "./QuanLyDanhMuc/DonVi/saga.js"
+import canBoCoBanSaga from "./QuanLyCanBo/ThongTinCoBan/saga.js"
+import lyLichKhoaHocSaga from "./QuanLyCanBo/LyLichKhoaHoc/saga.js";
 
 export default function* rootSaga() {
     yield all([

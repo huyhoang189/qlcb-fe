@@ -1,7 +1,7 @@
 import {all, call, put, takeEvery} from "redux-saga/effects";
 import canBoCoBanSlice from "./slice.js";
 import {ACTION_NAME,} from "../../../utils/common.js";
-import {create, deleteItem, getAllBase, getById, update} from "../../../apis/canBo.jsx";
+import {create, deleteItem, getAllBase, getById, update} from "../../../apis/canBo.js";
 
 function* _getAll({payload}) {
     try {

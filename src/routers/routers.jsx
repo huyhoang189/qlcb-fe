@@ -1,11 +1,11 @@
 import {createBrowserRouter} from "react-router-dom";
-import Home from "../pages/home";
+import Home from "../pages/Home";
 import MainLayout from "../layouts";
-import QuanLyChucDanhKhoaHoc from "../pages/quanLyDanhMuc/chucDanhKhoaHoc/index.jsx";
-import DonVi from "../pages/quanLyDanhMuc/donVi/index.jsx";
-import NotFound from "../pages/notFound/index.jsx";
-import CanBoCoBan from "../pages/quanLyCanBo/thongTinCoBan/index.jsx";
-import LyLichKhoaHoc from "../pages/quanLyCanBo/lyLichKhoaHoc/index.jsx";
+import QuanLyChucDanhKhoaHoc from "../pages/QuanLyDanhMuc/ChucDanhKhoaHoc/index.jsx";
+import DonVi from "../pages/QuanLyDanhMuc/DonVi/index.jsx";
+import NotFound from "../pages/NotFound/index.jsx";
+import CanBoCoBan from "../pages/QuanLyCanBo/ThongTinCoBan/index.jsx";
+import LyLichKhoaHoc from "../pages/QuanLyCanBo/LyLichKhoaHoc/index.jsx";
 
 
 export const router = createBrowserRouter([

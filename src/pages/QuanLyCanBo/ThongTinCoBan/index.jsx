@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import {ContentWrapper} from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import canBoCoBanSlice from "../../../toolkits/quanLyCanBo/thongTinCoBan/slice.js"
+import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js"
 import {useEffect, useState} from "react";
 import {Button, Dropdown, Space} from "antd";
 import {CreateButton, DeleteButton, UpdateButton} from "../../../components/Button/index.jsx";

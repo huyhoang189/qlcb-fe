@@ -4,7 +4,7 @@ const api = createAPIServices();
 
 export const getAll = (payload) => {
     return api.makeRequest({
-        url: `/ly-lich-khoa-hoc/getAllByMaCanBo?pageSize=${payload?.pageSize || 10}&pageNumber=${payload?.pageNumber || 1}&filter=${payload?.keyword || ""}&maCanBo=${payload?.ma_can_bo}`,
+        url: `/ly-lich-khoa-hoc/get-all-by-ma-can-bo/${payload?.ma_can_bo}?pageSize=${payload?.pageSize || 10}&pageNumber=${payload?.pageNumber || 1}&filter=${payload?.keyword || ""}&maCanBo=${payload?.ma_can_bo}`,
         method: "GET",
     });
 

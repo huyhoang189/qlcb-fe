@@ -1,7 +1,7 @@
 import {Button, Flex, theme} from "antd";
 import {MenuOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
-import appSlice from "../../toolkits/app/slice.js"
+import appSlice from "../../toolkits/App/slice.js"
 
 const {useToken} = theme;
 const Header = () => {

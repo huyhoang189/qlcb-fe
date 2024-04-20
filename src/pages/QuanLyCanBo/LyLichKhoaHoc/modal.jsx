@@ -1,7 +1,7 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import lyLichKhoaHocSlice from "../../../toolkits/quanLyCanBo/lyLichKhoaHoc/slice.js"
-import chucDanhKhoaHocSlice from "../../../toolkits/quanLyDanhMuc/chucDanhKhoaHoc/slice.js"
+import lyLichKhoaHocSlice from "../../../toolkits/QuanLyCanBo/LyLichKhoaHoc/slice.js"
+import chucDanhKhoaHocSlice from "../../../toolkits/QuanLyDanhMuc/ChucDanhKhoaHoc/slice.js"
 import {ACTION_NAME} from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 import {useEffect} from "react";
