@@ -1,111 +1,134 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import lyLichKhoaHocSlice from "../../../toolkits/QuanLyCanBo/LyLichKhoaHoc/slice.js"
-import chucDanhKhoaHocSlice from "../../../toolkits/QuanLyDanhMuc/ChucDanhKhoaHoc/slice.js"
-import {ACTION_NAME} from "../../../utils/common.js";
+import { useDispatch, useSelector } from "react-redux";
+import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
+import { ACTION_NAME } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import SelectInput from "../../../components/Form/selectinput.jsx";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const ModalItem = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { ma_can_bo } = params;
+  const { modalActive, selectedCanBoCoBan, pageSize, pageNumber } = useSelector(
+    (state) => state.canBoCoBans
+  );
+  const handleModal = (_item) => {
+    dispatch(canBoCoBanSlice.actions.toggleModal(_item));
+  };
 
-    const dispatch = useDispatch()
-    const params = useParams()
-    const {ma_can_bo} = params
-    const {modalActive, selectedLyLichKhoaHoc, pageSize, pageNumber} = useSelector(state => state.lyLichKhoaHocs)
-    const {chucDanhKhoaHocs} = useSelector(state => state.chucDanhKhoaHocs)
-    const handleModal = (_item) => {
-        dispatch(lyLichKhoaHocSlice.actions.toggleModal(_item))
+  const handleRecord = (_actionName, _item) => {
+    let item = Object.assign({}, _item);
+    dispatch(
+      canBoCoBanSlice.actions.handleCanBoCoBan({
+        item: {
+          ...item,
+          ma_can_bo,
+        },
+        actionName: _actionName,
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+      })
+    );
+  };
+
+  const onRecordInputChange = (key, event) => {
+    if (key) {
+      let clone = Object.assign({}, selectedCanBoCoBan);
+      clone[key] = event.target.value;
+      dispatch(canBoCoBanSlice.actions.updateSelectedCanBoCoBanInput(clone));
     }
+  };
 
-    const handleRecord = (_actionName, _item) => {
-        let item = Object.assign({}, _item);
-        dispatch(
-            lyLichKhoaHocSlice.actions.handleLyLichKhoaHoc({
-                item: {
-                    ...item,
-                    ma_can_bo
-                },
-                actionName: _actionName,
-                pageSize: pageSize,
-                pageNumber: pageNumber,
-
-            })
-        );
+  const onRecordSelectInputChange = (key, event) => {
+    if (key) {
+      let clone = Object.assign({}, selectedCanBoCoBan);
+      clone[key] = event;
+      dispatch(canBoCoBanSlice.actions.updateSelectedCanBoCoBanInput(clone));
     }
+  };
 
-    const onRecordInputChange = (key, event) => {
-        if (key) {
-            let clone = Object.assign({}, selectedLyLichKhoaHoc);
-            clone[key] = event.target.value;
-            dispatch(lyLichKhoaHocSlice.actions.updateSelectedLyLichKhoaHocInput(clone));
-        }
-    }
-
-    const onRecordSelectInputChange = (key, event) => {
-        if (key) {
-            let clone = Object.assign({}, selectedLyLichKhoaHoc);
-            clone[key] = event;
-            dispatch(lyLichKhoaHocSlice.actions.updateSelectedLyLichKhoaHocInput(clone));
-        }
-    }
-
-    //side effect
-    useEffect(() => {
-        dispatch(chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
-            pageSize: 1000,
-            pageNumber: 1
-        }))
-    }, [dispatch]);
-
-
-    return <CustomeModal
-        open={modalActive}
-        onCancel={() => handleModal(null)}
-        onOk={
-            selectedLyLichKhoaHoc?.id
-                ? () => handleRecord(ACTION_NAME.UPDATE, selectedLyLichKhoaHoc)
-                : () => handleRecord(ACTION_NAME.CREATE, selectedLyLichKhoaHoc)
-        }
-        title={selectedLyLichKhoaHoc?.id ? "Cập nhật dữ liệu" : "Thêm mới dữ liệu"}
-        okText="Chấp nhận"
-        cancelText="Từ chối"
-
+  return (
+    <CustomeModal
+      open={modalActive}
+      onCancel={() => handleModal(null)}
+      onOk={
+        selectedCanBoCoBan?.id
+          ? () => handleRecord(ACTION_NAME.UPDATE, selectedCanBoCoBan)
+          : () => handleRecord(ACTION_NAME.CREATE, selectedCanBoCoBan)
+      }
+      title={selectedCanBoCoBan?.id ? "Cập nhật dữ liệu" : "Thêm mới dữ liệu"}
+      okText="Chấp nhận"
+      cancelText="Từ chối"
     >
-        <TextInput
-            title="Tên chuyên ngành"
-            placeholder="Nhập vào tên chuyên ngành"
-            onChange={onRecordInputChange}
-            property={"chuyen_nganh"}
-            value={selectedLyLichKhoaHoc?.chuyen_nganh}
-        />
-        <TextInput
-            title="Thời gian"
-            placeholder="Nhập vào thời gian"
-            onChange={onRecordInputChange}
-            property={"thoi_gian"}
-            value={selectedLyLichKhoaHoc?.thoi_gian}
-        />
-        <SelectInput
-            title="Chức danh khoa học"
-            onChange={onRecordSelectInputChange}
-            property={"ma_chuc_danh"}
-            value={selectedLyLichKhoaHoc?.ma_chuc_danh}
-            options={chucDanhKhoaHocs.map((e) => ({
-                label: e?.ten_chuc_danh,
-                value: e?.id
-            }))}
-        />
-        <TextInput
-            title="Ghi chú"
-            placeholder="Nhập vào ghi chú"
-            onChange={onRecordInputChange}
-            property={"ghi_chu"}
-            value={selectedLyLichKhoaHoc?.ghi_chu}
-        />
+      <TextInput
+        title="Họ và tên khai sinh"
+        placeholder="Nhập vào họ và tên khai sinh"
+        onChange={onRecordInputChange}
+        property={"ho_ten_khai_sinh"}
+        value={selectedCanBoCoBan?.ho_ten_khai_sinh}
+        isNull={false}
+      />
+
+      <TextInput
+        title="Số hiệu quân nhân"
+        placeholder="Nhập vào số hiệu quân nhân"
+        onChange={onRecordInputChange}
+        property={"so_hieu_quan_nhan"}
+        value={selectedCanBoCoBan?.so_hieu_quan_nhan}
+        isNull={false}
+      />
+
+      <TextInput
+        title="Ngày tháng năm sinh"
+        placeholder="Nhập vào ngày thấng năm sinh"
+        onChange={onRecordInputChange}
+        property={"ngay_thang_nam_sinh"}
+        value={selectedCanBoCoBan?.ngay_thang_nam_sinh}
+      />
+
+      <TextInput
+        title="Ngày vào đảng"
+        placeholder="Nhập vào ngày vào đảng"
+        onChange={onRecordInputChange}
+        property={"ngay_vao_dang"}
+        value={selectedCanBoCoBan?.ngay_vao_dang}
+      />
+
+      <TextInput
+        title="Ngày nhập ngũ"
+        placeholder="Nhập vào ngày nhập ngũ"
+        onChange={onRecordInputChange}
+        property={"ngay_nhap_ngu"}
+        value={selectedCanBoCoBan?.ngay_nhap_ngu}
+      />
+
+      <TextInput
+        title="Quê quán"
+        placeholder="Nhập vào quê quán"
+        onChange={onRecordInputChange}
+        property={"que_quan"}
+        value={selectedCanBoCoBan?.que_quan}
+      />
+
+      <TextInput
+        title="Nơi ở hiện nay"
+        placeholder="Nhập vào nơi ở hiện nay"
+        onChange={onRecordInputChange}
+        property={"noi_o_hien_nay"}
+        value={selectedCanBoCoBan?.noi_o_hien_nay}
+      />
+
+      <TextInput
+        title="Trình độ giáo dục phổ thông"
+        placeholder="Nhập vào trình độ giáo dục phổ thông"
+        onChange={onRecordInputChange}
+        property={"trinh_do_giao_duc_pho_thong"}
+        value={selectedCanBoCoBan?.trinh_do_giao_duc_pho_thong}
+      />
     </CustomeModal>
-}
+  );
+};
 
-
-export default ModalItem
+export default ModalItem;

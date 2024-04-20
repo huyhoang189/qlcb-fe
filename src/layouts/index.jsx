@@ -1,45 +1,46 @@
-import {Layout, theme} from "antd";
+import { Flex, Layout, theme } from "antd";
 import Header from "./header";
 import Siderbar from "./sidebar";
 
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import useWindowSize from "../hooks/useWindowSize";
 
-const {useToken} = theme;
-const {Content, Footer} = Layout;
+const { useToken } = theme;
+const { Content, Footer } = Layout;
 const MainLayout = () => {
-    const token = useToken();
-    return (
-        <Layout
-            style={{
-                margin: 0,
-                // height: "100vh",
-                backgroundColor: token.colorBgBase,
-                fontFamily: '"Archivo", sans-serif',
-            }}
-        >
-            <Header/>
-            <Siderbar/>
-            <Content
-                style={{
-                    margin: 10,
-                    padding: 10,
-                    background: "#FFFFFF",
-                    minHeight: "calc(100% - 60px - 60px)",
-                    // boxShadow: "0px 3px 14px rgba(226, 225, 225, 0.75)"
-                }}
-            >
-                <Outlet/>
-            </Content>
-            <Footer
-                style={{
-                    textAlign: "center",
-                }}
-            >
-                ©{new Date().getFullYear()} Hệ thống quản lý Cán bộ Điều tra hình sự Quân đội - Cục Điều tra Hình
-                sự - BQP
-            </Footer>
-        </Layout>
-    );
+  const token = useToken();
+  const { width, height } = useWindowSize();
+  console.log(height);
+  return (
+    <Layout
+      style={{
+        margin: 0,
+        minHeight: height,
+        backgroundColor: token.colorBgBase,
+        fontFamily: '"Archivo", sans-serif',
+      }}
+    >
+      <Header />
+      <Siderbar />
+      <Content
+        style={{
+          margin: 10,
+          padding: 10,
+          background: "#FFFFFF",
+        }}
+      >
+        <Outlet />
+      </Content>
+      <Footer
+        style={{
+          textAlign: "center",
+        }}
+      >
+        ©{new Date().getFullYear()} Hệ thống quản lý Cán bộ Điều tra hình sự
+        Quân đội - Cục Điều tra Hình sự - BQP
+      </Footer>
+    </Layout>
+  );
 };
 
 export default MainLayout;

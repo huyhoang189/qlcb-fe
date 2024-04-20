@@ -3,41 +3,41 @@ import createAPIServices from "../apis/base.api.js";
 const api = createAPIServices();
 
 export const getAllBase = (payload) => {
-    return api.makeRequest({
-        url: `/can-bo/getAllBase?pageSize=${payload?.pageSize || 10}&pageNumber=${payload?.pageNumber || 1}&filter=${payload?.keyword || ""}`,
-        method: "GET",
-    });
-
+  return api.makeRequest({
+    url: `/can-bo/get-all-base?pageSize=${payload?.pageSize || 10}&pageNumber=${
+      payload?.pageNumber || 1
+    }&filter=${payload?.keyword || ""}`,
+    method: "GET",
+  });
 };
 
 export const getById = (payload) => {
-    return api.makeRequest({
-        url: `/can-bo/${payload?.id}`,
-        method: "GET",
-        data: payload,
-    });
+  return api.makeRequest({
+    url: `/can-bo/${payload?.id}`,
+    method: "GET",
+    data: payload,
+  });
 };
 
-
 export const create = (payload) => {
-    return api.makeRequest({
-        url: `/can-bo`,
-        method: "POST",
-        data: payload,
-    });
+  return api.makeRequest({
+    url: `/can-bo`,
+    method: "POST",
+    data: payload,
+  });
 };
 
 export const update = (payload) => {
-    return api.makeRequest({
-        url: `/can-bo/${payload?.id}`,
-        method: "PUT",
-        data: payload,
-    });
+  return api.makeRequest({
+    url: `/can-bo/${payload?.id}`,
+    method: "PUT",
+    data: payload,
+  });
 };
 
 export const deleteItem = (payload) => {
-    return api.makeRequest({
-        url: `/can-bo/${payload?.id}`,
-        method: "DELETE",
-    });
+  return api.makeRequest({
+    url: `/can-bo/${payload?.id}`,
+    method: "DELETE",
+  });
 };
