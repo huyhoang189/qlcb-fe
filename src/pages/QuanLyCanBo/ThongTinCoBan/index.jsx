@@ -83,10 +83,19 @@ const baseColumns = [
     align: "center",
   },
   {
-    title: "trình độ GDPT",
+    title: "Trình độ GDPT",
     dataIndex: "trinh_do_giao_duc_pho_thong",
     key: "trinh_do_giao_duc_pho_thong",
     align: "center",
+  },
+  {
+    title: "Đơn vị hiện tại",
+    dataIndex: "don_vi",
+    key: "don_vi",
+    align: "center",
+    render: (text, record) => {
+      return record?.don_vi?.ten_don_vi;
+    },
   },
 ];
 
@@ -102,6 +111,52 @@ const features = [
   {
     label: "Quá trình công tác",
     key: "qua-trinh-cong-tac",
+  },
+  {
+    label: "Quá trình đào tạo",
+    key: "qua-trinh-dao-tao",
+  },
+  {
+    label: "Lý lịch chức danh pháp lý",
+    key: "ly-lich-chuc-danh-phap-ly",
+  },
+  {
+    label: "Khen thưởng",
+    key: "khen-thuong",
+  },
+  {
+    label: "Kỷ luật",
+    key: "ky-luat",
+  },
+  {
+    label: "Trình độ ngoại ngữ",
+    key: "trinh-do-ngoai-ngu",
+  },
+
+  {
+    label: "Lịch sử đi nước ngoài",
+    key: "lich-su-di-nuoc-ngoai",
+  },
+  {
+    label: "Tình trạng sức khoẻ",
+    key: "tinh-trang-suc-khoe",
+  },
+  {
+    label: "Bảo hiểm",
+    key: "bao-hiem",
+  },
+  {
+    label: "Tình hình nhà ở",
+    key: "tinh-hinh-nha-o",
+  },
+
+  {
+    label: "Chứng nhận đã cấp",
+    key: "chung-nhan-da-cap",
+  },
+  {
+    label: "Quân hàm",
+    key: "quan-ham",
   },
 ];
 

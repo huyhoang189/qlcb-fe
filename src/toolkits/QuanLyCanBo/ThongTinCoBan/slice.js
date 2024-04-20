@@ -15,6 +15,7 @@ const initialState = {
     trinh_do_giao_duc_pho_thong: null,
     created_at: "",
     updated_at: "",
+    ma_don_vi_hien_tai: "",
   },
   selectedCanBoCoBan: {},
   errorMassage: false,

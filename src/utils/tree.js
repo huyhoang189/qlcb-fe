@@ -86,6 +86,4 @@ const getNodeByKey = (tree, key) => {
   return result;
 };
 
-const treeToList = (tree) => {};
-
 export { generateTrees, getKeysByTitle, getNodeByKey };

@@ -23,10 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       components: {
         Table: {
           rowHoverBg: "#fff",
+          borderColor: "#78b43d",
         },
         Button: {
           primaryShadow: "",
         },
+        Breadcrumb: {},
       },
     }}
   >

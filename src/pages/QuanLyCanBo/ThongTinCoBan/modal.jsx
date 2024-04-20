@@ -1,11 +1,14 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
+import donViSlice from "../../../toolkits/QuanLyDanhMuc/DonVi/slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SelectInput from "../../../components/Form/selectinput.jsx";
 import { useParams } from "react-router-dom";
+import { generateTrees } from "../../../utils/tree.js";
+import TreeInput from "../../../components/Form/treeInput.jsx";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
@@ -14,6 +17,10 @@ const ModalItem = () => {
   const { modalActive, selectedCanBoCoBan, pageSize, pageNumber } = useSelector(
     (state) => state.canBoCoBans
   );
+  const { donVis } = useSelector((state) => state.donVis);
+
+  const [tree, setTree] = useState([]);
+
   const handleModal = (_item) => {
     dispatch(canBoCoBanSlice.actions.toggleModal(_item));
   };
@@ -48,6 +55,21 @@ const ModalItem = () => {
       dispatch(canBoCoBanSlice.actions.updateSelectedCanBoCoBanInput(clone));
     }
   };
+
+  //side effect
+  useEffect(() => {
+    if (modalActive)
+      dispatch(
+        donViSlice.actions.getDonVis({
+          pageNumber: 1,
+          pageSize: 10000,
+        })
+      );
+  }, [dispatch, modalActive]);
+
+  useEffect(() => {
+    if (donVis) setTree(generateTrees(donVis));
+  }, [donVis]);
 
   return (
     <CustomeModal
@@ -126,6 +148,14 @@ const ModalItem = () => {
         onChange={onRecordInputChange}
         property={"trinh_do_giao_duc_pho_thong"}
         value={selectedCanBoCoBan?.trinh_do_giao_duc_pho_thong}
+      />
+
+      <TreeInput
+        title="Đơn vị cha"
+        onChange={onRecordSelectInputChange}
+        property={"ma_don_vi_hien_tai"}
+        value={selectedCanBoCoBan?.ma_don_vi_hien_tai}
+        options={tree}
       />
     </CustomeModal>
   );
