@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         colorBgHeader: "#78b43d",
         colorBase: "#fff",
         borderRadius: 2,
-        colorBorderSecondary: "#d6d9dc",
+        colorBorderSecondary: "#78b43d",
         colorBorder: "#d6d9dc",
         fontSize: 11,
         fontFamily: "Archivo",
@@ -28,7 +28,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         Button: {
           primaryShadow: "",
         },
-        Breadcrumb: {},
       },
     }}
   >

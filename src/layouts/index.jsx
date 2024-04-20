@@ -27,6 +27,7 @@ const MainLayout = () => {
           margin: 10,
           padding: 10,
           background: "#FFFFFF",
+          borderColor: token.colorBorderSecondary,
         }}
       >
         <Outlet />
