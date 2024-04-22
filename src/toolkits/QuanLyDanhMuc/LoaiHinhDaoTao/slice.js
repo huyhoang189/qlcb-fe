@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  chucVuChinhQuyens: [],
-  chucVuChinhQuyen: {
-    id: "",
-    ten_chuc_vu: "",
+  loaiHinhDaoTaos: [],
+  loaiHinhDaoTao: {
+    id: null,
+    ten: "",
     ghi_chu: "",
     created_at: "",
     updated_at: "",
   },
-  selectedChucVuChinhQuyen: {},
+  selectedLoaiHinhDaoTao: {},
   errorMassage: false,
   isLoading: false,
   modalActive: false,
@@ -20,62 +20,60 @@ const initialState = {
 };
 
 const reducer = createSlice({
-  name: "chucVuChinhQuyens",
+  name: "loaiHinhDaoTaos",
   initialState,
   reducers: {
     toggleModal: (state, action) => {
       state.modalActive = !state.modalActive;
-      state.selectedChucVuChinhQuyen =
-        action.payload !== null
-          ? action.payload
-          : initialState.chucVuChinhQuyen;
+      state.selectedLoaiHinhDaoTao =
+        action.payload !== null ? action.payload : initialState.loaiHinhDaoTao;
     },
-    getChucVuChinhQuyenById: (state, action) => {
+    getLoaiHinhDaoTaoById: (state, action) => {
       state.modalActive = false;
       state.errorMassage = false;
       state.isLoading = true;
       state.pageSize = action.payload.pageSize;
     },
-    getChucVuChinhQuyenByIdSuccess: (state, action) => {
+    getLoaiHinhDaoTaoByIdSuccess: (state, action) => {
       state.errorMassage = false;
-      state.selectedChucVuChinhQuyen = action.payload;
+      state.selectedLoaiHinhDaoTao = action.payload;
     },
-    getChucVuChinhQuyenByIdError: (state, action) => {
+    getLoaiHinhDaoTaoByIdError: (state, action) => {
       state.errorMassage = "Error";
-      state.selectedChucVuChinhQuyen = action.payload
+      state.selectedLoaiHinhDaoTao = action.payload
         ? action.payload
-        : state.chucVuChinhQuyen;
+        : state.loaiHinhDaoTao;
     },
-    getChucVuChinhQuyens: (state, action) => {
+    getLoaiHinhDaoTaos: (state, action) => {
       state.modalActive = false;
       state.errorMassage = false;
       state.isLoading = true;
     },
-    getChucVuChinhQuyensSuccess: (state, action) => {
+    getLoaiHinhDaoTaosSuccess: (state, action) => {
       state.errorMassage = false;
-      state.chucVuChinhQuyens = action.payload.data;
+      state.loaiHinhDaoTaos = action.payload.data;
       state.totalItem = action.payload.count;
       state.pageNumber = action.payload.pageNumber;
       state.totalPage = action.payload.totalPage;
       state.pageSize = action.payload.pageSize;
       state.isLoading = false;
     },
-    getChucVuChinhQuyensError: (state, action) => {
+    getLoaiHinhDaoTaosError: (state, action) => {
       state.errorMassage = "Error";
-      state.chucVuChinhQuyens = action.payload
+      state.loaiHinhDaoTaos = action.payload
         ? action.payload
-        : state.chucVuChinhQuyens;
+        : state.loaiHinhDaoTaos;
       state.isLoading = false;
     },
-    handleChucVuChinhQuyen: (state, action) => {},
-    handleChucVuChinhQuyenSuccess: (state, action) => {
+    handleLoaiHinhDaoTao: (state, action) => {},
+    handleLoaiHinhDaoTaoSuccess: (state, action) => {
       state.modalActive = false;
       state.errorMassage = false;
-      state.selectedChucVuChinhQuyen = action.payload;
+      state.selectedLoaiHinhDaoTao = action.payload;
     },
-    handleChucVuChinhQuyenError: (state, action) => {},
-    updateSelectedChucVuChinhQuyenInput: (state, action) => {
-      state.selectedChucVuChinhQuyen = action.payload;
+    handleLoaiHinhDaoTaoError: (state, action) => {},
+    updateSelectedLoaiHinhDaoTaoInput: (state, action) => {
+      state.selectedLoaiHinhDaoTao = action.payload;
     },
   },
 });

@@ -1,12 +1,12 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import chucVuChinhQuyenSlice from "./slice.js";
+import quaTrinhDaoTaoSlice from "./slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import {
   create,
   deleteItem,
   getAll,
   update,
-} from "../../../apis/chucVuChinhQuyen.js";
+} from "../../../apis/quaTrinhDaoTao.js";
 
 function* _getAll({ payload }) {
   try {
@@ -14,13 +14,13 @@ function* _getAll({ payload }) {
     const { metadata } = data;
     if (status === 200 || status === 201) {
       yield put(
-        chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensSuccess(metadata)
+        quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaosSuccess(metadata)
       );
     } else {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+      yield put(quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaosError([]));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+    yield put(quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaosError([]));
   }
 }
 
@@ -41,26 +41,26 @@ function* _handleItem({ payload }) {
 
     yield put(
       isSuccess
-        ? chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenSuccess()
-        : chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError([])
+        ? quaTrinhDaoTaoSlice.actions.handleQuaTrinhDaoTaoSuccess()
+        : quaTrinhDaoTaoSlice.actions.handleQuaTrinhDaoTaoError([])
     );
 
     if (isSuccess) {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens(payload));
+      yield put(quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaos(item));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError());
+    yield put(quaTrinhDaoTaoSlice.actions.handleQuaTrinhDaoTaoError());
   }
 }
 
 export default function* saga() {
   yield all([
     yield takeEvery(
-      chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens().type,
+      quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaos().type,
       _getAll
     ),
     yield takeEvery(
-      chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyen().type,
+      quaTrinhDaoTaoSlice.actions.handleQuaTrinhDaoTao().type,
       _handleItem
     ),
   ]);

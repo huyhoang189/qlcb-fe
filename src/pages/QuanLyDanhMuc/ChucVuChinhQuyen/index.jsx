@@ -2,8 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import lyLichKhoaHocSlice from "../../../toolkits/QuanLyCanBo/LyLichKhoaHoc/slice.js";
-import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
+import chucVuChinhQuyenSlice from "../../../toolkits/QuanLyDanhMuc/ChucVuChinhQuyen/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
 import {
@@ -12,7 +11,7 @@ import {
   UpdateButton,
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
-import { useParams } from "react-router-dom";
+import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
 
 const pageHeader = {
@@ -22,11 +21,10 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Quản lý hồ sơ cán bộ",
-      href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
+      title: "Quản lý danh mục",
     },
     {
-      title: `Lý lịch khoa học`,
+      title: "Quản lý chức vụ chính quyền",
     },
   ],
 };
@@ -41,25 +39,10 @@ const baseColumns = [
   },
 
   {
-    title: "Chuyên ngành",
-    dataIndex: "chuyen_nganh",
-    key: "chuyen_nganh",
+    title: "Tên chức vụ",
+    dataIndex: "ten_chuc_vu",
+    key: "ten_chuc_vu",
     align: "center",
-  },
-  {
-    title: "Thời gian",
-    dataIndex: "thoi_gian",
-    key: "thoi_gian",
-    align: "center",
-  },
-  {
-    title: "Chức danh",
-    dataIndex: "chuc_danh_khoa_hoc",
-    key: "chuc_danh_khoa_hoc",
-    align: "center",
-    render: (text, record) => {
-      return record?.chuc_danh_khoa_hoc?.ten_chuc_danh;
-    },
   },
   {
     title: "Ghi chú",
@@ -69,17 +52,12 @@ const baseColumns = [
   },
 ];
 
-const LyLichKhoaHoc = () => {
+const QuanLyChucVuChinhQuyen = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-  const { lyLichKhoaHocs, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.lyLichKhoaHocs);
-
-  const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
+  const { chucVuChinhQuyens, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.chucVuChinhQuyens);
 
   const [keyword, setKeyword] = useState("");
-
-  const { ma_can_bo } = params;
 
   const onChangeKeywordInput = (key, event) => {
     setKeyword(event.target.value);
@@ -87,22 +65,20 @@ const LyLichKhoaHoc = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      lyLichKhoaHocSlice.actions.getLyLichKhoaHocs({
+      chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
-        ma_can_bo,
       })
     );
   };
 
   const handleModal = (_item) => {
-    dispatch(lyLichKhoaHocSlice.actions.toggleModal(_item));
+    dispatch(chucVuChinhQuyenSlice.actions.toggleModal(_item));
   };
 
   const columns = [
     ...baseColumns,
-
     {
       title: "Công cụ",
       key: "tool",
@@ -117,8 +93,7 @@ const LyLichKhoaHoc = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                lyLichKhoaHocSlice.actions.handleLyLichKhoaHoc({
-                  ma_can_bo,
+                chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyen({
                   item: record,
                   actionName: "DELETE",
                   pageSize: pageSize,
@@ -137,41 +112,31 @@ const LyLichKhoaHoc = () => {
 
   //side effect
   useEffect(() => {
-    dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      lyLichKhoaHocSlice.actions.getLyLichKhoaHocs({
+      chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens({
         keyword,
         pageSize: 10,
         pageNumber: 1,
-        ma_can_bo,
       })
     );
   }, [dispatch, keyword]);
 
   return (
     <ContentWrapper>
-      <CustomBreadcrumb
-        items={[
-          ...pageHeader.breadcrumb,
-
-          {
-            title: `${selectedCanBoCoBan?.ho_ten_khai_sinh} - Số hiệu: ${selectedCanBoCoBan?.so_hieu_quan_nhan}`,
-          },
-        ]}
-      />
+      <CustomBreadcrumb items={pageHeader.breadcrumb} />
       <CustomeTable
         header={
-          <Header justify={"flex-end"}>
-            {/*<TextInput*/}
-            {/*    placeholder={"Nhập vào từ khoá tìm kiếm"}*/}
-            {/*    onChange={onChangeKeywordInput}*/}
-            {/*    property={"keyword"}*/}
-            {/*    width={20}*/}
-            {/*/>*/}
+          <Header>
+            <TextInput
+              placeholder={"Nhập vào từ khoá tìm kiếm"}
+              onChange={onChangeKeywordInput}
+              property={"keyword"}
+              width={20}
+            />
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={lyLichKhoaHocs}
+        data={chucVuChinhQuyens}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -187,4 +152,4 @@ const LyLichKhoaHoc = () => {
   );
 };
 
-export default LyLichKhoaHoc;
+export default QuanLyChucVuChinhQuyen;

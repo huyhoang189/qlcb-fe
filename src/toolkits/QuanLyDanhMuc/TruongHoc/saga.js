@@ -1,26 +1,19 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import chucVuChinhQuyenSlice from "./slice.js";
+import truongHocSlice from "./slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
-import {
-  create,
-  deleteItem,
-  getAll,
-  update,
-} from "../../../apis/chucVuChinhQuyen.js";
+import { create, deleteItem, getAll, update } from "../../../apis/truongHoc.js";
 
 function* _getAll({ payload }) {
   try {
     const { data, status } = yield call(getAll, payload);
     const { metadata } = data;
     if (status === 200 || status === 201) {
-      yield put(
-        chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensSuccess(metadata)
-      );
+      yield put(truongHocSlice.actions.getTruongHocsSuccess(metadata));
     } else {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+      yield put(truongHocSlice.actions.getTruongHocsError([]));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+    yield put(truongHocSlice.actions.getTruongHocsError([]));
   }
 }
 
@@ -41,27 +34,21 @@ function* _handleItem({ payload }) {
 
     yield put(
       isSuccess
-        ? chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenSuccess()
-        : chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError([])
+        ? truongHocSlice.actions.handleTruongHocSuccess()
+        : truongHocSlice.actions.handleTruongHocError([])
     );
 
     if (isSuccess) {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens(payload));
+      yield put(truongHocSlice.actions.getTruongHocs(payload));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError());
+    yield put(truongHocSlice.actions.handleTruongHocError());
   }
 }
 
 export default function* saga() {
   yield all([
-    yield takeEvery(
-      chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens().type,
-      _getAll
-    ),
-    yield takeEvery(
-      chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyen().type,
-      _handleItem
-    ),
+    yield takeEvery(truongHocSlice.actions.getTruongHocs().type, _getAll),
+    yield takeEvery(truongHocSlice.actions.handleTruongHoc().type, _handleItem),
   ]);
 }
