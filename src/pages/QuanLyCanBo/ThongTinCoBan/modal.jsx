@@ -2,13 +2,14 @@ import CustomeModal from "../../../components/Form/modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import donViSlice from "../../../toolkits/QuanLyDanhMuc/DonVi/slice.js";
-import { ACTION_NAME } from "../../../utils/common.js";
+import { ACTION_NAME, DATE_FORMAT } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 import { useEffect, useState } from "react";
 import SelectInput from "../../../components/Form/selectinput.jsx";
 import { useParams } from "react-router-dom";
 import { generateTrees } from "../../../utils/tree.js";
 import TreeInput from "../../../components/Form/treeInput.jsx";
+import DateInput from "../../../components/Form/dateinput.jsx";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,14 @@ const ModalItem = () => {
     if (key) {
       let clone = Object.assign({}, selectedCanBoCoBan);
       clone[key] = event;
+      dispatch(canBoCoBanSlice.actions.updateSelectedCanBoCoBanInput(clone));
+    }
+  };
+
+  const onRecordDateInputChange = (key, event) => {
+    if (key) {
+      let clone = Object.assign({}, selectedCanBoCoBan);
+      clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
       dispatch(canBoCoBanSlice.actions.updateSelectedCanBoCoBanInput(clone));
     }
   };
@@ -102,26 +111,26 @@ const ModalItem = () => {
         isNull={false}
       />
 
-      <TextInput
+      <DateInput
         title="Ngày tháng năm sinh"
         placeholder="Nhập vào ngày thấng năm sinh"
-        onChange={onRecordInputChange}
+        onChange={onRecordDateInputChange}
         property={"ngay_thang_nam_sinh"}
         value={selectedCanBoCoBan?.ngay_thang_nam_sinh}
       />
 
-      <TextInput
+      <DateInput
         title="Ngày vào đảng"
         placeholder="Nhập vào ngày vào đảng"
-        onChange={onRecordInputChange}
+        onChange={onRecordDateInputChange}
         property={"ngay_vao_dang"}
         value={selectedCanBoCoBan?.ngay_vao_dang}
       />
 
-      <TextInput
+      <DateInput
         title="Ngày nhập ngũ"
         placeholder="Nhập vào ngày nhập ngũ"
-        onChange={onRecordInputChange}
+        onChange={onRecordDateInputChange}
         property={"ngay_nhap_ngu"}
         value={selectedCanBoCoBan?.ngay_nhap_ngu}
       />

@@ -142,13 +142,6 @@ const ModalItem = () => {
         }))}
         isNull={false}
       />
-      {/* <TextInput
-        title="Thời gian bắt đầu"
-        placeholder="Nhập vào thời gian bắt đầu"
-        onChange={onRecordInputChange}
-        property={"thoi_gian_bat_dau"}
-        value={selectedQuaTrinhDaoTao?.thoi_gian_bat_dau}
-      /> */}
 
       <DateInput
         title="Thời gian bắt đầu"
@@ -165,14 +158,6 @@ const ModalItem = () => {
         property={"thoi_gian_ket_thuc"}
         value={selectedQuaTrinhDaoTao?.thoi_gian_ket_thuc}
       />
-
-      {/* <TextInput
-        title="Thời gian kết thúc"
-        placeholder="Nhập vào thời gian kết thúc"
-        onChange={onRecordInputChange}
-        property={"thoi_gian_ket_thuc"}
-        value={selectedQuaTrinhDaoTao?.thoi_gian_ket_thuc}
-      /> */}
 
       <TextInput
         title="Xếp loại"
