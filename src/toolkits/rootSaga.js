@@ -8,6 +8,7 @@ import chucVuChinhQuyenSaga from "./QuanLyDanhMuc/ChucVuChinhQuyen/saga.js";
 import truongHocSaga from "./QuanLyDanhMuc/TruongHoc/saga.js";
 import loaiHinhDaoTaoSaga from "./QuanLyDanhMuc/LoaiHinhDaoTao/saga.js";
 import chuyenNganhSaga from "./QuanLyDanhMuc/ChuyenNganh/saga.js";
+import quaTrinhDaoTaoSaga from "./QuanLyCanBo/QuaTrinhDaoTao/saga.js";
 
 export default function* rootSaga() {
   yield all([
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     truongHocSaga(),
     loaiHinhDaoTaoSaga(),
     chuyenNganhSaga(),
+    quaTrinhDaoTaoSaga(),
   ]);
 }

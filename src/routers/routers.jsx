@@ -10,6 +10,7 @@ import QuanLyTruongHoc from "../pages/QuanLyDanhMuc/TruongHoc/index.jsx";
 import QuanLyChucVuChinhQuyen from "../pages/QuanLyDanhMuc/ChucVuChinhQuyen/index.jsx";
 import QuanLyChuyenNganh from "../pages/QuanLyDanhMuc/ChuyenNganh/index.jsx";
 import QuanLyLoaiHinhDaoTao from "../pages/QuanLyDanhMuc/LoaiHinhDaoTao/index.jsx";
+import QuaTrinhDaoTao from "../pages/QuanLyCanBo/QuaTrinhDaoTao/index.jsx";
 
 export const router = createBrowserRouter([
   //   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
           {
             path: "danh-sach-can-bo/:ma_can_bo/ly-lich-khoa-hoc",
             element: <LyLichKhoaHoc />,
+          },
+          {
+            path: "danh-sach-can-bo/:ma_can_bo/qua-trinh-dao-tao",
+            element: <QuaTrinhDaoTao />,
           },
         ],
       },

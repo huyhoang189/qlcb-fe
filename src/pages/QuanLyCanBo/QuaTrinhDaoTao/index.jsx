@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import lyLichKhoaHocSlice from "../../../toolkits/QuanLyCanBo/LyLichKhoaHoc/slice.js";
+import quaTrinhDaoTaoSlice from "../../../toolkits/QuanLyCanBo/QuaTrinhDaoTao/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
@@ -26,7 +26,7 @@ const pageHeader = {
       href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
     },
     {
-      title: `Lý lịch khoa học`,
+      title: "Quá trình đào tạo",
     },
   ],
 };
@@ -39,27 +39,50 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
-
+  {
+    title: "Trường học",
+    dataIndex: "truong_hoc",
+    key: "truong_hoc",
+    align: "center",
+    render: (text, record) => {
+      return record?.truong_hoc?.ten_truong;
+    },
+  },
   {
     title: "Chuyên ngành",
     dataIndex: "chuyen_nganh",
     key: "chuyen_nganh",
     align: "center",
+    render: (text, record) => {
+      return record?.chuyen_nganh?.ten;
+    },
   },
   {
-    title: "Thời gian",
-    dataIndex: "thoi_gian",
-    key: "thoi_gian",
-    align: "center",
-  },
-  {
-    title: "Chức danh",
-    dataIndex: "chuc_danh_khoa_hoc",
-    key: "chuc_danh_khoa_hoc",
+    title: "Loại hình đào tạo",
+    dataIndex: "loai_hinh_dao_tao",
+    key: "loai_hinh_dao_tao",
     align: "center",
     render: (text, record) => {
-      return record?.chuc_danh_khoa_hoc?.ten_chuc_danh;
+      return record?.loai_hinh_dao_tao?.ten;
     },
+  },
+  {
+    title: "Thời gian bắt đầu",
+    dataIndex: "thoi_gian_bat_dau",
+    key: "thoi_gian_bat_dau",
+    align: "center",
+  },
+  {
+    title: "Thời gian kết thúc",
+    dataIndex: "thoi_gian_ket_thuc",
+    key: "thoi_gian_ket_thuc",
+    align: "center",
+  },
+  {
+    title: "Xếp loại",
+    dataIndex: "xep_loai",
+    key: "xep_loai",
+    align: "center",
   },
   {
     title: "Ghi chú",
@@ -69,11 +92,11 @@ const baseColumns = [
   },
 ];
 
-const LyLichKhoaHoc = () => {
+const QuaTrinhDaoTao = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { lyLichKhoaHocs, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.lyLichKhoaHocs);
+  const { quaTrinhDaoTaos, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.quaTrinhDaoTaos);
 
   const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
@@ -87,7 +110,7 @@ const LyLichKhoaHoc = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      lyLichKhoaHocSlice.actions.getLyLichKhoaHocs({
+      quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaos({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -97,7 +120,7 @@ const LyLichKhoaHoc = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(lyLichKhoaHocSlice.actions.toggleModal(_item));
+    dispatch(quaTrinhDaoTaoSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -117,7 +140,7 @@ const LyLichKhoaHoc = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                lyLichKhoaHocSlice.actions.handleLyLichKhoaHoc({
+                quaTrinhDaoTaoSlice.actions.handleQuaTrinhDaoTao({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -139,7 +162,7 @@ const LyLichKhoaHoc = () => {
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      lyLichKhoaHocSlice.actions.getLyLichKhoaHocs({
+      quaTrinhDaoTaoSlice.actions.getQuaTrinhDaoTaos({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -153,7 +176,6 @@ const LyLichKhoaHoc = () => {
       <CustomBreadcrumb
         items={[
           ...pageHeader.breadcrumb,
-
           {
             title: `${selectedCanBoCoBan?.ho_ten_khai_sinh} - Số hiệu: ${selectedCanBoCoBan?.so_hieu_quan_nhan}`,
           },
@@ -171,7 +193,7 @@ const LyLichKhoaHoc = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={lyLichKhoaHocs}
+        data={quaTrinhDaoTaos}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -187,4 +209,4 @@ const LyLichKhoaHoc = () => {
   );
 };
 
-export default LyLichKhoaHoc;
+export default QuaTrinhDaoTao;

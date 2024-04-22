@@ -11,6 +11,7 @@ import truongHocSlice from "./QuanLyDanhMuc/TruongHoc/slice.js";
 import chucVuChinhQuyenSlice from "./QuanLyDanhMuc/ChucVuChinhQuyen/slice.js";
 import chuyenNganhSlice from "./QuanLyDanhMuc/ChuyenNganh/slice.js";
 import loaiHinhDaoTaoSlice from "./QuanLyDanhMuc/LoaiHinhDaoTao/slice.js";
+import quaTrinhDaoTaoSlice from "./QuanLyCanBo/QuaTrinhDaoTao/slice.js";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -25,6 +26,7 @@ export const store = configureStore({
     chucVuChinhQuyens: chucVuChinhQuyenSlice.reducer,
     chuyenNganhs: chuyenNganhSlice.reducer,
     loaiHinhDaoTaos: loaiHinhDaoTaoSlice.reducer,
+    quaTrinhDaoTaos: quaTrinhDaoTaoSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

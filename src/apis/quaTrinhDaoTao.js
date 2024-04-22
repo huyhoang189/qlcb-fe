@@ -1,10 +1,10 @@
-import createAPIServices from "../apis/base.api.js";
+import createAPIServices from "./base.api.js";
 
 const api = createAPIServices();
 
 export const getAll = (payload) => {
   return api.makeRequest({
-    url: `/ly-lich-khoa-hoc/get-all-by-ma-can-bo/${
+    url: `/qua-trinh-dao-tao/get-all-by-ma-can-bo/${
       payload?.ma_can_bo
     }?pageSize=${payload?.pageSize || 10}&pageNumber=${
       payload?.pageNumber || 1
@@ -15,7 +15,7 @@ export const getAll = (payload) => {
 
 export const create = (payload) => {
   return api.makeRequest({
-    url: `/ly-lich-khoa-hoc`,
+    url: `/qua-trinh-dao-tao`,
     method: "POST",
     data: payload,
   });
@@ -23,7 +23,7 @@ export const create = (payload) => {
 
 export const update = (payload) => {
   return api.makeRequest({
-    url: `/ly-lich-khoa-hoc/${payload?.id}`,
+    url: `/qua-trinh-dao-tao/${payload?.id}`,
     method: "PUT",
     data: payload,
   });
@@ -31,7 +31,7 @@ export const update = (payload) => {
 
 export const deleteItem = (payload) => {
   return api.makeRequest({
-    url: `/ly-lich-khoa-hoc/${payload?.id}`,
+    url: `/qua-trinh-dao-tao/${payload?.id}`,
     method: "DELETE",
   });
 };
