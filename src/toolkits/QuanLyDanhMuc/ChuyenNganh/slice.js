@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   chuyenNganhs: [],
   chuyenNganh: {
-    id: "",
-    ten_chuc_danh: "",
+    id: null,
+    ten: "",
     ghi_chu: "",
     created_at: "",
     updated_at: "",

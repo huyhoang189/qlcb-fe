@@ -24,7 +24,7 @@ const pageHeader = {
       title: "Quản lý danh mục",
     },
     {
-      title: "Quản lý chức danh khoa học",
+      title: "Quản lý danh mục loại hình đào tạo",
     },
   ],
 };
@@ -39,9 +39,9 @@ const baseColumns = [
   },
 
   {
-    title: "Tên chức danh",
-    dataIndex: "ten_chuc_danh",
-    key: "ten_chuc_danh",
+    title: "Tên loại hình đào tạo",
+    dataIndex: "ten",
+    key: "ten",
     align: "center",
   },
   {

@@ -48,11 +48,11 @@ const ModalItem = () => {
       cancelText="Từ chối"
     >
       <TextInput
-        title="Tên chức danh"
-        placeholder="Nhập vào tên chức danh"
+        title="Tên trường học"
+        placeholder="Nhập vào tên trường học"
         onChange={onRecordInputChange}
-        property={"ten_chuc_danh"}
-        value={selectedTruongHoc?.ten_chuc_danh}
+        property={"ten_truong"}
+        value={selectedTruongHoc?.ten_truong}
       />
       <TextInput
         title="Ghi chú"

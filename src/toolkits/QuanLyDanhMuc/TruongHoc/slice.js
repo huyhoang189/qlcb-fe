@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   truongHocs: [],
   truongHoc: {
-    id: "",
-    ten_chuc_danh: "",
+    id: null,
+    ten_truong: "",
     ghi_chu: "",
     created_at: "",
     updated_at: "",

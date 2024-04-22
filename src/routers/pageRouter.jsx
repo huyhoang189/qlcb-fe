@@ -108,6 +108,10 @@ export const publicRouter = [
         key: "loai-hinh-dao-tao",
         label: "Loại hình đào tạo",
       },
+      {
+        key: "chuc-vu-chinh-quyen",
+        label: "Chức vụ chính quyền",
+      },
     ],
   },
   {

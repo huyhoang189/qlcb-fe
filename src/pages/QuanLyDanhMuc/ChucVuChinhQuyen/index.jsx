@@ -24,7 +24,7 @@ const pageHeader = {
       title: "Quản lý danh mục",
     },
     {
-      title: "Quản lý chức danh khoa học",
+      title: "Quản lý chức vụ chính quyền",
     },
   ],
 };
@@ -39,9 +39,9 @@ const baseColumns = [
   },
 
   {
-    title: "Tên chức danh",
-    dataIndex: "ten_chuc_danh",
-    key: "ten_chuc_danh",
+    title: "Tên chức vụ",
+    dataIndex: "ten_chuc_vu",
+    key: "ten_chuc_vu",
     align: "center",
   },
   {
