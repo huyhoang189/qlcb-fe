@@ -1,26 +1,24 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import chucVuChinhQuyenSlice from "./slice.js";
+import chuyenNganhSlice from "./slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import {
   create,
   deleteItem,
   getAll,
   update,
-} from "../../../apis/chucVuChinhQuyen.js";
+} from "../../../apis/chuyenNganh.js";
 
 function* _getAll({ payload }) {
   try {
     const { data, status } = yield call(getAll, payload);
     const { metadata } = data;
     if (status === 200 || status === 201) {
-      yield put(
-        chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensSuccess(metadata)
-      );
+      yield put(chuyenNganhSlice.actions.getChuyenNganhsSuccess(metadata));
     } else {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+      yield put(chuyenNganhSlice.actions.getChuyenNganhsError([]));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+    yield put(chuyenNganhSlice.actions.getChuyenNganhsError([]));
   }
 }
 
@@ -41,26 +39,23 @@ function* _handleItem({ payload }) {
 
     yield put(
       isSuccess
-        ? chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenSuccess()
-        : chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError([])
+        ? chuyenNganhSlice.actions.handleChuyenNganhSuccess()
+        : chuyenNganhSlice.actions.handleChuyenNganhError([])
     );
 
     if (isSuccess) {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens(payload));
+      yield put(chuyenNganhSlice.actions.getChuyenNganhs(payload));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError());
+    yield put(chuyenNganhSlice.actions.handleChuyenNganhError());
   }
 }
 
 export default function* saga() {
   yield all([
+    yield takeEvery(chuyenNganhSlice.actions.getChuyenNganhs().type, _getAll),
     yield takeEvery(
-      chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens().type,
-      _getAll
-    ),
-    yield takeEvery(
-      chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyen().type,
+      chuyenNganhSlice.actions.handleChuyenNganh().type,
       _handleItem
     ),
   ]);

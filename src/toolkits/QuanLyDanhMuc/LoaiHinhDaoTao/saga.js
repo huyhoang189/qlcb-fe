@@ -1,12 +1,12 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import chucVuChinhQuyenSlice from "./slice.js";
+import loaiHinhDaoTaoSlice from "./slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import {
   create,
   deleteItem,
   getAll,
   update,
-} from "../../../apis/chucVuChinhQuyen.js";
+} from "../../../apis/loaiHinhDaoTao.js";
 
 function* _getAll({ payload }) {
   try {
@@ -14,13 +14,13 @@ function* _getAll({ payload }) {
     const { metadata } = data;
     if (status === 200 || status === 201) {
       yield put(
-        chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensSuccess(metadata)
+        loaiHinhDaoTaoSlice.actions.getLoaiHinhDaoTaosSuccess(metadata)
       );
     } else {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+      yield put(loaiHinhDaoTaoSlice.actions.getLoaiHinhDaoTaosError([]));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyensError([]));
+    yield put(loaiHinhDaoTaoSlice.actions.getLoaiHinhDaoTaosError([]));
   }
 }
 
@@ -41,26 +41,26 @@ function* _handleItem({ payload }) {
 
     yield put(
       isSuccess
-        ? chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenSuccess()
-        : chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError([])
+        ? loaiHinhDaoTaoSlice.actions.handleLoaiHinhDaoTaoSuccess()
+        : loaiHinhDaoTaoSlice.actions.handleLoaiHinhDaoTaoError([])
     );
 
     if (isSuccess) {
-      yield put(chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens(payload));
+      yield put(loaiHinhDaoTaoSlice.actions.getLoaiHinhDaoTaos(payload));
     }
   } catch (error) {
-    yield put(chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyenError());
+    yield put(loaiHinhDaoTaoSlice.actions.handleLoaiHinhDaoTaoError());
   }
 }
 
 export default function* saga() {
   yield all([
     yield takeEvery(
-      chucVuChinhQuyenSlice.actions.getChucVuChinhQuyens().type,
+      loaiHinhDaoTaoSlice.actions.getLoaiHinhDaoTaos().type,
       _getAll
     ),
     yield takeEvery(
-      chucVuChinhQuyenSlice.actions.handleChucVuChinhQuyen().type,
+      loaiHinhDaoTaoSlice.actions.handleLoaiHinhDaoTao().type,
       _handleItem
     ),
   ]);
