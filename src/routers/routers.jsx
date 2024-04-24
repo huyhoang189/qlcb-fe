@@ -6,12 +6,17 @@ import DonVi from "../pages/QuanLyDanhMuc/DonVi/index.jsx";
 import NotFound from "../pages/NotFound/index.jsx";
 import CanBoCoBan from "../pages/QuanLyCanBo/ThongTinCoBan/index.jsx";
 import LyLichKhoaHoc from "../pages/QuanLyCanBo/LyLichKhoaHoc/index.jsx";
+import TrinhDoNgoaiNgu from "../pages/QuanLyCanBo/TrinhDoNgoaiNgu/index.jsx";
+import KhenThuong from "../pages/QuanLyCanBo/KhenThuong/index.jsx";
+import KyLuat from "../pages/QuanLyCanBo/KyLuat/index.jsx";
 import QuanLyTruongHoc from "../pages/QuanLyDanhMuc/TruongHoc/index.jsx";
 import QuanLyChucVuChinhQuyen from "../pages/QuanLyDanhMuc/ChucVuChinhQuyen/index.jsx";
 import QuanLyChuyenNganh from "../pages/QuanLyDanhMuc/ChuyenNganh/index.jsx";
 import QuanLyLoaiHinhDaoTao from "../pages/QuanLyDanhMuc/LoaiHinhDaoTao/index.jsx";
 import QuaTrinhDaoTao from "../pages/QuanLyCanBo/QuaTrinhDaoTao/index.jsx";
-
+import QuanLyNgoaiNgu from "../pages/QuanLyDanhMuc/NgoaiNgu/index.jsx";
+import QuanLyChungNhan from "../pages/QuanLyDanhMuc/ChungNhan/index.jsx"
+import QuanLyChucDanhPhapLy from "../pages/QuanLyDanhMuc/ChucDanhPhapLy/index.jsx"
 export const router = createBrowserRouter([
   //   {
   //     path: "login",
@@ -53,6 +58,18 @@ export const router = createBrowserRouter([
             path: "loai-hinh-dao-tao",
             element: <QuanLyLoaiHinhDaoTao />,
           },
+          {
+            path: "ngoai-ngu",
+            element: <QuanLyNgoaiNgu />,
+          },
+          {
+            path: "chung-nhan",
+            element: <QuanLyChungNhan />,
+          },
+          {
+            path: "chuc-danh-phap-ly",
+            element: <QuanLyChucDanhPhapLy />,
+          },
         ],
       },
       {
@@ -69,6 +86,18 @@ export const router = createBrowserRouter([
           {
             path: "danh-sach-can-bo/:ma_can_bo/qua-trinh-dao-tao",
             element: <QuaTrinhDaoTao />,
+          },
+          {
+            path: "danh-sach-can-bo/:ma_can_bo/trinh-do-ngoai-ngu",
+            element: <TrinhDoNgoaiNgu />,
+          },
+          {
+            path: "danh-sach-can-bo/:ma_can_bo/khen-thuong",
+            element: <KhenThuong />,
+          },
+          {
+            path: "danh-sach-can-bo/:ma_can_bo/ky-luat",
+            element: <KyLuat />,
           },
         ],
       },
