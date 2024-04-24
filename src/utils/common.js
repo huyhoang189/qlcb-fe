@@ -8,4 +8,5 @@ export const ACTION_NAME = {
 export const DATE_FORMAT = {
   DDMMYYYY: "DD/MM/YYYY",
   YYYYMMDD: "YYYY/MM/DD",
+  YYYY:"YYYY"
 };

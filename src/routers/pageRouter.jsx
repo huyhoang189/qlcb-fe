@@ -112,6 +112,18 @@ export const publicRouter = [
         key: "chuc-vu-chinh-quyen",
         label: "Chức vụ chính quyền",
       },
+      {
+        key: "ngoai-ngu",
+        label: "Ngoại ngữ",
+      },
+      {
+        key: "chung-nhan",
+        label: "Quản lý chứng nhận",
+      },
+      {
+        key: "chuc-danh-phap-ly",
+        label: "Quản lý chức danh pháp lý",
+      },
     ],
   },
   {
