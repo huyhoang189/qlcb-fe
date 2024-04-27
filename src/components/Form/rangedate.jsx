@@ -1,5 +1,6 @@
 import { DatePicker, Space, Typography } from "antd";
 const { RangePicker } = DatePicker;
+import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
 const RangeDate = ({
@@ -48,4 +49,11 @@ const RangeDate = ({
   );
 };
 
+RangeDate.propTypes = {
+  title: PropTypes.string,
+  property: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  isNull: PropTypes.bool,
+}
 export default RangeDate;

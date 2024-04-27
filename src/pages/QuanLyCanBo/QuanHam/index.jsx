@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import kyLuatSlice from "../../../toolkits/QuanLyCanBo/KyLuat/slice.js";
+import quanHamSlice from "../../../toolkits/QuanLyCanBo/QuanHam/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
@@ -26,7 +26,7 @@ const pageHeader = {
       href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
     },
     {
-      title: `Kỷ luật`,
+      title: `Bảo hiểm`,
     },
   ],
 };
@@ -41,27 +41,21 @@ const baseColumns = [
   },
 
   {
-    title: "Hình thức",
-    dataIndex: "hinh_thuc",
-    key: "hinh_thuc",
+    title: "Hệ số",
+    dataIndex: "he_so",
+    key: "he_so",
     align: "center",
   },
   {
-    title: "Nội dung",
-    dataIndex: "noi_dung",
-    key: "noi_dung",
+    title: "Quân hàm",
+    dataIndex: "quan_ham",
+    key: "quan_ham",
     align: "center",
   },
   {
     title: "Thời gian",
     dataIndex: "thoi_gian",
     key: "thoi_gian",
-    align: "center",
-  },
-  {
-    title: "Số quyết định",
-    dataIndex: "so_quyet_dinh",
-    key: "so_quyet_dinh",
     align: "center",
   },
   {
@@ -72,11 +66,11 @@ const baseColumns = [
   },
 ];
 
-const KyLuat = () => {
+const QuanHam = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { kyLuats, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.kyLuats);
+  const { quanHams, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.quanHams);
 
   const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
@@ -90,7 +84,7 @@ const KyLuat = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      kyLuatSlice.actions.getKyLuats({
+      quanHamSlice.actions.getQuanHams({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -100,7 +94,7 @@ const KyLuat = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(kyLuatSlice.actions.toggleModal(_item));
+    dispatch(quanHamSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -120,7 +114,7 @@ const KyLuat = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                kyLuatSlice.actions.handleKyLuat({
+                quanHamSlice.actions.handleQuanHam({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -142,7 +136,7 @@ const KyLuat = () => {
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      kyLuatSlice.actions.getKyLuats({
+      quanHamSlice.actions.getQuanHams({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -168,7 +162,7 @@ const KyLuat = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={kyLuats}
+        data={quanHams}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -184,4 +178,4 @@ const KyLuat = () => {
   );
 };
 
-export default KyLuat;
+export default QuanHam;

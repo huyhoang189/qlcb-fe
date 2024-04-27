@@ -7,12 +7,13 @@ const NumberInput =
          property,
          value,
          onChange,
+         addonAfter,
          isNull = true,
          disabled = false,
          size = 0,
          width = 100,
          min = 0,
-         max = 10,
+         max,
 
      }) => {
         return (
@@ -26,11 +27,15 @@ const NumberInput =
                     {isNull === false ? <span style={{color: "red"}}>(*)</span> : ""}
                 </Typography.Text>
                 <InputNumber
+                    formatter={value =>
+                    value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    }
                     value={value}
                     onChange={(e) => onChange(property, e)}
                     disabled={disabled}
                     min={min}
                     max={max}
+                    addonAfter={addonAfter}
                     style={{width: "100%"}}
                 />
 
@@ -45,6 +50,7 @@ NumberInput.propTypes = {
     property: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    addonAfter: PropTypes.string,
     isNull: PropTypes.bool,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,

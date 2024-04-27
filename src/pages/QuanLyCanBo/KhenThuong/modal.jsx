@@ -105,13 +105,6 @@ const ModalItem = () => {
         property={"thoi_gian"}
         value={selectedKhenThuong?.thoi_gian}
       />
-    <TextInput
-            title="Loại"
-            placeholder="Nhập vào loại khen thưởng"
-            onChange={onRecordInputChange}
-            property={"loai"}
-            value={selectedKhenThuong?.loai}
-        />
         <TextInput
             title="Ghi chú"
             placeholder="Nhập vào ghi chú"
