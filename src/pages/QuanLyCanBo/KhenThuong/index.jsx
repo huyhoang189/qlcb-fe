@@ -65,12 +65,6 @@ const baseColumns = [
     align: "center",
   },
   {
-    title: "Loại",
-    dataIndex: "loai",
-    key: "loai",
-    align: "center",
-  },
-  {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",

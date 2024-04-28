@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import kyLuatSlice from "../../../toolkits/QuanLyCanBo/KyLuat/slice.js";
+import chungNhanCapSlice from "../../../toolkits/QuanLyCanBo/ChungNhanCap/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
@@ -26,7 +26,7 @@ const pageHeader = {
       href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
     },
     {
-      title: `Kỷ luật`,
+      title: `Chứng nhận đã cấp`,
     },
   ],
 };
@@ -39,29 +39,37 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
-
   {
-    title: "Hình thức",
-    dataIndex: "hinh_thuc",
-    key: "hinh_thuc",
+    title: "chứng nhận",
+    dataIndex: "chung_nhan",
+    key: "chung_nhan",
+    align: "center",
+    render: (text, record) => {
+      return record?.chung_nhan?.ten_chung_nhan;
+    },
+  },
+  {
+    title: "Thời gian nhận",
+    dataIndex: "thoi_gian_nhan",
+    key: "thoi_gian_nhan",
     align: "center",
   },
   {
-    title: "Nội dung",
-    dataIndex: "noi_dung",
-    key: "noi_dung",
+    title: "Số chứng nhận",
+    dataIndex: "so_chung_nhan",
+    key: "so_chung_nhan",
     align: "center",
   },
   {
-    title: "Thời gian",
-    dataIndex: "thoi_gian",
-    key: "thoi_gian",
+    title: "Hình ảnh mặt trước",
+    dataIndex: "hinh_anh_mat_truoc",
+    key: "hinh_anh_mat_truoc",
     align: "center",
   },
   {
-    title: "Số quyết định",
-    dataIndex: "so_quyet_dinh",
-    key: "so_quyet_dinh",
+    title: "Hình ảnh mặt sau",
+    dataIndex: "hinh_anh_mat_sau",
+    key: "hinh_anh_mat_sau",
     align: "center",
   },
   {
@@ -72,11 +80,11 @@ const baseColumns = [
   },
 ];
 
-const KyLuat = () => {
+const ChungNhanCap = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { kyLuats, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.kyLuats);
+  const { chungNhanCaps, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.chungNhanCaps);
 
   const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
@@ -90,7 +98,7 @@ const KyLuat = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      kyLuatSlice.actions.getKyLuats({
+      chungNhanCapSlice.actions.getChungNhanCaps({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -100,7 +108,7 @@ const KyLuat = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(kyLuatSlice.actions.toggleModal(_item));
+    dispatch(chungNhanCapSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -120,7 +128,7 @@ const KyLuat = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                kyLuatSlice.actions.handleKyLuat({
+                chungNhanCapSlice.actions.handleChungNhanCap({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -142,7 +150,7 @@ const KyLuat = () => {
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      kyLuatSlice.actions.getKyLuats({
+      chungNhanCapSlice.actions.getChungNhanCaps({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -168,7 +176,7 @@ const KyLuat = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={kyLuats}
+        data={chungNhanCaps}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -184,4 +192,4 @@ const KyLuat = () => {
   );
 };
 
-export default KyLuat;
+export default ChungNhanCap;

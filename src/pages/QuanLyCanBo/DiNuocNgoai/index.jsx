@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import kyLuatSlice from "../../../toolkits/QuanLyCanBo/KyLuat/slice.js";
+import diNuocNgoaiSlice from "../../../toolkits/QuanLyCanBo/DiNuocNgoai/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
@@ -26,7 +26,7 @@ const pageHeader = {
       href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
     },
     {
-      title: `Kỷ luật`,
+      title: `Lịch sử đi nước ngoài`,
     },
   ],
 };
@@ -39,29 +39,22 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
-
   {
-    title: "Hình thức",
-    dataIndex: "hinh_thuc",
-    key: "hinh_thuc",
+    title: "Tên nước",
+    dataIndex: "ten_nuoc",
+    key: "ten_nuoc",
     align: "center",
   },
   {
-    title: "Nội dung",
-    dataIndex: "noi_dung",
-    key: "noi_dung",
+    title: "Thời gian bắt đầu",
+    dataIndex: "thoi_gian_bat_dau",
+    key: "thoi_gian_bat_dau",
     align: "center",
   },
   {
-    title: "Thời gian",
-    dataIndex: "thoi_gian",
-    key: "thoi_gian",
-    align: "center",
-  },
-  {
-    title: "Số quyết định",
-    dataIndex: "so_quyet_dinh",
-    key: "so_quyet_dinh",
+    title: "Thời gian kết thúc",
+    dataIndex: "thoi_gian_ket_thuc",
+    key: "thoi_gian_ket_thuc",
     align: "center",
   },
   {
@@ -70,13 +63,19 @@ const baseColumns = [
     key: "ghi_chu",
     align: "center",
   },
+  {
+    title: "Lý do",
+    dataIndex: "ly_do",
+    key: "ly_do",
+    align: "center",
+  },
 ];
 
-const KyLuat = () => {
+const DiNuocNgoai = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { kyLuats, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.kyLuats);
+  const { diNuocNgoais, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.diNuocNgoais);
 
   const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
@@ -90,7 +89,7 @@ const KyLuat = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      kyLuatSlice.actions.getKyLuats({
+      diNuocNgoaiSlice.actions.getDiNuocNgoais({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -100,7 +99,7 @@ const KyLuat = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(kyLuatSlice.actions.toggleModal(_item));
+    dispatch(diNuocNgoaiSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -120,7 +119,7 @@ const KyLuat = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                kyLuatSlice.actions.handleKyLuat({
+                diNuocNgoaiSlice.actions.handleDiNuocNgoai({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -142,7 +141,7 @@ const KyLuat = () => {
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      kyLuatSlice.actions.getKyLuats({
+      diNuocNgoaiSlice.actions.getDiNuocNgoais({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -165,10 +164,16 @@ const KyLuat = () => {
       <CustomeTable
         header={
           <Header justify={"flex-end"}>
+            {/*<TextInput*/}
+            {/*    placeholder={"Nhập vào từ khoá tìm kiếm"}*/}
+            {/*    onChange={onChangeKeywordInput}*/}
+            {/*    property={"keyword"}*/}
+            {/*    width={20}*/}
+            {/*/>*/}
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={kyLuats}
+        data={diNuocNgoais}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -184,4 +189,4 @@ const KyLuat = () => {
   );
 };
 
-export default KyLuat;
+export default DiNuocNgoai;

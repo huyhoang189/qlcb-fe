@@ -10,6 +10,11 @@ import lyLichKhoaHocSlice from "./QuanLyCanBo/LyLichKhoaHoc/slice.js";
 import trinhDoNgoaiNguSlice from "./QuanLyCanBo/TrinhDoNgoaiNgu/slice.js";
 import khenThuongSlice from "./QuanLyCanBo/KhenThuong/slice.js";
 import kyLuatSlice from "./QuanLyCanBo/KyLuat/slice.js";
+import diNuocNgoaiSlice from "./QuanLyCanBo/DiNuocNgoai/slice.js";
+import tinhTrangSucKhoeSlice from "./QuanLyCanBo/TinhTrangSucKhoe/slice.js";
+import baoHiemSlice from "./QuanLyCanBo/BaoHiem/slice.js";
+import tinhHinhNhaOSlice from "./QuanLyCanBo/TinhHinhNhaO/slice.js"
+import chungNhanCapSlice from "./QuanLyCanBo/ChungNhanCap/slice.js";
 import truongHocSlice from "./QuanLyDanhMuc/TruongHoc/slice.js";
 import chucVuChinhQuyenSlice from "./QuanLyDanhMuc/ChucVuChinhQuyen/slice.js";
 import chuyenNganhSlice from "./QuanLyDanhMuc/ChuyenNganh/slice.js";
@@ -31,6 +36,11 @@ export const store = configureStore({
     trinhDoNgoaiNgus: trinhDoNgoaiNguSlice.reducer,
     khenThuongs: khenThuongSlice.reducer,
     kyLuats: kyLuatSlice.reducer,
+    diNuocNgoais: diNuocNgoaiSlice.reducer,
+    tinhTrangSucKhoes: tinhTrangSucKhoeSlice.reducer,
+    baoHiems: baoHiemSlice.reducer,
+    tinhHinhNhaOs: tinhHinhNhaOSlice.reducer,
+    chungNhanCaps: chungNhanCapSlice.reducer,
     truongHocs: truongHocSlice.reducer,
     chucVuChinhQuyens: chucVuChinhQuyenSlice.reducer,
     chuyenNganhs: chuyenNganhSlice.reducer,
