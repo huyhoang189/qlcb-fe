@@ -1,8 +1,9 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import truongHocSlice from "../../../toolkits/QuanLyDanhMuc/TruongHoc/slice.js";
-import { ACTION_NAME } from "../../../utils/common.js";
+import { ACTION_NAME, LOAI_TRUONG_HOC } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
+import SelectInput from "../../../components/Form/selectinput.jsx";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,14 @@ const ModalItem = () => {
     }
   };
 
+  const onRecordSelectedInputChange = (key, event) => {
+    if (key) {
+      let clone = Object.assign({}, selectedTruongHoc);
+      clone[key] = event;
+      dispatch(truongHocSlice.actions.updateSelectedTruongHocInput(clone));
+    }
+  };
+
   return (
     <CustomeModal
       open={modalActive}
@@ -53,6 +62,15 @@ const ModalItem = () => {
         onChange={onRecordInputChange}
         property={"ten_truong"}
         value={selectedTruongHoc?.ten_truong}
+        isNull={false}
+      />
+      <SelectInput
+        title="Loại trường học"
+        onChange={onRecordSelectedInputChange}
+        property={"loai_truong_hoc"}
+        value={selectedTruongHoc?.loai_truong_hoc}
+        options={LOAI_TRUONG_HOC}
+        isNull={false}
       />
       <TextInput
         title="Ghi chú"

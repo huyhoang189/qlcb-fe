@@ -13,6 +13,7 @@ import {
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
+import { LOAI_CHUC_DANH_PHAP_LY } from "../../../utils/common.js";
 
 const pageHeader = {
   breadcrumb: [
@@ -37,12 +38,23 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
-
   {
     title: "Tên chức danh",
     dataIndex: "ten_chuc_danh",
     key: "ten_chuc_danh",
     align: "center",
+  },
+  {
+    title: "Loại chức danh",
+    dataIndex: "loai_chuc_danh",
+    key: "loai_chuc_danh",
+    align: "center",
+    render: (text, record) => {
+      return (
+        LOAI_CHUC_DANH_PHAP_LY.find((e) => e?.value === record?.loai_chuc_danh)
+          ?.label || "Không xác định"
+      );
+    },
   },
   {
     title: "Ghi chú",
@@ -65,7 +77,7 @@ const QuanLyChucDanhPhapLy = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-        chucDanhPhapLySlice.actions.getChucDanhPhapLys({
+      chucDanhPhapLySlice.actions.getChucDanhPhapLys({
         keyword,
         pageSize: pageSize,
         pageNumber: current,

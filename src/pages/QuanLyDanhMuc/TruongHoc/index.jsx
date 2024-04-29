@@ -13,6 +13,7 @@ import {
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
+import { LOAI_TRUONG_HOC } from "../../../utils/common.js";
 
 const pageHeader = {
   breadcrumb: [
@@ -43,7 +44,21 @@ const baseColumns = [
     dataIndex: "ten_truong",
     key: "ten_truong",
     align: "center",
+    width: "50%",
   },
+  {
+    title: "Loại cơ sở đào tạo",
+    dataIndex: "loai_truong_hoc",
+    key: "loai_truong_hoc",
+    align: "center",
+    render: (text, record) => {
+      return (
+        LOAI_TRUONG_HOC.find((e) => e?.value === record?.loai_truong_hoc)
+          ?.label || "Không xác định"
+      );
+    },
+  },
+
   {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
