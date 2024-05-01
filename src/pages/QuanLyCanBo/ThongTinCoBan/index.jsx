@@ -80,13 +80,13 @@ const baseColumns = [
     title: "Quê quán",
     dataIndex: "que_quan",
     key: "que_quan",
-    align: "center",
+    // align: "center",
   },
   {
     title: "Nơi ở hiện nay",
     dataIndex: "noi_o_hien_nay",
     key: "noi_o_hien_nay",
-    align: "center",
+    // align: "center",
   },
   {
     title: "Trình độ GDPT",
@@ -98,10 +98,9 @@ const baseColumns = [
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",
     key: "don_vi",
-    align: "center",
-    render: (text, record) => {
-      return record?.don_vi?.ten_don_vi;
-    },
+    // render: (text, record) => {
+    //   return record?.don_vi?.ten_don_vi;
+    // },
   },
 ];
 

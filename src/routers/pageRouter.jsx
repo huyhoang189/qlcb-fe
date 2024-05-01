@@ -72,9 +72,13 @@ export const publicRouter = [
           "Quản lý cán bộ tham gia thi và kết quả thi chuyên môn nghiệm vụ",
       },
       {
-        key: "quan-ly-in",
-        label: "Quản lý in Thẻ điều tra viên, Giấy chứng nhận nghiệp vụ",
+        key: "ke-hoach-dao-tao-boi-duong-can-bo",
+        label: "Quản lý kế hoạch đào tạo - bồi dưỡng",
       },
+      // {
+      //   key: "quan-ly-in",
+      //   label: "Quản lý in Thẻ điều tra viên, Giấy chứng nhận nghiệp vụ",
+      // },
     ],
   },
   {
