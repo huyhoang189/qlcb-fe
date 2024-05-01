@@ -30,6 +30,16 @@ export const publicRouter = [
     key: "dieu-dong-bo-nhiem",
     icon: <TranslationOutlined />,
     label: "Điều động, bổ nhiệm",
+    children: [
+      {
+        key: "bo-nhiem-can-bo",
+        label: "Bổ nhiệm cán bộ",
+      },
+      {
+        key: "dieu-dong-can-bo",
+        label: "Điều động cán bộ",
+      },
+    ],
   },
   {
     key: "chinh-sach",

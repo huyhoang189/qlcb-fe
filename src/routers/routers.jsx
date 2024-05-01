@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import MainLayout from "../layouts";
-import QuanLyChucDanhKhoaHoc from "../pages/QuanLyDanhMuc/ChucDanhKhoaHoc/index.jsx";
 import DonVi from "../pages/QuanLyDanhMuc/DonVi/index.jsx";
 import NotFound from "../pages/NotFound/index.jsx";
 import CanBoCoBan from "../pages/QuanLyCanBo/ThongTinCoBan/index.jsx";
@@ -11,18 +10,21 @@ import KhenThuong from "../pages/QuanLyCanBo/KhenThuong/index.jsx";
 import KyLuat from "../pages/QuanLyCanBo/KyLuat/index.jsx";
 import DiNuocNgoai from "../pages/QuanLyCanBo/DiNuocNgoai/index.jsx";
 import TinhTrangSucKhoe from "../pages/QuanLyCanBo/TinhTrangSucKhoe/index.jsx";
-import BaoHiem from "../pages/QuanLyCanBo/BaoHiem/index.jsx"
-import TinhHinhNhaO from "../pages/QuanLyCanBo/TinhHinhNhaO/index.jsx"
-import ChungNhanCap from "../pages/QuanLyCanBo/ChungNhanCap/index.jsx"
-import QuanHam from "../pages/QuanLyCanBo/QuanHam/index.jsx"
+import BaoHiem from "../pages/QuanLyCanBo/BaoHiem/index.jsx";
+import TinhHinhNhaO from "../pages/QuanLyCanBo/TinhHinhNhaO/index.jsx";
+import ChungNhanCap from "../pages/QuanLyCanBo/ChungNhanCap/index.jsx";
+import QuanHam from "../pages/QuanLyCanBo/QuanHam/index.jsx";
 import QuanLyTruongHoc from "../pages/QuanLyDanhMuc/TruongHoc/index.jsx";
+import QuanLyChucDanhKhoaHoc from "../pages/QuanLyDanhMuc/ChucDanhKhoaHoc/index.jsx";
 import QuanLyChucVuChinhQuyen from "../pages/QuanLyDanhMuc/ChucVuChinhQuyen/index.jsx";
 import QuanLyChuyenNganh from "../pages/QuanLyDanhMuc/ChuyenNganh/index.jsx";
 import QuanLyLoaiHinhDaoTao from "../pages/QuanLyDanhMuc/LoaiHinhDaoTao/index.jsx";
 import QuaTrinhDaoTao from "../pages/QuanLyCanBo/QuaTrinhDaoTao/index.jsx";
 import QuanLyNgoaiNgu from "../pages/QuanLyDanhMuc/NgoaiNgu/index.jsx";
-import QuanLyChungNhan from "../pages/QuanLyDanhMuc/ChungNhan/index.jsx"
-import QuanLyChucDanhPhapLy from "../pages/QuanLyDanhMuc/ChucDanhPhapLy/index.jsx"
+import QuanLyChungNhan from "../pages/QuanLyDanhMuc/ChungNhan/index.jsx";
+import QuanLyChucDanhPhapLy from "../pages/QuanLyDanhMuc/ChucDanhPhapLy/index.jsx";
+import QuanLyBoNhiemCanBo from "../pages/DieuDongBoNhiem/BoNhiemCanBo/index.jsx";
+import DanhSachBoNhiem from "../pages/DieuDongBoNhiem/DanhSachBoNhiem/index.jsx";
 export const router = createBrowserRouter([
   //   {
   //     path: "login",
@@ -128,6 +130,19 @@ export const router = createBrowserRouter([
           {
             path: "danh-sach-can-bo/:ma_can_bo/chung-nhan-da-cap",
             element: <QuanHam />,
+          },
+        ],
+      },
+      {
+        path: "dieu-dong-bo-nhiem",
+        children: [
+          {
+            path: "bo-nhiem-can-bo",
+            element: <QuanLyBoNhiemCanBo />,
+          },
+          {
+            path: "bo-nhiem-can-bo/:ma_bo_nhiem/danh-sach-bo-nhiem",
+            element: <DanhSachBoNhiem />,
           },
         ],
       },

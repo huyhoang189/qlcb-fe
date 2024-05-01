@@ -13,7 +13,7 @@ import kyLuatSlice from "./QuanLyCanBo/KyLuat/slice.js";
 import diNuocNgoaiSlice from "./QuanLyCanBo/DiNuocNgoai/slice.js";
 import tinhTrangSucKhoeSlice from "./QuanLyCanBo/TinhTrangSucKhoe/slice.js";
 import baoHiemSlice from "./QuanLyCanBo/BaoHiem/slice.js";
-import tinhHinhNhaOSlice from "./QuanLyCanBo/TinhHinhNhaO/slice.js"
+import tinhHinhNhaOSlice from "./QuanLyCanBo/TinhHinhNhaO/slice.js";
 import chungNhanCapSlice from "./QuanLyCanBo/ChungNhanCap/slice.js";
 import truongHocSlice from "./QuanLyDanhMuc/TruongHoc/slice.js";
 import chucVuChinhQuyenSlice from "./QuanLyDanhMuc/ChucVuChinhQuyen/slice.js";
@@ -21,8 +21,10 @@ import chuyenNganhSlice from "./QuanLyDanhMuc/ChuyenNganh/slice.js";
 import loaiHinhDaoTaoSlice from "./QuanLyDanhMuc/LoaiHinhDaoTao/slice.js";
 import ngoaiNguSlice from "./QuanLyDanhMuc/NgoaiNgu/slice.js";
 import chungNhanSlice from "./QuanLyDanhMuc/ChungNhan/slice.js";
-import chucDanhPhapLySlice from "./QuanLyDanhMuc/ChucDanhPhapLy/slice.js"
+import chucDanhPhapLySlice from "./QuanLyDanhMuc/ChucDanhPhapLy/slice.js";
 import quaTrinhDaoTaoSlice from "./QuanLyCanBo/QuaTrinhDaoTao/slice.js";
+import boNhiemCanBoSlice from "./DieuDongBoNhiem/BoNhiemCanBo/slice.js";
+import danhSachBoNhiemSlice from "./DieuDongBoNhiem/DanhSachBoNhiem/slice.js";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -49,6 +51,8 @@ export const store = configureStore({
     chungNhans: chungNhanSlice.reducer,
     chucDanhPhapLys: chucDanhPhapLySlice.reducer,
     quaTrinhDaoTaos: quaTrinhDaoTaoSlice.reducer,
+    boNhiemCanBos: boNhiemCanBoSlice.reducer,
+    danhSachBoNhiems: danhSachBoNhiemSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

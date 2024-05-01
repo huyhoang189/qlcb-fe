@@ -65,6 +65,12 @@ const baseColumns = [
     align: "center",
   },
   {
+    title: "Ngày vào đảng CT",
+    dataIndex: "ngay_chinh_thuc",
+    key: "ngay_chinh_thuc",
+    align: "center",
+  },
+  {
     title: "Ngày nhập ngũ",
     dataIndex: "ngay_nhap_ngu",
     key: "ngay_nhap_ngu",
