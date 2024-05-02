@@ -3,9 +3,11 @@ import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import lyLichChucDanhPhapLySlice from "../../../toolkits/QuanLyCanBo/LyLichChucDanhPhapLy/slice.js";
+
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
+
 import {
   CreateButton,
   DeleteButton,
@@ -50,6 +52,12 @@ const baseColumns = [
     },
   },
   {
+    title: "Đơn vị",
+    dataIndex: "don_vi_full_text",
+    key: "don_vi_full_text",
+    align: "center",
+  },
+  {
     title: "Thời gian bắt đầu",
     dataIndex: "thoi_gian_bat_dau",
     key: "thoi_gian_bat_dau",
@@ -61,6 +69,7 @@ const baseColumns = [
     key: "thoi_gian_ket_thuc",
     align: "center",
   },
+
   {
     title: "Ghi chú",
     dataIndex: "ghi_chu",

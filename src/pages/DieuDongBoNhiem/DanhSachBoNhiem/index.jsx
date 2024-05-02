@@ -203,7 +203,7 @@ const prepareData = (data = []) => {
         items={[
           ...e?.can_bo?.ly_lich_phap_ly.map(
             (element) =>
-              `${element?.chuc_danh_phap_ly?.ten_chuc_danh}, ${element?.thoi_gian_bat_dau}`
+              `- ${element?.chuc_danh_phap_ly?.ten_chuc_danh},${element?.don_vi_full_text} ${element?.thoi_gian_bat_dau}`
           ),
         ]}
         splitBy=";"
