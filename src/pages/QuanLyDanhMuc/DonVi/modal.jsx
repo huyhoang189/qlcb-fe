@@ -112,13 +112,16 @@ const ModalItem = () => {
         options={tree}
       />
 
-      {/* <SelectInput
+      <SelectInput
         title=""
         onChange={onRecordSelectInputChange}
-        property={"ma_don_vi_cha"}
-        value={selectedDonVi?.ma_don_vi_cha}
-        options={tree}
-      /> */}
+        property={"trang_thai"}
+        value={selectedDonVi?.trang_thai}
+        options={[
+          { label: "Danh mục", value: false },
+          { label: "Đơn vị", value: true },
+        ]}
+      />
     </CustomeModal>
   );
 };

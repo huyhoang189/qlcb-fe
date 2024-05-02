@@ -13,6 +13,7 @@ const generateChildNodes = (arr, ma_don_vi_cha, parentKey) => {
         title: `${element?.ten_don_vi} `,
         value: element.id,
         key: `${parentKey}-${index}`,
+        disabled: !element?.trang_thai,
         ...element,
       };
 
@@ -36,6 +37,7 @@ const generateTrees = (arr) => {
         children: [],
         value: element.id,
         title: `${element?.ten_don_vi}`,
+        disabled: !element?.trang_thai,
         key: `${index}`,
         ...element,
       };
