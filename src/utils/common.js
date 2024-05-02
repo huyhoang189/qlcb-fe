@@ -25,7 +25,12 @@ export const LOAI_CHUC_DANH_PHAP_LY = [
   { value: "CAN_BO_KHAC", label: "Cán bộ khác" },
 ];
 
+export const HINH_THUC_THUONG_KY_LUAT = [
+  { value: "TAP_THE", label: "Tập thể" },
+  { value: "CA_NHAN", label: "Cá nhân" },
+  ];
+
 export const LOAI_KHEN_THUONG_KY_LUAT = {
-  TAP_THE: "Tập thể",
-  CA_NHAN: "Cá nhân",
+  KHEN_THUONG: "KHEN_THUONG",
+  KY_LUAT: "KY_LUAT",
 };

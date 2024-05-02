@@ -27,6 +27,9 @@ import QuanLyChungNhan from "../pages/QuanLyDanhMuc/ChungNhan/index.jsx";
 import QuanLyChucDanhPhapLy from "../pages/QuanLyDanhMuc/ChucDanhPhapLy/index.jsx";
 import QuanLyBoNhiemCanBo from "../pages/DieuDongBoNhiem/BoNhiemCanBo/index.jsx";
 import DanhSachBoNhiem from "../pages/DieuDongBoNhiem/DanhSachBoNhiem/index.jsx";
+import QuanLyKhenThuong from "../pages/DieuTraHinhSu/QuanLyKhenThuong/index.jsx";
+import QuanLyKyLuat from "../pages/DieuTraHinhSu/QuanLyKyLuat/index.jsx";
+import DanhSachKhenThuong from "../pages/DieuTraHinhSu/QuanLyKhenThuong/detail.jsx";
 export const router = createBrowserRouter([
   //   {
   //     path: "login",
@@ -153,6 +156,25 @@ export const router = createBrowserRouter([
           {
             path: "bo-nhiem-can-bo/:ma_bo_nhiem/danh-sach-bo-nhiem",
             element: <DanhSachBoNhiem />,
+          },
+        ],
+      },
+      {
+        path: "chinh-sach",
+        children: [
+          {
+            path: "quan-ly-thi-dua-khen-thuong",
+            element: <QuanLyKhenThuong />,
+            children: [
+              {
+                path: ":ma_khen_thuong/danh-sach-khen-thuong",
+                element: <DanhSachKhenThuong />,
+              }
+            ]
+          },
+          {
+            path: "quan-ly-ky-luat",
+            element: <QuanLyKyLuat />,
           },
         ],
       },
