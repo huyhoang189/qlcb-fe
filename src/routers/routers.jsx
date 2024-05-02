@@ -25,6 +25,7 @@ import QuanLyChungNhan from "../pages/QuanLyDanhMuc/ChungNhan/index.jsx";
 import QuanLyChucDanhPhapLy from "../pages/QuanLyDanhMuc/ChucDanhPhapLy/index.jsx";
 import QuanLyBoNhiemCanBo from "../pages/DieuDongBoNhiem/BoNhiemCanBo/index.jsx";
 import DanhSachBoNhiem from "../pages/DieuDongBoNhiem/DanhSachBoNhiem/index.jsx";
+import DonVi_V2 from "../pages/QuanLyDanhMuc/DonVi/index_v1.jsx";
 export const router = createBrowserRouter([
   //   {
   //     path: "login",
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "don-vi",
-            element: <DonVi />,
+            element: <DonVi_V2 />,
           },
           {
             path: "chuc-danh-khoa-hoc",

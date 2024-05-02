@@ -20,7 +20,9 @@ export const LOAI_CHUC_DANH_PHAP_LY = [
   { value: "TT_PTT_CAP_1", label: "TT, PTT cấp thứ nhất" },
   { value: "TT_PTT_CAP_2", label: "TT, PTT cấp thứ hai" },
   { value: "TT_PTT_CAP_3", label: "TT, PTT cấp thứ ba" },
-  { value: "DIEU_TRA_VIEN", label: "Điều tra viên" },
+  { value: "DIEU_TRA_VIEN_CAO_CAP", label: "Điều tra viên cao cấp" },
+  { value: "DIEU_TRA_VIEN_TRUNG_CAP", label: "Điều tra viên trung cấp" },
+  { value: "DIEU_TRA_VIEN_SO_CAP", label: "Điều tra viên sơ cấp" },
   { value: "CAN_BO_DIEU_TRA", label: "Cán bộ tra" },
   { value: "CAN_BO_KHAC", label: "Cán bộ khác" },
 ];

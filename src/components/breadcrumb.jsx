@@ -28,8 +28,10 @@ const CustomBreadcrumb = ({ items = [] }) => {
             <Breadcrumb.Item key={i + 1}>
               {i + 1 === items.length ? (
                 <span style={{ fontWeight: "bold" }}>{e?.title}</span>
-              ) : (
+              ) : e?.href ? (
                 <Link to={e?.href || "#"}>{e?.title}</Link>
+              ) : (
+                <span style={{}}>{e?.title}</span>
               )}
             </Breadcrumb.Item>
           ))}
