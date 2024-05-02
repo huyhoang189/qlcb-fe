@@ -65,6 +65,12 @@ const baseColumns = [
     align: "center",
   },
   {
+    title: "Ngày vào đảng CT",
+    dataIndex: "ngay_chinh_thuc",
+    key: "ngay_chinh_thuc",
+    align: "center",
+  },
+  {
     title: "Ngày nhập ngũ",
     dataIndex: "ngay_nhap_ngu",
     key: "ngay_nhap_ngu",
@@ -74,13 +80,13 @@ const baseColumns = [
     title: "Quê quán",
     dataIndex: "que_quan",
     key: "que_quan",
-    align: "center",
+    // align: "center",
   },
   {
     title: "Nơi ở hiện nay",
     dataIndex: "noi_o_hien_nay",
     key: "noi_o_hien_nay",
-    align: "center",
+    // align: "center",
   },
   {
     title: "Trình độ GDPT",
@@ -92,10 +98,9 @@ const baseColumns = [
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",
     key: "don_vi",
-    align: "center",
-    render: (text, record) => {
-      return record?.don_vi?.ten_don_vi;
-    },
+    // render: (text, record) => {
+    //   return record?.don_vi?.ten_don_vi;
+    // },
   },
 ];
 

@@ -128,6 +128,14 @@ const ModalItem = () => {
       />
 
       <DateInput
+        title="Ngày vào đảng chính thứ"
+        placeholder="Nhập vào ngày vào đảng chính thức"
+        onChange={onRecordDateInputChange}
+        property={"ngay_chinh_thuc"}
+        value={selectedCanBoCoBan?.ngay_chinh_thuc}
+      />
+
+      <DateInput
         title="Ngày nhập ngũ"
         placeholder="Nhập vào ngày nhập ngũ"
         onChange={onRecordDateInputChange}

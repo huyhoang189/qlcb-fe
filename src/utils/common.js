@@ -24,3 +24,8 @@ export const LOAI_CHUC_DANH_PHAP_LY = [
   { value: "CAN_BO_DIEU_TRA", label: "Cán bộ tra" },
   { value: "CAN_BO_KHAC", label: "Cán bộ khác" },
 ];
+
+export const LOAI_KHEN_THUONG_KY_LUAT = {
+  TAP_THE: "Tập thể",
+  CA_NHAN: "Cá nhân",
+};
