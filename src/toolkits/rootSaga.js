@@ -13,6 +13,8 @@ import baoHiemSaga from "./QuanLyCanBo/BaoHiem/saga.js";
 import tinhHinhNhaOSaga from "./QuanLyCanBo/TinhHinhNhaO/saga.js";
 import chungNhanCapSaga from "./QuanLyCanBo/ChungNhanCap/saga.js";
 import quanHamSaga from "./QuanLyCanBo/QuanHam/saga.js";
+import quaTrinhCongTacSaga from "./QuanLyCanBo/QuaTrinhCongTac/saga.js";
+import lyLichChucDanhPhapLySaga from "./QuanLyCanBo/LyLichChucDanhPhapLy/saga.js";
 import chucVuChinhQuyenSaga from "./QuanLyDanhMuc/ChucVuChinhQuyen/saga.js";
 import truongHocSaga from "./QuanLyDanhMuc/TruongHoc/saga.js";
 import loaiHinhDaoTaoSaga from "./QuanLyDanhMuc/LoaiHinhDaoTao/saga.js";
@@ -23,7 +25,8 @@ import chucDanhPhapLySaga from "./QuanLyDanhMuc/ChucDanhPhapLy/saga.js";
 import quaTrinhDaoTaoSaga from "./QuanLyCanBo/QuaTrinhDaoTao/saga.js";
 import boNhiemCanBoSaga from "./DieuDongBoNhiem/BoNhiemCanBo/saga.js";
 import danhSachBoNhiemSaga from "./DieuDongBoNhiem/DanhSachBoNhiem/saga.js";
-
+import quanLyKhenThuongSaga from "./DieuTraHinhSu/QuanLyKhenThuong/saga.js";
+import quanLyKyLuatSaga from "./DieuTraHinhSu/QuanLyKyLuat/saga.js";
 export default function* rootSaga() {
   yield all([
     chucDanhKhoaHocSaga(),
@@ -39,7 +42,9 @@ export default function* rootSaga() {
     tinhHinhNhaOSaga(),
     chungNhanCapSaga(),
     quanHamSaga(),
+    quaTrinhCongTacSaga(),
     chucVuChinhQuyenSaga(),
+    lyLichChucDanhPhapLySaga(),
     truongHocSaga(),
     loaiHinhDaoTaoSaga(),
     chuyenNganhSaga(),
@@ -49,5 +54,7 @@ export default function* rootSaga() {
     quaTrinhDaoTaoSaga(),
     boNhiemCanBoSaga(),
     danhSachBoNhiemSaga(),
+    quanLyKhenThuongSaga(),
+    quanLyKyLuatSaga(),
   ]);
 }

@@ -2,19 +2,20 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import quanHamSlice from "../../../toolkits/QuanLyCanBo/QuanHam/slice.js";
-import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
+import quanLyKhenThuongSlice from "../../../toolkits/DieuTraHinhSu/QuanLyKhenThuong/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
   UpdateButton,
+  DetailButton
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import { useParams } from "react-router-dom";
 import ModalItem from "./modal.jsx";
-
+import {LOAI_KHEN_THUONG_KY_LUAT} from "../../../utils/common.js"
+import { useNavigate } from "react-router-dom";
 const pageHeader = {
   breadcrumb: [
     {
@@ -22,11 +23,11 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Quản lý hồ sơ cán bộ",
-      href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
+      title: "Chính sách",
+      
     },
     {
-      title: `Quân hàm`,
+      title: `Quản lý thi đua, khen thưởng`,
     },
   ],
 };
@@ -40,15 +41,33 @@ const baseColumns = [
     align: "center",
   },
   {
-    title: "Quân hàm",
-    dataIndex: "quan_ham",
-    key: "quan_ham",
+    title: "Quyết định số",
+    dataIndex: "quyet_dinh_so",
+    key: "quyet_dinh_so",
+    align: "center",
+  },
+  {
+    title: "Hình thức khen thưởng",
+    dataIndex: "hinh_thuc",
+    key: "hinh_thuc",
+    align: "center",
+  },
+  {
+    title: "Nội dụng",
+    dataIndex: "noi_dung",
+    key: "noi_dung",
     align: "center",
   },
   {
     title: "Thời gian",
-    dataIndex: "thoi_gian_nhan",
-    key: "thoi_gian_nhan",
+    dataIndex: "thoi_gian",
+    key: "thoi_gian",
+    align: "center",
+  },
+  {
+    title: "Lý do",
+    dataIndex: "ly_do",
+    key: "ly_do",
     align: "center",
   },
   {
@@ -59,13 +78,12 @@ const baseColumns = [
   },
 ];
 
-const QuanHam = () => {
+const QuanLyKhenThuong = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
-  const { quanHams, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.quanHams);
-
-  const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
+  const { quanLyKhenThuongs, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.quanLyKhenThuongs);
 
   const [keyword, setKeyword] = useState("");
 
@@ -77,17 +95,17 @@ const QuanHam = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      quanHamSlice.actions.getQuanHams({
+      quanLyKhenThuongSlice.actions.getQuanLyKhenThuongs({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
-        ma_can_bo,
+
       })
     );
   };
 
   const handleModal = (_item) => {
-    dispatch(quanHamSlice.actions.toggleModal(_item));
+    dispatch(quanLyKhenThuongSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -103,11 +121,16 @@ const QuanHam = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
+          <DetailButton
+            onClick={() => {
+              navigate(`${record.id}/danh-sach-khen-thuong`);
+            }}
+          />
           <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                quanHamSlice.actions.handleQuanHam({
+                quanLyKhenThuongSlice.actions.handleQuanLyKhenThuong({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -127,13 +150,12 @@ const QuanHam = () => {
 
   //side effect
   useEffect(() => {
-    dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      quanHamSlice.actions.getQuanHams({
+      quanLyKhenThuongSlice.actions.getQuanLyKhenThuongs({
         keyword,
         pageSize: 10,
         pageNumber: 1,
-        ma_can_bo,
+        type: LOAI_KHEN_THUONG_KY_LUAT.KHEN_THUONG
       })
     );
   }, [dispatch, keyword]);
@@ -143,10 +165,6 @@ const QuanHam = () => {
       <CustomBreadcrumb
         items={[
           ...pageHeader.breadcrumb,
-
-          {
-            title: `${selectedCanBoCoBan?.ho_ten_khai_sinh} - Số hiệu: ${selectedCanBoCoBan?.so_hieu_quan_nhan}`,
-          },
         ]}
       />
       <CustomeTable
@@ -155,7 +173,7 @@ const QuanHam = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={quanHams}
+        data={quanLyKhenThuongs}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -171,4 +189,4 @@ const QuanHam = () => {
   );
 };
 
-export default QuanHam;
+export default QuanLyKhenThuong;

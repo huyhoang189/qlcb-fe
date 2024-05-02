@@ -1,17 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    quanHams: [],
-    quanHam: {
+    quaTrinhCongTacs: [],
+    quaTrinhCongTac: {
         id: "",
         ma_can_bo: "",
-        quan_ham: "",
-        thoi_gian_nhan: "",
+        ma_chuc_vu_chinh_quyen:"",
+        don_vi_full_text: "",
+        thoi_gian_bat_dau: "",
+        thoi_gian_ket_thuc:"",
         ghi_chu: '',
         created_at: "",
         updated_at: ""
     },
-    selectedQuanHam: {},
+    selectedQuaTrinhCongTac: {},
     errorMassage: false,
     isLoading: false,
     modalActive: false,
@@ -23,62 +25,62 @@ const initialState = {
 };
 
 const reducer = createSlice({
-    name: "quanHams",
+    name: "quaTrinhCongTacs",
     initialState,
     reducers: {
         toggleModal: (state, action) => {
             state.modalActive = !state.modalActive;
-            state.selectedQuanHam =
-                action.payload !== null ? action.payload : initialState.quanHam;
+            state.selectedQuaTrinhCongTac =
+                action.payload !== null ? action.payload : initialState.quaTrinhCongTac;
         },
-        getQuanHamById: (state, action) => {
+        getQuaTrinhCongTacById: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
             state.pageSize = action.payload.pageSize;
         },
-        getQuanHamByIdSuccess: (state, action) => {
+        getQuaTrinhCongTacByIdSuccess: (state, action) => {
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedQuaTrinhCongTac = action.payload;
         },
-        getQuanHamByIdError: (state, action) => {
+        getQuaTrinhCongTacByIdError: (state, action) => {
             state.errorMassage = "Error";
-            state.selectedQuanHam = action.payload
+            state.selectedQuaTrinhCongTac = action.payload
                 ? action.payload
-                : state.quanHam;
+                : state.quaTrinhCongTac;
         },
-        getQuanHams: (state, action) => {
+        getQuaTrinhCongTacs: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
         },
-        getQuanHamsSuccess: (state, action) => {
+        getQuaTrinhCongTacsSuccess: (state, action) => {
             state.errorMassage = false;
-            state.quanHams = action.payload.data;
+            state.quaTrinhCongTacs = action.payload.data;
             state.totalItem = action.payload.count;
             state.pageNumber = action.payload.pageNumber;
             state.totalPage = action.payload.totalPage;
             state.pageSize = action.payload.pageSize;
             state.isLoading = false;
         },
-        getQuanHamsError: (state, action) => {
+        getQuaTrinhCongTacsError: (state, action) => {
             state.errorMassage = "Error";
-            state.quanHams = action.payload
+            state.quaTrinhCongTacs = action.payload
                 ? action.payload
-                : state.quanHams;
+                : state.quaTrinhCongTacs;
             state.isLoading = false;
         },
-        handleQuanHam: (state, action) => {
+        handleQuaTrinhCongTac: (state, action) => {
         },
-        handleQuanHamSuccess: (state, action) => {
+        handleQuaTrinhCongTacSuccess: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedQuaTrinhCongTac = action.payload;
         },
-        handleQuanHamError: (state, action) => {
+        handleQuaTrinhCongTacError: (state, action) => {
         },
-        updateSelectedQuanHamInput: (state, action) => {
-            state.selectedQuanHam = action.payload;
+        updateSelectedQuaTrinhCongTacInput: (state, action) => {
+            state.selectedQuaTrinhCongTac = action.payload;
         },
 
     },

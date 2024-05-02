@@ -1,17 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    quanHams: [],
-    quanHam: {
+    quanLyKhenThuongs: [],
+    quanLyKhenThuong: {
         id: "",
-        ma_can_bo: "",
-        quan_ham: "",
-        thoi_gian_nhan: "",
+        hinh_thuc: "",
+        noi_dung: "",
+        thoi_gian: "",
+        ly_do:"",
+        quyet_dinh_so:"",
         ghi_chu: '',
+        loai:"",
         created_at: "",
         updated_at: ""
     },
-    selectedQuanHam: {},
+    selectedQuanLyKhenThuong: {},
     errorMassage: false,
     isLoading: false,
     modalActive: false,
@@ -23,62 +26,62 @@ const initialState = {
 };
 
 const reducer = createSlice({
-    name: "quanHams",
+    name: "quanLyKhenThuongs",
     initialState,
     reducers: {
         toggleModal: (state, action) => {
             state.modalActive = !state.modalActive;
-            state.selectedQuanHam =
-                action.payload !== null ? action.payload : initialState.quanHam;
+            state.selectedQuanLyKhenThuong =
+                action.payload !== null ? action.payload : initialState.quanLyKhenThuong;
         },
-        getQuanHamById: (state, action) => {
+        getQuanLyKhenThuongById: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
             state.pageSize = action.payload.pageSize;
         },
-        getQuanHamByIdSuccess: (state, action) => {
+        getQuanLyKhenThuongByIdSuccess: (state, action) => {
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedQuanLyKhenThuong = action.payload;
         },
-        getQuanHamByIdError: (state, action) => {
+        getQuanLyKhenThuongByIdError: (state, action) => {
             state.errorMassage = "Error";
-            state.selectedQuanHam = action.payload
+            state.selectedQuanLyKhenThuong = action.payload
                 ? action.payload
-                : state.quanHam;
+                : state.quanLyKhenThuong;
         },
-        getQuanHams: (state, action) => {
+        getQuanLyKhenThuongs: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
         },
-        getQuanHamsSuccess: (state, action) => {
+        getQuanLyKhenThuongsSuccess: (state, action) => {
             state.errorMassage = false;
-            state.quanHams = action.payload.data;
+            state.quanLyKhenThuongs = action.payload.data;
             state.totalItem = action.payload.count;
             state.pageNumber = action.payload.pageNumber;
             state.totalPage = action.payload.totalPage;
             state.pageSize = action.payload.pageSize;
             state.isLoading = false;
         },
-        getQuanHamsError: (state, action) => {
+        getQuanLyKhenThuongsError: (state, action) => {
             state.errorMassage = "Error";
-            state.quanHams = action.payload
+            state.quanLyKhenThuongs = action.payload
                 ? action.payload
-                : state.quanHams;
+                : state.quanLyKhenThuongs;
             state.isLoading = false;
         },
-        handleQuanHam: (state, action) => {
+        handleQuanLyKhenThuong: (state, action) => {
         },
-        handleQuanHamSuccess: (state, action) => {
+        handleQuanLyKhenThuongSuccess: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedQuanLyKhenThuong = action.payload;
         },
-        handleQuanHamError: (state, action) => {
+        handleQuanLyKhenThuongError: (state, action) => {
         },
-        updateSelectedQuanHamInput: (state, action) => {
-            state.selectedQuanHam = action.payload;
+        updateSelectedQuanLyKhenThuongInput: (state, action) => {
+            state.selectedQuanLyKhenThuong = action.payload;
         },
 
     },

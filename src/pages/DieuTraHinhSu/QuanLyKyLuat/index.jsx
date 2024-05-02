@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import quanHamSlice from "../../../toolkits/QuanLyCanBo/QuanHam/slice.js";
+import quanLyKyLuatSlice from "../../../toolkits/DieuTraHinhSu/QuanLyKyLuat/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
@@ -26,7 +26,7 @@ const pageHeader = {
       href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
     },
     {
-      title: `Quân hàm`,
+      title: `Bảo hiểm`,
     },
   ],
 };
@@ -39,6 +39,13 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
+
+  {
+    title: "Hệ số",
+    dataIndex: "he_so",
+    key: "he_so",
+    align: "center",
+  },
   {
     title: "Quân hàm",
     dataIndex: "quan_ham",
@@ -47,8 +54,8 @@ const baseColumns = [
   },
   {
     title: "Thời gian",
-    dataIndex: "thoi_gian_nhan",
-    key: "thoi_gian_nhan",
+    dataIndex: "thoi_gian",
+    key: "thoi_gian",
     align: "center",
   },
   {
@@ -59,11 +66,11 @@ const baseColumns = [
   },
 ];
 
-const QuanHam = () => {
+const QuanLyKyLuat = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { quanHams, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.quanHams);
+  const { quanLyKyLuats, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.quanLyKyLuats);
 
   const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
@@ -77,7 +84,7 @@ const QuanHam = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      quanHamSlice.actions.getQuanHams({
+      quanLyKyLuatSlice.actions.getQuanLyKyLuats({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -87,7 +94,7 @@ const QuanHam = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(quanHamSlice.actions.toggleModal(_item));
+    dispatch(quanLyKyLuatSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -107,7 +114,7 @@ const QuanHam = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                quanHamSlice.actions.handleQuanHam({
+                quanLyKyLuatSlice.actions.handleQuanLyKyLuat({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -129,7 +136,7 @@ const QuanHam = () => {
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      quanHamSlice.actions.getQuanHams({
+      quanLyKyLuatSlice.actions.getQuanLyKyLuats({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -155,7 +162,7 @@ const QuanHam = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={quanHams}
+        data={quanLyKyLuats}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -171,4 +178,4 @@ const QuanHam = () => {
   );
 };
 
-export default QuanHam;
+export default QuanLyKyLuat;

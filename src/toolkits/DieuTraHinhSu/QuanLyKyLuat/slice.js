@@ -1,17 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    quanHams: [],
-    quanHam: {
+    quanLyKyLuats: [],
+    quanLyKyLuat: {
         id: "",
-        ma_can_bo: "",
-        quan_ham: "",
-        thoi_gian_nhan: "",
+        hinh_thuc: "",
+        noi_dung: "",
+        thoi_gian: "",
+        ly_do:"",
+        quyet_dinh_so:"",
         ghi_chu: '',
+        loai:"",
         created_at: "",
         updated_at: ""
     },
-    selectedQuanHam: {},
+    selectedQuanLyKyLuat: {},
     errorMassage: false,
     isLoading: false,
     modalActive: false,
@@ -23,62 +26,62 @@ const initialState = {
 };
 
 const reducer = createSlice({
-    name: "quanHams",
+    name: "quanLyKyLuats",
     initialState,
     reducers: {
         toggleModal: (state, action) => {
             state.modalActive = !state.modalActive;
-            state.selectedQuanHam =
-                action.payload !== null ? action.payload : initialState.quanHam;
+            state.selectedQuanLyKyLuat =
+                action.payload !== null ? action.payload : initialState.quanLyKyLuat;
         },
-        getQuanHamById: (state, action) => {
+        getQuanLyKyLuatById: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
             state.pageSize = action.payload.pageSize;
         },
-        getQuanHamByIdSuccess: (state, action) => {
+        getQuanLyKyLuatByIdSuccess: (state, action) => {
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedQuanLyKyLuat = action.payload;
         },
-        getQuanHamByIdError: (state, action) => {
+        getQuanLyKyLuatByIdError: (state, action) => {
             state.errorMassage = "Error";
-            state.selectedQuanHam = action.payload
+            state.selectedQuanLyKyLuat = action.payload
                 ? action.payload
-                : state.quanHam;
+                : state.quanLyKyLuat;
         },
-        getQuanHams: (state, action) => {
+        getQuanLyKyLuats: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
         },
-        getQuanHamsSuccess: (state, action) => {
+        getQuanLyKyLuatsSuccess: (state, action) => {
             state.errorMassage = false;
-            state.quanHams = action.payload.data;
+            state.quanLyKyLuats = action.payload.data;
             state.totalItem = action.payload.count;
             state.pageNumber = action.payload.pageNumber;
             state.totalPage = action.payload.totalPage;
             state.pageSize = action.payload.pageSize;
             state.isLoading = false;
         },
-        getQuanHamsError: (state, action) => {
+        getQuanLyKyLuatsError: (state, action) => {
             state.errorMassage = "Error";
-            state.quanHams = action.payload
+            state.quanLyKyLuats = action.payload
                 ? action.payload
-                : state.quanHams;
+                : state.quanLyKyLuats;
             state.isLoading = false;
         },
-        handleQuanHam: (state, action) => {
+        handleQuanLyKyLuat: (state, action) => {
         },
-        handleQuanHamSuccess: (state, action) => {
+        handleQuanLyKyLuatSuccess: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedQuanLyKyLuat = action.payload;
         },
-        handleQuanHamError: (state, action) => {
+        handleQuanLyKyLuatError: (state, action) => {
         },
-        updateSelectedQuanHamInput: (state, action) => {
-            state.selectedQuanHam = action.payload;
+        updateSelectedQuanLyKyLuatInput: (state, action) => {
+            state.selectedQuanLyKyLuat = action.payload;
         },
 
     },
