@@ -1,17 +1,18 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    quanHams: [],
-    quanHam: {
+    lyLichChucDanhPhapLys: [],
+    lyLichChucDanhPhapLy: {
         id: "",
         ma_can_bo: "",
-        quan_ham: "",
-        thoi_gian_nhan: "",
+        ma_chuc_danh: "",
+        thoi_gian_bat_dau: "",
+        thoi_gian_ket_thuc: "",
         ghi_chu: '',
         created_at: "",
         updated_at: ""
     },
-    selectedQuanHam: {},
+    selectedLyLichChucDanhPhapLy: {},
     errorMassage: false,
     isLoading: false,
     modalActive: false,
@@ -23,62 +24,62 @@ const initialState = {
 };
 
 const reducer = createSlice({
-    name: "quanHams",
+    name: "lyLichChucDanhPhapLys",
     initialState,
     reducers: {
         toggleModal: (state, action) => {
             state.modalActive = !state.modalActive;
-            state.selectedQuanHam =
-                action.payload !== null ? action.payload : initialState.quanHam;
+            state.selectedLyLichChucDanhPhapLy =
+                action.payload !== null ? action.payload : initialState.lyLichChucDanhPhapLy;
         },
-        getQuanHamById: (state, action) => {
+        getLyLichChucDanhPhapLyById: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
             state.pageSize = action.payload.pageSize;
         },
-        getQuanHamByIdSuccess: (state, action) => {
+        getLyLichChucDanhPhapLyByIdSuccess: (state, action) => {
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedLyLichChucDanhPhapLy = action.payload;
         },
-        getQuanHamByIdError: (state, action) => {
+        getLyLichChucDanhPhapLyByIdError: (state, action) => {
             state.errorMassage = "Error";
-            state.selectedQuanHam = action.payload
+            state.selectedLyLichChucDanhPhapLy = action.payload
                 ? action.payload
-                : state.quanHam;
+                : state.lyLichChucDanhPhapLy;
         },
-        getQuanHams: (state, action) => {
+        getLyLichChucDanhPhapLys: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
             state.isLoading = true;
         },
-        getQuanHamsSuccess: (state, action) => {
+        getLyLichChucDanhPhapLysSuccess: (state, action) => {
             state.errorMassage = false;
-            state.quanHams = action.payload.data;
+            state.lyLichChucDanhPhapLys = action.payload.data;
             state.totalItem = action.payload.count;
             state.pageNumber = action.payload.pageNumber;
             state.totalPage = action.payload.totalPage;
             state.pageSize = action.payload.pageSize;
             state.isLoading = false;
         },
-        getQuanHamsError: (state, action) => {
+        getLyLichChucDanhPhapLysError: (state, action) => {
             state.errorMassage = "Error";
-            state.quanHams = action.payload
+            state.lyLichChucDanhPhapLys = action.payload
                 ? action.payload
-                : state.quanHams;
+                : state.lyLichChucDanhPhapLys;
             state.isLoading = false;
         },
-        handleQuanHam: (state, action) => {
+        handleLyLichChucDanhPhapLy: (state, action) => {
         },
-        handleQuanHamSuccess: (state, action) => {
+        handleLyLichChucDanhPhapLySuccess: (state, action) => {
             state.modalActive = false;
             state.errorMassage = false;
-            state.selectedQuanHam = action.payload;
+            state.selectedLyLichChucDanhPhapLy = action.payload;
         },
-        handleQuanHamError: (state, action) => {
+        handleLyLichChucDanhPhapLyError: (state, action) => {
         },
-        updateSelectedQuanHamInput: (state, action) => {
-            state.selectedQuanHam = action.payload;
+        updateSelectedLyLichChucDanhPhapLyInput: (state, action) => {
+            state.selectedLyLichChucDanhPhapLy = action.payload;
         },
 
     },

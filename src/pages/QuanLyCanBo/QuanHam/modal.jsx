@@ -21,7 +21,7 @@ const ModalItem = () => {
         let date = new dayjs(); 
         let item = Object.assign({}, _item);
         date = date.format(DATE_FORMAT.DDMMYYYY);
-        item.thoi_gian = item.thoi_gian===''?date:item.thoi_gian;
+        item.thoi_gian_nhan = item.thoi_gian_nhan===''?date:item.thoi_gian_nhan;
         dispatch(
             quanHamSlice.actions.handleQuanHam({
                 item: {
@@ -67,13 +67,6 @@ const ModalItem = () => {
 
     >
         <TextInput
-            title="Hệ số"
-            placeholder="Nhập vào hệ số"
-            onChange={onRecordInputChange}
-            property={"he_so"}
-            value={selectedQuanHam?.he_so}
-        />
-        <TextInput
             title="Quân hàm"
             placeholder="Nhập vào quân hàm"
             onChange={onRecordInputChange}
@@ -81,11 +74,11 @@ const ModalItem = () => {
             value={selectedQuanHam?.quan_ham}
         />
         <DateInput
-        title="Thời gian"
-        placeholder="Nhập vào thời gian"
+        title="Thời gian nhận"
+        placeholder="Nhập vào thời gian nhận"
         onChange={onRecordDateInputChange}
-        property={"thoi_gian"}
-        value={selectedQuanHam?.thoi_gian}
+        property={"thoi_gian_nhan"}
+        value={selectedQuanHam?.thoi_gian_nhan}
       />
         <TextInput
             title="Ghi chú"

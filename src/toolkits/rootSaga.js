@@ -13,6 +13,8 @@ import baoHiemSaga from "./QuanLyCanBo/BaoHiem/saga.js";
 import tinhHinhNhaOSaga from "./QuanLyCanBo/TinhHinhNhaO/saga.js";
 import chungNhanCapSaga from "./QuanLyCanBo/ChungNhanCap/saga.js";
 import quanHamSaga from "./QuanLyCanBo/QuanHam/saga.js";
+import quaTrinhCongTacSaga from "./QuanLyCanBo/QuaTrinhCongTac/saga.js";
+import lyLichChucDanhPhapLySaga from "./QuanLyCanBo/LyLichChucDanhPhapLy/saga.js";
 import chucVuChinhQuyenSaga from "./QuanLyDanhMuc/ChucVuChinhQuyen/saga.js";
 import truongHocSaga from "./QuanLyDanhMuc/TruongHoc/saga.js";
 import loaiHinhDaoTaoSaga from "./QuanLyDanhMuc/LoaiHinhDaoTao/saga.js";
@@ -37,7 +39,9 @@ export default function* rootSaga() {
     tinhHinhNhaOSaga(),
     chungNhanCapSaga(),
     quanHamSaga(),
+    quaTrinhCongTacSaga(),
     chucVuChinhQuyenSaga(),
+    lyLichChucDanhPhapLySaga(),
     truongHocSaga(),
     loaiHinhDaoTaoSaga(),
     chuyenNganhSaga(),

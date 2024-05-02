@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import quanHamSlice from "../../../toolkits/QuanLyCanBo/QuanHam/slice.js";
+import lyLichChucDanhPhapLySlice from "../../../toolkits/QuanLyCanBo/LyLichChucDanhPhapLy/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
@@ -26,7 +26,7 @@ const pageHeader = {
       href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
     },
     {
-      title: `Quân hàm`,
+      title: `Lý lịch chức danh pháp lý`,
     },
   ],
 };
@@ -39,16 +39,26 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
+
   {
-    title: "Quân hàm",
-    dataIndex: "quan_ham",
-    key: "quan_ham",
+    title: "Chức danh",
+    dataIndex: "chuc_danh_phap_ly",
+    key: "chuc_danh_phap_ly",
+    align: "center",
+    render: (text, record) => {
+      return record?.chuc_danh_phap_ly?.ten_chuc_danh;
+    },
+  },
+  {
+    title: "Thời gian bắt đầu",
+    dataIndex: "thoi_gian_bat_dau",
+    key: "thoi_gian_bat_dau",
     align: "center",
   },
   {
-    title: "Thời gian",
-    dataIndex: "thoi_gian_nhan",
-    key: "thoi_gian_nhan",
+    title: "Thời gian kết thúc",
+    dataIndex: "thoi_gian_ket_thuc",
+    key: "thoi_gian_ket_thuc",
     align: "center",
   },
   {
@@ -59,11 +69,11 @@ const baseColumns = [
   },
 ];
 
-const QuanHam = () => {
+const LyLichChucDanhPhapLy = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { quanHams, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.quanHams);
+  const { lyLichChucDanhPhapLys, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.lyLichChucDanhPhapLys);
 
   const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
@@ -77,7 +87,7 @@ const QuanHam = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      quanHamSlice.actions.getQuanHams({
+      lyLichChucDanhPhapLySlice.actions.getLyLichChucDanhPhapLys({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -87,7 +97,7 @@ const QuanHam = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(quanHamSlice.actions.toggleModal(_item));
+    dispatch(lyLichChucDanhPhapLySlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -107,7 +117,7 @@ const QuanHam = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                quanHamSlice.actions.handleQuanHam({
+                lyLichChucDanhPhapLySlice.actions.handleLyLichChucDanhPhapLy({
                   ma_can_bo,
                   item: record,
                   actionName: "DELETE",
@@ -129,7 +139,7 @@ const QuanHam = () => {
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
-      quanHamSlice.actions.getQuanHams({
+      lyLichChucDanhPhapLySlice.actions.getLyLichChucDanhPhapLys({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -152,10 +162,16 @@ const QuanHam = () => {
       <CustomeTable
         header={
           <Header justify={"flex-end"}>
+            {/*<TextInput*/}
+            {/*    placeholder={"Nhập vào từ khoá tìm kiếm"}*/}
+            {/*    onChange={onChangeKeywordInput}*/}
+            {/*    property={"keyword"}*/}
+            {/*    width={20}*/}
+            {/*/>*/}
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={quanHams}
+        data={lyLichChucDanhPhapLys}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -171,4 +187,4 @@ const QuanHam = () => {
   );
 };
 
-export default QuanHam;
+export default LyLichChucDanhPhapLy;
