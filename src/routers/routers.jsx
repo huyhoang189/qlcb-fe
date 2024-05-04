@@ -29,7 +29,7 @@ import QuanLyBoNhiemCanBo from "../pages/DieuDongBoNhiem/BoNhiemCanBo/index.jsx"
 import DanhSachBoNhiem from "../pages/DieuDongBoNhiem/DanhSachBoNhiem/index.jsx";
 import QuanLyKhenThuong from "../pages/DieuTraHinhSu/QuanLyKhenThuong/index.jsx";
 import QuanLyKyLuat from "../pages/DieuTraHinhSu/QuanLyKyLuat/index.jsx";
-import DanhSachKhenThuong from "../pages/DieuTraHinhSu/QuanLyKhenThuong/detail.jsx";
+import DanhSachKhenThuongKyLuat from "../pages/DieuTraHinhSu/DanhSachKhenThuongKyLuat/index.jsx";
 import DonVi_V2 from "../pages/QuanLyDanhMuc/DonVi/index_v1.jsx";
 export const router = createBrowserRouter([
   //   {
@@ -166,17 +166,19 @@ export const router = createBrowserRouter([
           {
             path: "quan-ly-thi-dua-khen-thuong",
             element: <QuanLyKhenThuong />,
-            children: [
-              {
-                path: ":ma_khen_thuong/danh-sach-khen-thuong",
-                element: <DanhSachKhenThuong />,
-              }
-            ]
+          },
+          {
+              path: "quan-ly-thi-dua-khen-thuong/:ma_khen_thuong_ky_luat/:type/danh-sach-khen-thuong",
+              element: <DanhSachKhenThuongKyLuat />,
           },
           {
             path: "quan-ly-ky-luat",
             element: <QuanLyKyLuat />,
           },
+          {
+            path: "quan-ly-ky-luat/:ma_khen_thuong_ky_luat/:type/danh-sach-ky-luat",
+            element: <DanhSachKhenThuongKyLuat />,
+        },
         ],
       },
     ],

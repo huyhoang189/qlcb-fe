@@ -8,14 +8,13 @@ import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
-  UpdateButton,
   DetailButton
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import { useParams } from "react-router-dom";
 import ModalItem from "./modal.jsx";
-import {LOAI_KHEN_THUONG_KY_LUAT} from "../../../utils/common.js"
 import { useNavigate } from "react-router-dom";
+import { LOAI_KHEN_THUONG_KY_LUAT } from "../../../utils/common";
 const pageHeader = {
   breadcrumb: [
     {
@@ -123,10 +122,10 @@ const QuanLyKhenThuong = () => {
         >
           <DetailButton
             onClick={() => {
-              navigate(`${record.id}/danh-sach-khen-thuong`);
+              navigate(`${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KHEN_THUONG}/danh-sach-khen-thuong`);
             }}
           />
-          <UpdateButton onClick={() => handleModal(record)} />
+          {/* <UpdateButton onClick={() => handleModal(record)} /> */}
           <DeleteButton
             onConfirm={() => {
               dispatch(
@@ -155,7 +154,6 @@ const QuanLyKhenThuong = () => {
         keyword,
         pageSize: 10,
         pageNumber: 1,
-        type: LOAI_KHEN_THUONG_KY_LUAT.KHEN_THUONG
       })
     );
   }, [dispatch, keyword]);

@@ -12,7 +12,8 @@ const initialState = {
         loai: "",
         ghi_chu: '',
         created_at: "",
-        updated_at: ""
+        updated_at: "",
+        chi_tiet:[]
     },
     selectedKhenThuong: {},
     errorMassage: false,

@@ -4,14 +4,15 @@ import quanLyKhenThuongSlice from "../../../toolkits/DieuTraHinhSu/QuanLyKhenThu
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import donViSlice from "../../../toolkits/QuanLyDanhMuc/DonVi/slice.js";
 import SelectInput from "../../../components/Form/selectinput.jsx";
+import SelectMutil from "../../../components/Form/selectmutil.jsx";
 import {ACTION_NAME} from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import dayjs from "dayjs";
 import {useParams} from "react-router-dom";
 import DateInput from "../../../components/Form/dateinput.jsx";
-import AutoCompleteInput from "../../../components/Form/autocomplete.jsx"
-import { DATE_FORMAT, HINH_THUC_THUONG_KY_LUAT } from "../../../utils/common";
+import TableObjKhenThuongKyLuat from "../DanhSachKhenThuongKyLuat/table.jsx"
+import { DATE_FORMAT, HINH_THUC_THUONG_KY_LUAT, LOAI_KHEN_THUONG_KY_LUAT } from "../../../utils/common";
 import { Row, Col } from 'antd'
 const ModalItem = () => {
 
@@ -21,7 +22,9 @@ const ModalItem = () => {
     const {modalActive, selectedQuanLyKhenThuong, pageSize, pageNumber} = useSelector(state => state.quanLyKhenThuongs)
     const { canBoCoBans } = useSelector((state) => state.canBoCoBans);
     const { donVis } = useSelector((state) => state.donVis);
+    const [listObjKhenThuongKyLuat, setListObjKhenThuongKyLuat] = useState({ListObjKhenThuongKyLuat: [], ids: []});
     const handleModal = (_item) => {
+        setListObjKhenThuongKyLuat({ListObjKhenThuongKyLuat: [], ids: []})
         dispatch(quanLyKhenThuongSlice.actions.toggleModal(_item))
     }
 
@@ -30,6 +33,14 @@ const ModalItem = () => {
         let item = Object.assign({}, _item);
         date = date.format(DATE_FORMAT.DDMMYYYY);
         item.thoi_gian = item.thoi_gian===''?date:item.thoi_gian;
+        if(item.hinh_thuc==="CA_NHAN")
+        item.chi_tiet = listObjKhenThuongKyLuat.ids.map((e)=>{
+            return {ma_can_bo: e}
+        })
+        else
+            item.chi_tiet = listObjKhenThuongKyLuat.ids.map((e)=>{
+            return {ma_to_chuc: e}
+        })
         dispatch(
             quanLyKhenThuongSlice.actions.handleQuanLyKhenThuong({
                 item: {
@@ -42,10 +53,20 @@ const ModalItem = () => {
 
             })
         );
+        setListObjKhenThuongKyLuat({ListObjKhenThuong: [], ids: []})
     }
-
+    const onRecordSelectObjKhenThuongKyLuatChange = (event) => {
+            const IdObjKhenThuongKyLuatSelect = event;
+            const ObjKhenThuongKyLuat = selectedQuanLyKhenThuong?.hinh_thuc==="CA_NHAN"?canBoCoBans:donVis
+            const ObjKhenThuongKyLuatSelected = IdObjKhenThuongKyLuatSelect.map(item => {
+                const SelectedItem = ObjKhenThuongKyLuat.find(tg => tg.id === item);
+                return SelectedItem
+            });
+            setListObjKhenThuongKyLuat({ListObjKhenThuongKyLuat: ObjKhenThuongKyLuatSelected, ids: event});
+    }
     const onRecordSelectInputChange = (key, event) => {
         if (key) {
+            setListObjKhenThuongKyLuat({ListObjKhenThuong: [], ids: []})
             let clone = Object.assign({}, selectedQuanLyKhenThuong);
             clone[key] = event;
             dispatch(quanLyKhenThuongSlice.actions.updateSelectedQuanLyKhenThuongInput(clone));
@@ -67,6 +88,16 @@ const ModalItem = () => {
           );
         }
       };
+      const optionObjKhenThuongKyLuat = selectedQuanLyKhenThuong?.hinh_thuc==="CA_NHAN"?
+            canBoCoBans.map((e) => ({
+                label: e?.so_hieu_quan_nhan + " -- "+ e?.ho_ten_khai_sinh + " -- "+ e?.don_vi,
+                value: e?.id
+            }))
+       :
+            donVis.map((e) => ({
+                label: e?.ma_don_vi + " -- "+ e?.ten_don_vi + " -- "+ e?.don_vi?.ten_don_vi,
+                value: e?.id
+            }))
 
       //side effect
     useEffect(() => {
@@ -80,8 +111,20 @@ const ModalItem = () => {
         }))
     }, [dispatch]);
 
+    useEffect(()=>{
+        if(selectedQuanLyKhenThuong?.id)
+        {
+            let listKT= selectedQuanLyKhenThuong?.chi_tiet?.map((e)=>
+                canBoCoBans.find(item=>item.id===e.ma_can_bo)
+            )
+            let listIdKT= selectedQuanLyKhenThuong?.chi_tiet?.map((e)=>
+                e.ma_can_bo
+            )
+            setListObjKhenThuongKyLuat({ListObjKhenThuong:listKT, ids: listIdKT})
+        }
+    }, [selectedQuanLyKhenThuong])
     return <CustomeModal
-        width={750}
+        width={950}
         open={modalActive}
         onCancel={() => handleModal(null)}
         onOk={
@@ -95,7 +138,7 @@ const ModalItem = () => {
 
     >
         <Row gutter={16} style={{ width: '100%' }}>
-        <Col span={12}>
+        <Col span={8}>
         <TextInput
             title="Quyết định"
             placeholder="Nhập vào số quyết định"
@@ -140,13 +183,17 @@ const ModalItem = () => {
             value={selectedQuanLyKhenThuong?.ghi_chu}
         />
         </Col>
-        <Col span={12}>
-        <AutoCompleteInput
+        <Col span={16}>
+        <SelectMutil
+            onChange={onRecordSelectObjKhenThuongKyLuatChange}
             title="Danh sách"
-            options={canBoCoBans.map((e) => ({
-                label: e?.so_hieu_quan_nhan + " -- "+ e?.ho_ten_khai_sinh + " -- "+ e?.don_vi?.ten_don_vi,
-                value: e?.id
-            }))}
+            options={optionObjKhenThuongKyLuat}
+            value={listObjKhenThuongKyLuat.ids}
+        />
+        <TableObjKhenThuongKyLuat 
+            ListKhenThuongKyLuat={listObjKhenThuongKyLuat}
+            SetListKhenThuongKyLuat={setListObjKhenThuongKyLuat}
+            HinhThuc={selectedQuanLyKhenThuong?.hinh_thuc}
         />
         </Col>
         </Row>

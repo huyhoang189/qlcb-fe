@@ -36,3 +36,4 @@ export const LOAI_KHEN_THUONG_KY_LUAT = {
   KHEN_THUONG: "KHEN_THUONG",
   KY_LUAT: "KY_LUAT",
 };
+
