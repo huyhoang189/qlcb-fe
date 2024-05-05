@@ -48,7 +48,7 @@ const NumberInput =
 NumberInput.propTypes = {
     title: PropTypes.string,
     property: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.number,
     onChange: PropTypes.func,
     addonAfter: PropTypes.string,
     isNull: PropTypes.bool,

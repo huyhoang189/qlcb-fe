@@ -10,11 +10,13 @@ const DateInput = ({
   isNull = true,
   disable = false,
   status = "",
+  format = DATE_FORMAT.DDMMYYYY,
+  picker
 }) => {
   const _value =
-    dayjs(value ? value : dayjs(), DATE_FORMAT.DDMMYYYY).toString() !==
+    dayjs(value ? value : dayjs(), format).toString() !==
     "Invalid Date"
-      ? dayjs(value ? value : dayjs(), DATE_FORMAT.DDMMYYYY)
+      ? dayjs(value ? value : dayjs(), format)
       : dayjs();
   console.log();
   return (
@@ -28,10 +30,11 @@ const DateInput = ({
       </Typography.Text>
       <DatePicker
         value={_value}
-        format={DATE_FORMAT.DDMMYYYY}
+        format={format}
         onChange={(e) => onChange(property, e)}
         disabled={disable}
         status={status}
+        picker={picker}
         style={{ width: "100%" }}
       />
     </Space>

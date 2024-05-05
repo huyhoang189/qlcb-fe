@@ -2,19 +2,19 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import quanLyKhenThuongSlice from "../../../toolkits/DieuTraHinhSu/QuanLyKhenThuong/slice.js";
+import keHoachSlice from "../../../toolkits/QuanLyDaoTao/KeHoach/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
+  UpdateButton,
   DetailButton
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
-import { useParams } from "react-router-dom";
+import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
 import { useNavigate } from "react-router-dom";
-import { LOAI_KHEN_THUONG_KY_LUAT } from "../../../utils/common";
 const pageHeader = {
   breadcrumb: [
     {
@@ -22,11 +22,10 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Chính sách",
-      
+      title: "Quản lý đào tạo",
     },
     {
-      title: `Quản lý thi đua, khen thưởng`,
+      title: "Kế hoạch bồi dưỡng đào tạo cán bộ",
     },
   ],
 };
@@ -39,6 +38,7 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
+
   {
     title: "Năm học",
     dataIndex: "nam_hoc",
@@ -65,16 +65,13 @@ const baseColumns = [
   },
 ];
 
-const QuanLyKhenThuong = () => {
+const QuanLyKeHoach = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const params = useParams();
-  const { quanLyKhenThuongs, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.quanLyKhenThuongs);
+  const { keHoachs, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.keHoachs);
 
   const [keyword, setKeyword] = useState("");
-
-  const { ma_can_bo } = params;
 
   const onChangeKeywordInput = (key, event) => {
     setKeyword(event.target.value);
@@ -82,22 +79,20 @@ const QuanLyKhenThuong = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      quanLyKhenThuongSlice.actions.getQuanLyKhenThuongs({
+      keHoachSlice.actions.getKeHoachs({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
-
       })
     );
   };
 
   const handleModal = (_item) => {
-    dispatch(quanLyKhenThuongSlice.actions.toggleModal(_item));
+    dispatch(keHoachSlice.actions.toggleModal(_item));
   };
 
   const columns = [
     ...baseColumns,
-
     {
       title: "Công cụ",
       key: "tool",
@@ -108,17 +103,16 @@ const QuanLyKhenThuong = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
-          <DetailButton
+            <DetailButton
             onClick={() => {
-              navigate(`${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KHEN_THUONG}/danh-sach-khen-thuong`);
+              navigate(`${record.id}/chi-tiet-ke-hoach`);
             }}
           />
-          {/* <UpdateButton onClick={() => handleModal(record)} /> */}
+          <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                quanLyKhenThuongSlice.actions.handleQuanLyKhenThuong({
-                  ma_can_bo,
+                keHoachSlice.actions.handleKeHoach({
                   item: record,
                   actionName: "DELETE",
                   pageSize: pageSize,
@@ -138,7 +132,7 @@ const QuanLyKhenThuong = () => {
   //side effect
   useEffect(() => {
     dispatch(
-      quanLyKhenThuongSlice.actions.getQuanLyKhenThuongs({
+      keHoachSlice.actions.getKeHoachs({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -148,18 +142,20 @@ const QuanLyKhenThuong = () => {
 
   return (
     <ContentWrapper>
-      <CustomBreadcrumb
-        items={[
-          ...pageHeader.breadcrumb,
-        ]}
-      />
+      <CustomBreadcrumb items={pageHeader.breadcrumb} />
       <CustomeTable
         header={
-          <Header justify={"flex-end"}>
+          <Header>
+            <TextInput
+              placeholder={"Nhập vào từ khoá tìm kiếm"}
+              onChange={onChangeKeywordInput}
+              property={"keyword"}
+              width={20}
+            />
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={quanLyKhenThuongs}
+        data={keHoachs}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -175,4 +171,4 @@ const QuanLyKhenThuong = () => {
   );
 };
 
-export default QuanLyKhenThuong;
+export default QuanLyKeHoach;

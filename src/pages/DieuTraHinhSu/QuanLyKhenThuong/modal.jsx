@@ -12,7 +12,7 @@ import dayjs from "dayjs";
 import {useParams} from "react-router-dom";
 import DateInput from "../../../components/Form/dateinput.jsx";
 import TableObjKhenThuongKyLuat from "../DanhSachKhenThuongKyLuat/table.jsx"
-import { DATE_FORMAT, HINH_THUC_THUONG_KY_LUAT, LOAI_KHEN_THUONG_KY_LUAT } from "../../../utils/common";
+import { DATE_FORMAT, HINH_THUC_THUONG_KY_LUAT } from "../../../utils/common";
 import { Row, Col } from 'antd'
 const ModalItem = () => {
 
