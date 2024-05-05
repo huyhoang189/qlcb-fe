@@ -39,8 +39,8 @@ const pageHeader = {
 const baseColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 30,
     align: "center",
   },

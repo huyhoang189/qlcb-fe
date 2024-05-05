@@ -11,6 +11,15 @@ export const getAllBase = (payload) => {
   });
 };
 
+export const getAllByMaDonVi = (payload) => {
+  return api.makeRequest({
+    url: `/can-bo/get-all-by-ma-don-vi/${payload?.ma_don_vi}?pageSize=${
+      payload?.pageSize || 10
+    }&pageNumber=${payload?.pageNumber || 1}&filter=${payload?.keyword || ""}`,
+    method: "GET",
+  });
+};
+
 export const getById = (payload) => {
   return api.makeRequest({
     url: `/can-bo/${payload?.id}`,

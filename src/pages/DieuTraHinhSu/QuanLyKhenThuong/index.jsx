@@ -8,7 +8,7 @@ import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
-  DetailButton
+  DetailButton,
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import { useParams } from "react-router-dom";
@@ -23,7 +23,6 @@ const pageHeader = {
     },
     {
       title: "Chính sách",
-      
     },
     {
       title: `Quản lý thi đua, khen thưởng`,
@@ -50,6 +49,9 @@ const baseColumns = [
     dataIndex: "hinh_thuc",
     key: "hinh_thuc",
     align: "center",
+    render: (text, record) => {
+      return record?.hinh_thuc === "TAP_THE" ? "Tập thể" : "Cá nhân";
+    },
   },
   {
     title: "Nội dụng",
@@ -98,7 +100,6 @@ const QuanLyKhenThuong = () => {
         keyword,
         pageSize: pageSize,
         pageNumber: current,
-
       })
     );
   };
@@ -122,7 +123,9 @@ const QuanLyKhenThuong = () => {
         >
           <DetailButton
             onClick={() => {
-              navigate(`${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KHEN_THUONG}/danh-sach-khen-thuong`);
+              navigate(
+                `${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KHEN_THUONG}/danh-sach-khen-thuong`
+              );
             }}
           />
           {/* <UpdateButton onClick={() => handleModal(record)} /> */}
@@ -160,11 +163,7 @@ const QuanLyKhenThuong = () => {
 
   return (
     <ContentWrapper>
-      <CustomBreadcrumb
-        items={[
-          ...pageHeader.breadcrumb,
-        ]}
-      />
+      <CustomBreadcrumb items={[...pageHeader.breadcrumb]} />
       <CustomeTable
         header={
           <Header justify={"flex-end"}>

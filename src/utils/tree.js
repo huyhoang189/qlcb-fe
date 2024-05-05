@@ -38,7 +38,7 @@ const generateTrees = (arr) => {
         value: element.id,
         title: `${element?.ten_don_vi}`,
         disabled: !element?.trang_thai,
-        key: `${index}`,
+        key: `0-${index}`,
         ...element,
       };
       trees.push(node);
@@ -46,7 +46,7 @@ const generateTrees = (arr) => {
     }
   }
   trees.forEach((element, index) => {
-    let child = generateChildNodes(arr, element.id, `${index}`);
+    let child = generateChildNodes(arr, element.id, `0-${index}`);
     trees[index].children = [...child];
   });
   return trees;
