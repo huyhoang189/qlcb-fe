@@ -80,6 +80,25 @@ const reducer = createSlice({
     updateSelectedCanBoCoBanInput: (state, action) => {
       state.selectedCanBoCoBan = action.payload;
     },
+
+    getCanBoByMaDonVi: (state, action) => {
+      state.modalActive = false;
+      state.errorMassage = false;
+      state.isLoading = true;
+    },
+    getCanBobyMaDonViSuccess: (state, action) => {
+      state.errorMassage = false;
+      state.canBoCoBans = action.payload.data;
+      state.totalItem = action.payload.count;
+      state.pageNumber = action.payload.pageNumber;
+      state.pageSize = action.payload.pageSize;
+      state.isLoading = false;
+    },
+    getCanBoByMaDonViError: (state, action) => {
+      state.errorMassage = "Error";
+      state.canBoCoBans = action.payload ? action.payload : state.canBoCoBans;
+      state.isLoading = false;
+    },
   },
 });
 

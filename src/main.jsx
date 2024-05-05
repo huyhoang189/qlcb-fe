@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ConfigProvider
     theme={{
       token: {
-        colorBgBase: "#F1F1F1",
+        colorBgBase: "#fff",
         colorBgHeader: "#78b43d",
         colorBase: "#fff",
         borderRadius: 2,
@@ -23,10 +23,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       components: {
         Table: {
           rowHoverBg: "#fff",
-          borderColor: "#78b43d",
+          borderColor: "#d6d9dc",
         },
         Button: {
           primaryShadow: "",
+        },
+        Modal: {
+          contentBg: "#fff",
+          headerBg: "#fff",
         },
       },
     }}

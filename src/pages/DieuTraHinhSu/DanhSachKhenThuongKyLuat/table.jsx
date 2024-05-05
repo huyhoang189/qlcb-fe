@@ -1,9 +1,7 @@
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { Space } from "antd";
-import {
-  DeleteButton,
-} from "../../../components/Button/index.jsx";
+import { DeleteButton } from "../../../components/Button/index.jsx";
 import PropTypes from "prop-types";
 
 const CanBoColumns = [
@@ -68,14 +66,18 @@ const DonViColumns = [
   },
 ];
 
-const TableObjKhenThuongKyLuat = ({ListKhenThuongKyLuat=[], SetListKhenThuongKyLuat, HinhThuc}) => {
+const TableObjKhenThuongKyLuat = ({
+  ListKhenThuongKyLuat = [],
+  SetListKhenThuongKyLuat,
+  HinhThuc,
+}) => {
   const columns = [
-    ...HinhThuc==="CA_NHAN"?CanBoColumns:DonViColumns,
+    ...(HinhThuc === "CA_NHAN" ? CanBoColumns : DonViColumns),
     {
       title: "Công cụ",
       key: "tool",
       align: "center",
-      width: 50,
+      width: 100,
       render: (text, record) => (
         <Space
           direction="horizontal"
@@ -83,11 +85,16 @@ const TableObjKhenThuongKyLuat = ({ListKhenThuongKyLuat=[], SetListKhenThuongKyL
         >
           <DeleteButton
             onConfirm={() => {
-              ListKhenThuongKyLuat.ListObjKhenThuongKyLuat= ListKhenThuongKyLuat.ListObjKhenThuongKyLuat.filter((e) => e.id!=record.id);
-              ListKhenThuongKyLuat.ids= ListKhenThuongKyLuat.ids.filter((e) => e!=record.id);
+              ListKhenThuongKyLuat.ListObjKhenThuongKyLuat =
+                ListKhenThuongKyLuat.ListObjKhenThuongKyLuat.filter(
+                  (e) => e.id != record.id
+                );
+              ListKhenThuongKyLuat.ids = ListKhenThuongKyLuat.ids.filter(
+                (e) => e != record.id
+              );
               SetListKhenThuongKyLuat({
-                ...ListKhenThuongKyLuat
-              })
+                ...ListKhenThuongKyLuat,
+              });
             }}
           />
         </Space>
@@ -102,13 +109,12 @@ const TableObjKhenThuongKyLuat = ({ListKhenThuongKyLuat=[], SetListKhenThuongKyL
         columns={columns}
         pagination={false}
       />
-
     </ContentWrapper>
   );
 };
 TableObjKhenThuongKyLuat.propTypes = {
   HinhThuc: PropTypes.string,
   SetListKhenThuongKyLuat: PropTypes.func,
-  ListKhenThuongKyLuat: PropTypes.array
-}
+  ListKhenThuongKyLuat: PropTypes.array,
+};
 export default TableObjKhenThuongKyLuat;
