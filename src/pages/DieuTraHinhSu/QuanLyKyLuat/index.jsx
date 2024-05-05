@@ -3,18 +3,18 @@ import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import quanLyKyLuatSlice from "../../../toolkits/DieuTraHinhSu/QuanLyKyLuat/slice.js";
-import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
-  UpdateButton,
+  DetailButton
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import { useParams } from "react-router-dom";
 import ModalItem from "./modal.jsx";
-
+import { useNavigate } from "react-router-dom";
+import { LOAI_KHEN_THUONG_KY_LUAT } from "../../../utils/common";
 const pageHeader = {
   breadcrumb: [
     {
@@ -22,11 +22,11 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Quản lý hồ sơ cán bộ",
-      href: "/quan-ly-ho-so-can-bo/danh-sach-can-bo",
+      title: "Chính sách",
+      
     },
     {
-      title: `Bảo hiểm`,
+      title: `Quản lý kỷ luật`,
     },
   ],
 };
@@ -39,23 +39,34 @@ const baseColumns = [
     width: 50,
     align: "center",
   },
-
   {
-    title: "Hệ số",
-    dataIndex: "he_so",
-    key: "he_so",
+    title: "Quyết định số",
+    dataIndex: "quyet_dinh_so",
+    key: "quyet_dinh_so",
     align: "center",
   },
   {
-    title: "Quân hàm",
-    dataIndex: "quan_ham",
-    key: "quan_ham",
+    title: "Hình thức khen thưởng",
+    dataIndex: "hinh_thuc",
+    key: "hinh_thuc",
+    align: "center",
+  },
+  {
+    title: "Nội dụng",
+    dataIndex: "noi_dung",
+    key: "noi_dung",
     align: "center",
   },
   {
     title: "Thời gian",
     dataIndex: "thoi_gian",
     key: "thoi_gian",
+    align: "center",
+  },
+  {
+    title: "Lý do",
+    dataIndex: "ly_do",
+    key: "ly_do",
     align: "center",
   },
   {
@@ -68,11 +79,10 @@ const baseColumns = [
 
 const QuanLyKyLuat = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const { quanLyKyLuats, isLoading, totalItem, pageNumber, pageSize } =
     useSelector((state) => state.quanLyKyLuats);
-
-  const { selectedCanBoCoBan } = useSelector((state) => state.canBoCoBans);
 
   const [keyword, setKeyword] = useState("");
 
@@ -88,7 +98,7 @@ const QuanLyKyLuat = () => {
         keyword,
         pageSize: pageSize,
         pageNumber: current,
-        ma_can_bo,
+
       })
     );
   };
@@ -110,7 +120,12 @@ const QuanLyKyLuat = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
-          <UpdateButton onClick={() => handleModal(record)} />
+          <DetailButton
+            onClick={() => {
+              navigate(`${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KY_LUAT}/danh-sach-ky-luat`);
+            }}
+          />
+          {/* <UpdateButton onClick={() => handleModal(record)} /> */}
           <DeleteButton
             onConfirm={() => {
               dispatch(
@@ -134,13 +149,11 @@ const QuanLyKyLuat = () => {
 
   //side effect
   useEffect(() => {
-    dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
     dispatch(
       quanLyKyLuatSlice.actions.getQuanLyKyLuats({
         keyword,
         pageSize: 10,
         pageNumber: 1,
-        ma_can_bo,
       })
     );
   }, [dispatch, keyword]);
@@ -150,10 +163,6 @@ const QuanLyKyLuat = () => {
       <CustomBreadcrumb
         items={[
           ...pageHeader.breadcrumb,
-
-          {
-            title: `${selectedCanBoCoBan?.ho_ten_khai_sinh} - Số hiệu: ${selectedCanBoCoBan?.so_hieu_quan_nhan}`,
-          },
         ]}
       />
       <CustomeTable
