@@ -2,18 +2,19 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import chucDanhKhoaHocSlice from "../../../toolkits/QuanLyDanhMuc/ChucDanhKhoaHoc/slice.js";
+import keHoachSlice from "../../../toolkits/QuanLyDaoTao/QuanLyKeHoach/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
   UpdateButton,
+  DetailButton
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
-
+import { useNavigate } from "react-router-dom";
 const pageHeader = {
   breadcrumb: [
     {
@@ -21,10 +22,10 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Quản lý danh mục",
+      title: "Quản lý đào tạo",
     },
     {
-      title: "Quản lý chức danh khoa học",
+      title: "Kế hoạch bồi dưỡng đào tạo cán bộ",
     },
   ],
 };
@@ -39,9 +40,21 @@ const baseColumns = [
   },
 
   {
-    title: "Tên chức danh",
-    dataIndex: "ten_chuc_danh",
-    key: "ten_chuc_danh",
+    title: "Năm học",
+    dataIndex: "nam_hoc",
+    key: "nam_hoc",
+    align: "center",
+  },
+  {
+    title: "Chỉ tiêu",
+    dataIndex: "chi_tieu",
+    key: "chi_tieu",
+    align: "center",
+  },
+  {
+    title: "Thực hiện",
+    dataIndex: "thuc_hien",
+    key: "thuc_hien",
     align: "center",
   },
   {
@@ -52,10 +65,11 @@ const baseColumns = [
   },
 ];
 
-const QuanLyChucDanhKhoaHoc = () => {
+const QuanLyKeHoach = () => {
   const dispatch = useDispatch();
-  const { chucDanhKhoaHocs, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.chucDanhKhoaHocs);
+  const navigate = useNavigate();
+  const { keHoachs, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.keHoachs);
 
   const [keyword, setKeyword] = useState("");
 
@@ -65,7 +79,7 @@ const QuanLyChucDanhKhoaHoc = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
+      keHoachSlice.actions.getKeHoachs({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -74,7 +88,7 @@ const QuanLyChucDanhKhoaHoc = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(chucDanhKhoaHocSlice.actions.toggleModal(_item));
+    dispatch(keHoachSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -89,11 +103,16 @@ const QuanLyChucDanhKhoaHoc = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
+            <DetailButton
+            onClick={() => {
+              navigate(`${record.id}/chi-tiet-ke-hoach`);
+            }}
+          />
           <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHoc({
+                keHoachSlice.actions.handleKeHoach({
                   item: record,
                   actionName: "DELETE",
                   pageSize: pageSize,
@@ -113,7 +132,7 @@ const QuanLyChucDanhKhoaHoc = () => {
   //side effect
   useEffect(() => {
     dispatch(
-      chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
+      keHoachSlice.actions.getKeHoachs({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -136,7 +155,7 @@ const QuanLyChucDanhKhoaHoc = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={chucDanhKhoaHocs}
+        data={keHoachs}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -152,4 +171,4 @@ const QuanLyChucDanhKhoaHoc = () => {
   );
 };
 
-export default QuanLyChucDanhKhoaHoc;
+export default QuanLyKeHoach;

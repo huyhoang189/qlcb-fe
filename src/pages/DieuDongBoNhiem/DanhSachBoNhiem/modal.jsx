@@ -1,17 +1,24 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import danhSachBoNhiemSlice from "../../../toolkits/DieuDongBoNhiem/DanhSachBoNhiem/slice.js";
-import { ACTION_NAME } from "../../../utils/common.js";
+import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
+import chucDanhPhapLySlice from "../../../toolkits/QuanLyDanhMuc/ChucDanhPhapLy/slice.js";
+import { ACTION_NAME, LOAI_CHUC_DANH_PHAP_LY } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 import { useParams } from "react-router-dom";
+import SelectInput from "../../../components/Form/selectinput.jsx";
+import {useEffect, useState} from "react";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const { ma_dieu_dong } = params;
-
-  const { modalActive, selectedDanhSachBoNhiem, pageSize, pageNumber } =
+  const { ma_bo_nhiem } = params;
+  const [optionListDaoTao, setOptionListDaoTao] = useState()
+  const { danhSachBoNhiems, modalActive, selectedDanhSachBoNhiem, pageSize, pageNumber } =
     useSelector((state) => state.danhSachBoNhiems);
+    const { chucDanhPhapLys} =
+    useSelector((state) => state.chucDanhPhapLys);
+  const {canBoCoBans} = useSelector(state => state.canBoCoBans)
 
   const handleModal = (_item) => {
     dispatch(danhSachBoNhiemSlice.actions.toggleModal(_item));
@@ -19,13 +26,14 @@ const ModalItem = () => {
 
   const handleRecord = (_actionName, _item) => {
     let item = Object.assign({}, _item);
+    item.ma_bo_nhiem = ma_bo_nhiem
     dispatch(
       danhSachBoNhiemSlice.actions.handleDanhSachBoNhiem({
         item: item,
         actionName: _actionName,
         pageSize: pageSize,
         pageNumber: pageNumber,
-        ma_dieu_dong,
+        ma_bo_nhiem,
       })
     );
   };
@@ -39,6 +47,40 @@ const ModalItem = () => {
       );
     }
   };
+
+  const onRecordSelectInputChange = (key, event) => {
+    if (key) {
+        let clone = Object.assign({}, selectedDanhSachBoNhiem);
+        clone[key] = event;
+        dispatch(danhSachBoNhiemSlice.actions.updateSelectedDanhSachBoNhiemInput(clone));
+    }
+}
+
+useEffect(() => {
+  dispatch(canBoCoBanSlice.actions.getCanBoCoBans({
+      pageSize: 1000,
+      pageNumber: 1
+  }))
+  dispatch(
+    chucDanhPhapLySlice.actions.getChucDanhPhapLys({
+      pageSize: 1000,
+      pageNumber: 1,
+    })
+  );
+}, [dispatch]);
+
+useEffect(()=> {
+  const initialOption = canBoCoBans.map((e) => ({
+    label: e?.so_hieu_quan_nhan + " -- "+ e?.ho_ten_khai_sinh + " -- "+ e?.don_vi,
+    value: e?.id
+}))
+  let OptionCurrent =initialOption.map(e=>{
+    if(danhSachBoNhiems.find(item => item.ma_can_bo === e.value))
+    return {...e, disabled:"true"}
+    else return {...e}
+  })
+  setOptionListDaoTao(OptionCurrent)
+},[canBoCoBans,danhSachBoNhiems])
 
   return (
     <CustomeModal
@@ -55,23 +97,32 @@ const ModalItem = () => {
       okText="Chấp nhận"
       cancelText="Từ chối"
     >
-      <TextInput
-        title="Cán bộ"
-        onChange={onRecordInputChange}
-        property={"ma_can_bo"}
-        value={selectedDanhSachBoNhiem?.ma_can_bo}
-      />
-      <TextInput
-        title="Chức danh pháp lý bổ nhiệm"
-        onChange={onRecordInputChange}
-        property={"ma_chu_danh"}
-        value={selectedDanhSachBoNhiem?.ma_chu_danh}
-      />
-      <TextInput
-        title="Loại chức danh pháp lý"
-        onChange={onRecordInputChange}
-        property={"loai_chuc_danh"}
-        value={selectedDanhSachBoNhiem?.loai_chuc_danh}
+      <SelectInput
+            title="Cán bộ"
+            onChange={onRecordSelectInputChange}
+            property={"ma_hoc_vien"}
+            value={selectedDanhSachBoNhiem?.ma_hoc_vien}
+            isNull={false}
+            options={optionListDaoTao}
+        />
+      <SelectInput
+            title="Chức danh pháp lý bổ nhiệm"
+            onChange={onRecordSelectInputChange}
+            property={"ma_chuc_danh"}
+            value={selectedDanhSachBoNhiem?.ma_chuc_danh}
+            isNull={false}
+            options={chucDanhPhapLys.map((e) => ({
+              label: e?.ten_chuc_danh,
+              value: e?.id
+          }))}
+        />
+      <SelectInput
+        title="Loại chức danh bổ nhiệm"
+        onChange={onRecordSelectInputChange}
+        property={"loai_bo_nhiem"}
+        value={selectedDanhSachBoNhiem?.loai_bo_nhiem}
+        options={LOAI_CHUC_DANH_PHAP_LY}
+        isNull={false}
       />
       <TextInput
         title="Ghi chú"

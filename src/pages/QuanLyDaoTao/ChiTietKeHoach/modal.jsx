@@ -38,6 +38,7 @@ const ModalItem = () => {
         actionName: _actionName,
         pageSize: pageSize,
         pageNumber: pageNumber,
+        ma_ke_hoach
       })
     );
   };

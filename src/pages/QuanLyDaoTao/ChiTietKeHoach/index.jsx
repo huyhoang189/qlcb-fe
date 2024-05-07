@@ -6,10 +6,12 @@ import chiTietKeHoachSlice from "../../../toolkits/QuanLyDaoTao/ChiTietKeHoach/s
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Space } from "antd";
+import { useNavigate } from "react-router-dom";
 import {
   CreateButton,
   DeleteButton,
   UpdateButton,
+  DetailButton
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
@@ -37,8 +39,8 @@ const pageHeader = {
 const baseColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 50,
     align: "center",
   },
@@ -88,6 +90,7 @@ const QuanLyChiTietKeHoach = () => {
   const params = useParams();
   const { ma_ke_hoach } = params;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { chiTietKeHoachs, isLoading, totalItem, pageNumber, pageSize } =
     useSelector((state) => state.chiTietKeHoachs);
 
@@ -124,6 +127,11 @@ const QuanLyChiTietKeHoach = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
+          <DetailButton
+            onClick={() => {
+              navigate(`${record.id}/danh-sach-dao-tao`);
+            }}
+          />
           <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {

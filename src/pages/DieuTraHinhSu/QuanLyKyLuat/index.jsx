@@ -34,8 +34,8 @@ const pageHeader = {
 const baseColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 50,
     align: "center",
   },
@@ -50,6 +50,9 @@ const baseColumns = [
     dataIndex: "hinh_thuc",
     key: "hinh_thuc",
     align: "center",
+    render: (text, record) => {
+      return record?.hinh_thuc === "TAP_THE" ? "Tập thể" : "Cá nhân";
+    },
   },
   {
     title: "Nội dụng",

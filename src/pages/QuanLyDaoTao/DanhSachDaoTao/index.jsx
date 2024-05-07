@@ -2,7 +2,7 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import chucDanhKhoaHocSlice from "../../../toolkits/QuanLyDanhMuc/ChucDanhKhoaHoc/slice.js";
+import danhSachDaoTaoSlice from "../../../toolkits/QuanLyDaoTao/DanhSachDaoTao/slice.js";
 import { useEffect, useState } from "react";
 import { Space } from "antd";
 import {
@@ -13,7 +13,8 @@ import {
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
-
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const pageHeader = {
   breadcrumb: [
     {
@@ -21,10 +22,17 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Quản lý danh mục",
+      title: "Quản lý đào tạo",
     },
     {
-      title: "Quản lý chức danh khoa học",
+      title: "Kế hoạch bồi dưỡng đào tạo cán bộ",
+      href:"/quan-ly-dao-tao/ke-hoach-dao-tao-boi-duong-can-bo",
+    },
+    {
+      title: "Chi tiết kế hoạch",
+    },
+    {
+      title: "Danh sách học viên",
     },
   ],
 };
@@ -39,10 +47,22 @@ const baseColumns = [
   },
 
   {
-    title: "Tên chức danh",
-    dataIndex: "ten_chuc_danh",
-    key: "ten_chuc_danh",
+    title: "Họ tên",
+    dataIndex: "can_bo",
+    key: "can_bo",
     align: "center",
+    render: (text, record) => {
+      return record?.can_bo?.ho_ten_khai_sinh;
+    },
+  },
+  {
+    title: "Đơn vị",
+    dataIndex: "can_bo",
+    key: "can_bo",
+    align: "center",
+    render: (text, record) => {
+      return record?.can_bo?.don_vi?.ten_don_vi;
+    },
   },
   {
     title: "Ghi chú",
@@ -52,10 +72,13 @@ const baseColumns = [
   },
 ];
 
-const QuanLyChucDanhKhoaHoc = () => {
+const QuanLyDanhSachDaoTao = () => {
   const dispatch = useDispatch();
-  const { chucDanhKhoaHocs, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.chucDanhKhoaHocs);
+  const navigate = useNavigate();
+  const params = useParams();
+  const { ma_chi_tiet_ke_hoach } = params;
+  const { danhSachDaoTaos, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.danhSachDaoTaos);
 
   const [keyword, setKeyword] = useState("");
 
@@ -65,7 +88,8 @@ const QuanLyChucDanhKhoaHoc = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
+      danhSachDaoTaoSlice.actions.getDanhSachDaoTaos({
+        ma_chi_tiet_ke_hoach,
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -74,7 +98,7 @@ const QuanLyChucDanhKhoaHoc = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(chucDanhKhoaHocSlice.actions.toggleModal(_item));
+    dispatch(danhSachDaoTaoSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -93,7 +117,7 @@ const QuanLyChucDanhKhoaHoc = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                chucDanhKhoaHocSlice.actions.handleChucDanhKhoaHoc({
+                danhSachDaoTaoSlice.actions.handleDanhSachDaoTao({
                   item: record,
                   actionName: "DELETE",
                   pageSize: pageSize,
@@ -113,7 +137,8 @@ const QuanLyChucDanhKhoaHoc = () => {
   //side effect
   useEffect(() => {
     dispatch(
-      chucDanhKhoaHocSlice.actions.getChucDanhKhoaHocs({
+      danhSachDaoTaoSlice.actions.getDanhSachDaoTaos({
+        ma_chi_tiet_ke_hoach,
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -136,7 +161,7 @@ const QuanLyChucDanhKhoaHoc = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={chucDanhKhoaHocs}
+        data={danhSachDaoTaos}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -152,4 +177,4 @@ const QuanLyChucDanhKhoaHoc = () => {
   );
 };
 
-export default QuanLyChucDanhKhoaHoc;
+export default QuanLyDanhSachDaoTao;

@@ -7,8 +7,8 @@ import PropTypes from "prop-types";
 const CanBoColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 10,
     align: "center",
   },
@@ -38,8 +38,8 @@ const CanBoColumns = [
 const DonViColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 10,
     align: "center",
   },
@@ -68,6 +68,7 @@ const DonViColumns = [
 
 const TableObjKhenThuongKyLuat = ({
   ListKhenThuongKyLuat = [],
+  OnChangeOptionObjKhenThuongKyLuat,
   SetListKhenThuongKyLuat,
   HinhThuc,
 }) => {
@@ -92,6 +93,7 @@ const TableObjKhenThuongKyLuat = ({
               ListKhenThuongKyLuat.ids = ListKhenThuongKyLuat.ids.filter(
                 (e) => e != record.id
               );
+              OnChangeOptionObjKhenThuongKyLuat(ListKhenThuongKyLuat.ListObjKhenThuongKyLuat)
               SetListKhenThuongKyLuat({
                 ...ListKhenThuongKyLuat,
               });
@@ -115,6 +117,7 @@ const TableObjKhenThuongKyLuat = ({
 TableObjKhenThuongKyLuat.propTypes = {
   HinhThuc: PropTypes.string,
   SetListKhenThuongKyLuat: PropTypes.func,
-  ListKhenThuongKyLuat: PropTypes.array,
+  ListKhenThuongKyLuat: PropTypes.object,
+  OnChangeOptionObjKhenThuongKyLuat: PropTypes.func
 };
 export default TableObjKhenThuongKyLuat;

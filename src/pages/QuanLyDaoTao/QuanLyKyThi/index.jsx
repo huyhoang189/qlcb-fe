@@ -2,9 +2,9 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import keHoachSlice from "../../../toolkits/QuanLyDaoTao/KeHoach/slice.js";
+import kyThiSlice from "../../../toolkits/QuanLyDaoTao/QuanLyKyThi/slice.js";
 import { useEffect, useState } from "react";
-import { Space } from "antd";
+import { Space, Tag } from "antd";
 import {
   CreateButton,
   DeleteButton,
@@ -33,29 +33,79 @@ const pageHeader = {
 const baseColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 50,
     align: "center",
   },
 
   {
-    title: "Năm học",
-    dataIndex: "nam_hoc",
-    key: "nam_hoc",
+    title: "Tên kỳ thi",
+    dataIndex: "ten_ky_thi",
+    key: "ten_ky_thi",
     align: "center",
   },
   {
-    title: "Chỉ tiêu",
-    dataIndex: "chi_tieu",
-    key: "chi_tieu",
+    title: "Thời gian tổ chức",
+    dataIndex: "thoi_gian_to_chuc",
+    key: "thoi_gian_to_chuc",
     align: "center",
   },
   {
-    title: "Thực hiện",
-    dataIndex: "thuc_hien",
-    key: "thuc_hien",
+    title: "Kết quả",
+    dataIndex: "ket_qua",
+    key: "ket_qua",
     align: "center",
+    children: [
+      {
+        title: 'Giỏi',
+        dataIndex: 'Gioi',
+        key: 'Gioi',
+        //width: 150,
+        align: 'center',
+        render: (text, row, index) => {
+          //let obj = eval('({' + row.ket_qua + '})');
+          return 10
+        }
+      },
+      {
+        title: 'Khá',
+        dataIndex: 'kha',
+        key: 'kha',
+        //width: 150,
+        align: 'center',
+        render: (text, row, index) => {
+          //let obj = eval('({' + row.ket_qua + '})');
+          return 10
+        }
+      },
+      {
+        title: 'Trung Bình',
+        dataIndex: 'TB',
+        key: 'TB',
+        //width: 150,
+        align: 'center',
+        render: (text, row, index) => {
+          //let obj = eval('({' + row.ket_qua + '})');
+          return 10
+        }
+      }
+    ]
+  },
+  {
+    title: "Trạng thái",
+    dataIndex: "trang_thai",
+    key: "trang_thai",
+    align: "center",
+    render: (_,row) => (
+      <>
+        {       
+            <Tag color={row.trang_thai?'green':'red'}>
+              {row.trang_thai?"ACTIVE":"DISABLE"}
+            </Tag>
+        }
+      </>
+    ),
   },
   {
     title: "Ghi chú",
@@ -65,11 +115,11 @@ const baseColumns = [
   },
 ];
 
-const QuanLyKeHoach = () => {
+const QuanLyKyThi = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { keHoachs, isLoading, totalItem, pageNumber, pageSize } =
-    useSelector((state) => state.keHoachs);
+  const { kyThis, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.kyThis);
 
   const [keyword, setKeyword] = useState("");
 
@@ -79,7 +129,7 @@ const QuanLyKeHoach = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      keHoachSlice.actions.getKeHoachs({
+      kyThiSlice.actions.getKyThis({
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -88,7 +138,7 @@ const QuanLyKeHoach = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(keHoachSlice.actions.toggleModal(_item));
+    dispatch(kyThiSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -112,7 +162,7 @@ const QuanLyKeHoach = () => {
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                keHoachSlice.actions.handleKeHoach({
+                kyThiSlice.actions.handleKyThi({
                   item: record,
                   actionName: "DELETE",
                   pageSize: pageSize,
@@ -132,7 +182,7 @@ const QuanLyKeHoach = () => {
   //side effect
   useEffect(() => {
     dispatch(
-      keHoachSlice.actions.getKeHoachs({
+      kyThiSlice.actions.getKyThis({
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -155,7 +205,7 @@ const QuanLyKeHoach = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={keHoachs}
+        data={kyThis}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -171,4 +221,4 @@ const QuanLyKeHoach = () => {
   );
 };
 
-export default QuanLyKeHoach;
+export default QuanLyKyThi;

@@ -1,8 +1,9 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import boNhiemCanBoSlice from "../../../toolkits/DieuDongBoNhiem/BoNhiemCanBo/slice.js";
-import { ACTION_NAME } from "../../../utils/common.js";
+import { ACTION_NAME, DATE_FORMAT } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
+import DateInput from "../../../components/Form/dateinput.jsx";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,16 @@ const ModalItem = () => {
     }
   };
 
+  const onRecordDateInputChange = (key, event) => {
+    if (key) {
+      let clone = Object.assign({}, selectedBoNhiemCanBo);
+      clone[key] = event.format(DATE_FORMAT.YYYY);
+      dispatch(
+        boNhiemCanBoSlice.actions.updateSelectedBoNhiemCanBoInput(clone)
+      );
+    }
+  };
+
   return (
     <CustomeModal
       open={modalActive}
@@ -55,12 +66,14 @@ const ModalItem = () => {
         property={"tieu_de"}
         value={selectedBoNhiemCanBo?.tieu_de}
       />
-      <TextInput
+      <DateInput
         title="Năm"
+        format = {DATE_FORMAT.YYYY}
         placeholder="Nhập vào năm"
-        onChange={onRecordInputChange}
+        onChange={onRecordDateInputChange}
         property={"nam"}
-        value={selectedBoNhiemCanBo?.nam}
+        picker="year"
+        value={selectedBoNhiemCanBo?.nam_hoc}
       />
       <TextInput
         title="Đợt"

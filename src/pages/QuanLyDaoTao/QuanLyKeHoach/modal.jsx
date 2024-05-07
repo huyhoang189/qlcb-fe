@@ -1,6 +1,6 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import keHoachSlice from "../../../toolkits/QuanLyDaoTao/KeHoach/slice.js";
+import keHoachSlice from "../../../toolkits/QuanLyDaoTao/QuanLyKeHoach/slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 import DateInput from "../../../components/Form/dateinput.jsx";
