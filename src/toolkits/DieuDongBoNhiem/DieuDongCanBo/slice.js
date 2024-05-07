@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  canBos: [],
+  selectedCanBo: {},
+  selectedDonVi: {},
   dieuDongCanBos: [],
   selectedDieuDongCanBo: {},
   dieuDongCanBo: {},
@@ -19,9 +20,21 @@ const reducer = createSlice({
   reducers: {
     toggleModal: (state, action) => {
       state.modalActive = !state.modalActive;
-      state.selectedDieuDongCanBo =
-        action.payload !== null ? action.payload : initialState.dieuDongCanBo;
+      state.selectedCanBo = action.payload !== null ? action.payload : {};
+      state.selectedDieuDongCanBo = {};
     },
+    updateSelectedDieuDongCanBoInput: (state, action) => {
+      state.selectedDieuDongCanBo = action.payload;
+    },
+    updateSelectedDonVi: (state, action) => {
+      state.selectedDonVi = action.payload;
+    },
+    handleDieuDongCanBo: (state, action) => {},
+    handleDieuDongCanBoSuccess: (state, action) => {
+      state.modalActive = false;
+      state.errorMassage = false;
+    },
+    handleDieuDongCanBoError: (state, action) => {},
   },
 });
 
