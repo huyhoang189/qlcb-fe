@@ -1,24 +1,26 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import boNhiemCanBoSlice from "./slice.js";
+import lichSuDieuDongSlice from "./slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import {
   create,
   deleteItem,
   getAll,
   update,
-} from "../../../apis/BoNhiemCanBo/boNhiemCanBo.api.js";
+} from "../../../apis/DieuDongCanBo/dieuDongCanBo.api.js";
 
 function* _getAll({ payload }) {
   try {
     const { data, status } = yield call(getAll, payload);
     const { metadata } = data;
     if (status === 200 || status === 201) {
-      yield put(boNhiemCanBoSlice.actions.getBoNhiemCanBosSuccess(metadata));
+      yield put(
+        lichSuDieuDongSlice.actions.getLichSuDieuDongsSuccess(metadata)
+      );
     } else {
-      yield put(boNhiemCanBoSlice.actions.getBoNhiemCanBosError([]));
+      yield put(lichSuDieuDongSlice.actions.getLichSuDieuDongsError([]));
     }
   } catch (error) {
-    yield put(boNhiemCanBoSlice.actions.getBoNhiemCanBosError([]));
+    yield put(lichSuDieuDongSlice.actions.getLichSuDieuDongsError([]));
   }
 }
 
@@ -39,24 +41,27 @@ function* _handleItem({ payload }) {
 
     yield put(
       isSuccess
-        ? boNhiemCanBoSlice.actions.handleBoNhiemCanBoSuccess()
-        : boNhiemCanBoSlice.actions.handleBoNhiemCanBoError([])
+        ? lichSuDieuDongSlice.actions.handleLichSuDieuDongSuccess()
+        : lichSuDieuDongSlice.actions.handleLichSuDieuDongError([])
     );
 
     if (isSuccess) {
-      yield put(boNhiemCanBoSlice.actions.getBoNhiemCanBos(payload));
+      yield put(lichSuDieuDongSlice.actions.getLichSuDieuDongs(payload));
     }
   } catch (error) {
-    yield put(boNhiemCanBoSlice.actions.handleBoNhiemCanBoError());
+    yield put(lichSuDieuDongSlice.actions.handleLichSuDieuDongError());
     console.log(error);
   }
 }
 
 export default function* saga() {
   yield all([
-    yield takeEvery(boNhiemCanBoSlice.actions.getBoNhiemCanBos().type, _getAll),
     yield takeEvery(
-      boNhiemCanBoSlice.actions.handleBoNhiemCanBo().type,
+      lichSuDieuDongSlice.actions.getLichSuDieuDongs().type,
+      _getAll
+    ),
+    yield takeEvery(
+      lichSuDieuDongSlice.actions.handleLichSuDieuDong().type,
       _handleItem
     ),
   ]);

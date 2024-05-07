@@ -33,16 +33,9 @@ const pageHeader = {
 const baseCanBoColumn = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 50,
-    align: "center",
-  },
-
-  {
-    title: "Họ và tên khai sinh",
-    dataIndex: "ho_ten_khai_sinh",
-    key: "ho_ten_khai_sinh",
     align: "center",
   },
   {
@@ -52,34 +45,58 @@ const baseCanBoColumn = [
     align: "center",
   },
   {
-    title: "Ngày tháng năm sinh",
-    dataIndex: "ngay_thang_nam_sinh",
-    key: "ngay_thang_nam_sinh",
+    title: "Họ và tên khai sinh",
+    dataIndex: "ho_ten_khai_sinh",
+    key: "ho_ten_khai_sinh",
     align: "center",
   },
   {
-    title: "Đơn vị hiện tại",
-    dataIndex: "don_vi_full_text",
-    key: "don_vi_full_text",
+    title: "Cấp bậc",
+    dataIndex: "cap_bac",
+    key: "cap_bac",
     align: "center",
+    render: (text, record) => {
+      return record?.cap_bac?.quan_ham;
+    },
+  },
+  {
+    title: "Chức vụ",
+    dataIndex: "chuc_vu",
+    key: "chuc_vu",
+    align: "center",
+    render: (text, record) => {
+      return record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu;
+    },
+  },
+  {
+    title: "Đơn vị hiện tại",
+    dataIndex: "don_vi",
+    key: "don_vi",
+    // align: "center",
   },
 ];
 
 const DieuDongCanBo = () => {
   const dispatch = useDispatch();
 
-  const { donVis } = useSelector((state) => state.donVis);
+  const { donVis, selectedDonVi } = useSelector((state) => state.donVis);
   const { canBoCoBans, pageSize, pageNumber, count, isLoading } = useSelector(
     (state) => state.canBoCoBans
   );
 
-  const [selectDonVi, setSelectedDonvi] = useState();
+  // const [selectDonVi, setSelectedDonvi, ] = useState();
   const rowSelection = {
     onSelect: (record) => {
-      setSelectedDonvi(record);
+      // setSelectedDonvi(record);
+      dispatch(donViSlice.actions.updateSelectedDonViInput(record));
     },
     hideDefaultSelections: true,
     type: "radio",
+    getCheckboxProps: (record) => ({
+      disabled: record.ma_don_vi === "BQP",
+      // // Column configuration not to be checked
+      title: record.title,
+    }),
   };
 
   const canBoColumns = [
@@ -109,19 +126,26 @@ const DieuDongCanBo = () => {
     dispatch(dieuDongCanBoSlice.actions.toggleModal(_item));
   };
 
+  const treeData = useMemo(() => generateTrees(donVis), [donVis]);
+
   //side effect
   useEffect(() => {
     dispatch(donViSlice.actions.getDonVis({ pageSize: 1000 }));
   }, [dispatch]);
 
   useEffect(() => {
-    if (selectDonVi?.id) {
+    if (selectedDonVi?.id) {
       dispatch(
-        canBoSlice.actions.getCanBoByMaDonVi({ ma_don_vi: selectDonVi.id })
+        canBoSlice.actions.getCanBoByMaDonVi({ ma_don_vi: selectedDonVi.id })
       );
     }
-  }, [selectDonVi]);
-  const treeData = useMemo(() => generateTrees(donVis), [donVis]);
+  }, [selectedDonVi]);
+
+  useEffect(() => {
+    if (treeData) {
+      dispatch(donViSlice.actions.updateSelectedDonViInput(treeData[0]));
+    }
+  }, [treeData]);
 
   return (
     <ContentWrapper>
