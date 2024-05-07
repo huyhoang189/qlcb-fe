@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Pagination, Row } from "antd";
 import PropTypes from "prop-types";
 import { TableWrapper } from "./style.js";
 

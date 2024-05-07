@@ -8,7 +8,7 @@ import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
-  DetailButton
+  DetailButton,
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import { useParams } from "react-router-dom";
@@ -23,7 +23,6 @@ const pageHeader = {
     },
     {
       title: "Chính sách",
-      
     },
     {
       title: `Quản lý kỷ luật`,
@@ -43,13 +42,11 @@ const baseColumns = [
     title: "Quyết định số",
     dataIndex: "quyet_dinh_so",
     key: "quyet_dinh_so",
-    align: "center",
   },
   {
     title: "Hình thức khen thưởng",
     dataIndex: "hinh_thuc",
     key: "hinh_thuc",
-    align: "center",
     render: (text, record) => {
       return record?.hinh_thuc === "TAP_THE" ? "Tập thể" : "Cá nhân";
     },
@@ -58,25 +55,21 @@ const baseColumns = [
     title: "Nội dụng",
     dataIndex: "noi_dung",
     key: "noi_dung",
-    align: "center",
   },
   {
     title: "Thời gian",
     dataIndex: "thoi_gian",
     key: "thoi_gian",
-    align: "center",
   },
   {
     title: "Lý do",
     dataIndex: "ly_do",
     key: "ly_do",
-    align: "center",
   },
   {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
-    align: "center",
   },
 ];
 
@@ -101,7 +94,6 @@ const QuanLyKyLuat = () => {
         keyword,
         pageSize: pageSize,
         pageNumber: current,
-
       })
     );
   };
@@ -125,7 +117,9 @@ const QuanLyKyLuat = () => {
         >
           <DetailButton
             onClick={() => {
-              navigate(`${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KY_LUAT}/danh-sach-ky-luat`);
+              navigate(
+                `${record.id}/${LOAI_KHEN_THUONG_KY_LUAT.KY_LUAT}/danh-sach-ky-luat`
+              );
             }}
           />
           {/* <UpdateButton onClick={() => handleModal(record)} /> */}
@@ -163,11 +157,7 @@ const QuanLyKyLuat = () => {
 
   return (
     <ContentWrapper>
-      <CustomBreadcrumb
-        items={[
-          ...pageHeader.breadcrumb,
-        ]}
-      />
+      <CustomBreadcrumb items={[...pageHeader.breadcrumb]} />
       <CustomeTable
         header={
           <Header justify={"flex-end"}>

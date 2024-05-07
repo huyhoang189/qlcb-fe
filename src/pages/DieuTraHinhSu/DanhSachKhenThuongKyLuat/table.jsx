@@ -17,13 +17,11 @@ const CanBoColumns = [
     title: "Họ và tên khai sinh",
     dataIndex: "ho_ten_khai_sinh",
     key: "ho_ten_khai_sinh",
-    align: "center",
   },
   {
     title: "Số hiệu quân nhân",
     dataIndex: "so_hieu_quan_nhan",
     key: "so_hieu_quan_nhan",
-    align: "center",
   },
   {
     title: "Đơn vị hiện tại",
@@ -48,13 +46,11 @@ const DonViColumns = [
     title: "Mã đơn vị",
     dataIndex: "ma_don_vi",
     key: "ma_don_vi",
-    align: "center",
   },
   {
     title: "Tên đơn vị",
     dataIndex: "ten_don_vi",
     key: "ten_don_vi",
-    align: "center",
   },
   {
     title: "Tên đơn vị cha",
@@ -93,7 +89,9 @@ const TableObjKhenThuongKyLuat = ({
               ListKhenThuongKyLuat.ids = ListKhenThuongKyLuat.ids.filter(
                 (e) => e != record.id
               );
-              OnChangeOptionObjKhenThuongKyLuat(ListKhenThuongKyLuat.ListObjKhenThuongKyLuat)
+              OnChangeOptionObjKhenThuongKyLuat(
+                ListKhenThuongKyLuat.ListObjKhenThuongKyLuat
+              );
               SetListKhenThuongKyLuat({
                 ...ListKhenThuongKyLuat,
               });
@@ -118,6 +116,6 @@ TableObjKhenThuongKyLuat.propTypes = {
   HinhThuc: PropTypes.string,
   SetListKhenThuongKyLuat: PropTypes.func,
   ListKhenThuongKyLuat: PropTypes.object,
-  OnChangeOptionObjKhenThuongKyLuat: PropTypes.func
+  OnChangeOptionObjKhenThuongKyLuat: PropTypes.func,
 };
 export default TableObjKhenThuongKyLuat;

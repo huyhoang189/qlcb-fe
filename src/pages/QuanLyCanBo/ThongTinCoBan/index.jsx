@@ -44,37 +44,39 @@ const baseColumns = [
     title: "Họ và tên khai sinh",
     dataIndex: "ho_ten_khai_sinh",
     key: "ho_ten_khai_sinh",
-    align: "center",
   },
   {
     title: "Số hiệu quân nhân",
     dataIndex: "so_hieu_quan_nhan",
     key: "so_hieu_quan_nhan",
-    align: "center",
   },
   {
     title: "Ngày tháng năm sinh",
     dataIndex: "ngay_thang_nam_sinh",
     key: "ngay_thang_nam_sinh",
-    align: "center",
+  },
+  {
+    title: "Giới tính",
+    dataIndex: "gioi_tinh",
+    key: "gioi_tinh",
+    render: (text, record) => {
+      return record?.gioi_tinh === "NAM" ? "Nam" : "Nữ";
+    },
   },
   {
     title: "Ngày vào đảng",
     dataIndex: "ngay_vao_dang",
     key: "ngay_vao_dang",
-    align: "center",
   },
   {
     title: "Ngày vào đảng CT",
     dataIndex: "ngay_chinh_thuc",
     key: "ngay_chinh_thuc",
-    align: "center",
   },
   {
     title: "Ngày nhập ngũ",
     dataIndex: "ngay_nhap_ngu",
     key: "ngay_nhap_ngu",
-    align: "center",
   },
   {
     title: "Quê quán",
@@ -92,7 +94,6 @@ const baseColumns = [
     title: "Trình độ GDPT",
     dataIndex: "trinh_do_giao_duc_pho_thong",
     key: "trinh_do_giao_duc_pho_thong",
-    align: "center",
   },
   {
     title: "Đơn vị hiện tại",

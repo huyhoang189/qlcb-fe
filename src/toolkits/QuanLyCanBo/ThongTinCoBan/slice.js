@@ -13,6 +13,7 @@ const initialState = {
     que_quan: "",
     noi_o_hien_nay: "",
     trinh_do_giao_duc_pho_thong: null,
+    gioi_tinh: "NAM",
     created_at: "",
     updated_at: "",
     ma_don_vi_hien_tai: "",

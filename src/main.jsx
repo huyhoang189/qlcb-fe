@@ -16,14 +16,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         borderRadius: 2,
         colorBorderSecondary: "#78b43d",
         colorBorder: "#d6d9dc",
-        fontSize: 11,
-        fontFamily: "Archivo",
+        fontSize: 12,
+        // fontFamily: "Archivo",
         colorPrimary: "#3c811e",
       },
       components: {
         Table: {
           rowHoverBg: "#fff",
           borderColor: "#d6d9dc",
+          headerBg: "#f1f2f3",
         },
         Button: {
           primaryShadow: "",

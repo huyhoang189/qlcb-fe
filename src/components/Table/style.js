@@ -12,7 +12,12 @@ export const TableWrapper = styled(Table)`
   }
 
   .ant-table-thead > tr > th {
-    background: #f9f9f9;
+    // background: #f9f9f9;
+    font-weight: bold;
     // text-transform: uppercase;
+  }
+
+  .ant-table-tbody > tr > td {
+    white-space: wrap;
   }
 `;

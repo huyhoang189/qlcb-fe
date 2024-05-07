@@ -14,7 +14,7 @@ import {
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const pageHeader = {
   breadcrumb: [
@@ -37,25 +37,36 @@ const pageHeader = {
 const baseColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 50,
     align: "center",
   },
   {
-    title: "Tiêu đề",
-    dataIndex: "tieu_de",
-    key: "tieu_de",
+    title: "Chức vụ",
+    dataIndex: "chuc_vu",
+    key: "chuc_vu",
+    render: (text, record) => {
+      return record?.chuc_vu_chinh_quyen?.ten_chuc_vu;
+    },
   },
   {
-    title: "Năm",
-    dataIndex: "nam",
-    key: "nam",
+    title: "Đơn vị",
+    dataIndex: "don_vi_full_text",
+    key: "don_vi_full_text",
   },
   {
-    title: "Đợt",
-    dataIndex: "dot",
-    key: "dot",
+    title: "Thời gian bắt đầu",
+    dataIndex: "thoi_gian_bat_dau",
+    key: "thoi_gian_bat_dau",
+  },
+  {
+    title: "Thời gian kết thúc",
+    dataIndex: "thoi_gian_ket_thuc",
+    key: "thoi_gian_ket_thuc",
+    render: (text, record) => {
+      return record?.thoi_gian_ket_thuc ? record?.thoi_gian_ket_thuc : "Nay";
+    },
   },
   {
     title: "Ghi chú",
@@ -64,9 +75,11 @@ const baseColumns = [
   },
 ];
 
-const QuanLyLichSuDieuDong = () => {
+const LichSuDieuDong = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const params = useParams();
+  const { ma_can_bo } = params;
+
   const { lichSuDieuDongs, isLoading, totalItem, pageNumber, pageSize } =
     useSelector((state) => state.lichSuDieuDongs);
 
@@ -77,13 +90,16 @@ const QuanLyLichSuDieuDong = () => {
   };
 
   const handlePaginationChange = (current, pageSize) => {
-    dispatch(
-      lichSuDieuDongSlice.actions.getLichSuDieuDongs({
-        keyword,
-        pageSize: pageSize,
-        pageNumber: current,
-      })
-    );
+    if (ma_can_bo) {
+      dispatch(
+        lichSuDieuDongSlice.actions.getLichSuDieuDongs({
+          keyword,
+          pageSize: pageSize,
+          pageNumber: current,
+          ma_can_bo,
+        })
+      );
+    }
   };
 
   const handleModal = (_item) => {
@@ -102,11 +118,11 @@ const QuanLyLichSuDieuDong = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
-          <DetailButton
+          {/* <DetailButton
             onClick={() => {
               navigate(`${record.id}/danh-sach-bo-nhiem`);
             }}
-          />
+          /> */}
           <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {
@@ -130,13 +146,16 @@ const QuanLyLichSuDieuDong = () => {
 
   //side effect
   useEffect(() => {
-    dispatch(
-      lichSuDieuDongSlice.actions.getLichSuDieuDongs({
-        keyword,
-        pageSize: 10,
-        pageNumber: 1,
-      })
-    );
+    if (ma_can_bo) {
+      dispatch(
+        lichSuDieuDongSlice.actions.getLichSuDieuDongs({
+          keyword,
+          pageSize: 10,
+          pageNumber: 1,
+          ma_can_bo,
+        })
+      );
+    }
   }, [dispatch, keyword]);
 
   return (
@@ -170,4 +189,4 @@ const QuanLyLichSuDieuDong = () => {
   );
 };
 
-export default QuanLyLichSuDieuDong;
+export default LichSuDieuDong;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContentWrapper = styled("div")`
-  font-family: "Archivo", sans-serif;
+  // font-family: "Archivo", sans-serif;
 
   .ant-tree {
     background: #fff;
@@ -10,8 +10,4 @@ export const ContentWrapper = styled("div")`
   .site-tree-search-value {
     color: #f50;
   }
-
-  //   .ant-breadcrumb {
-  //     text-transform: uppercase;
-  //   }
 `;

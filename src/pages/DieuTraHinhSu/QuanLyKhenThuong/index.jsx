@@ -36,19 +36,16 @@ const baseColumns = [
     dataIndex: "key_table",
     key: "key_table",
     width: 50,
-    align: "center",
   },
   {
     title: "Quyết định số",
     dataIndex: "quyet_dinh_so",
     key: "quyet_dinh_so",
-    align: "center",
   },
   {
     title: "Hình thức khen thưởng",
     dataIndex: "hinh_thuc",
     key: "hinh_thuc",
-    align: "center",
     render: (text, record) => {
       return record?.hinh_thuc === "TAP_THE" ? "Tập thể" : "Cá nhân";
     },
@@ -57,25 +54,21 @@ const baseColumns = [
     title: "Nội dụng",
     dataIndex: "noi_dung",
     key: "noi_dung",
-    align: "center",
   },
   {
     title: "Thời gian",
     dataIndex: "thoi_gian",
     key: "thoi_gian",
-    align: "center",
   },
   {
     title: "Lý do",
     dataIndex: "ly_do",
     key: "ly_do",
-    align: "center",
   },
   {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
-    align: "center",
   },
 ];
 

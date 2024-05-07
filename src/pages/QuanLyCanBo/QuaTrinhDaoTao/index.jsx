@@ -43,7 +43,6 @@ const baseColumns = [
     title: "Trường học",
     dataIndex: "truong_hoc",
     key: "truong_hoc",
-    align: "center",
     render: (text, record) => {
       return record?.truong_hoc?.ten_truong;
     },
@@ -52,7 +51,6 @@ const baseColumns = [
     title: "Chuyên ngành",
     dataIndex: "chuyen_nganh",
     key: "chuyen_nganh",
-    align: "center",
     render: (text, record) => {
       return record?.chuyen_nganh?.ten;
     },
@@ -61,7 +59,6 @@ const baseColumns = [
     title: "Loại hình đào tạo",
     dataIndex: "loai_hinh_dao_tao",
     key: "loai_hinh_dao_tao",
-    align: "center",
     render: (text, record) => {
       return record?.loai_hinh_dao_tao?.ten;
     },
@@ -70,25 +67,21 @@ const baseColumns = [
     title: "Thời gian bắt đầu",
     dataIndex: "thoi_gian_bat_dau",
     key: "thoi_gian_bat_dau",
-    align: "center",
   },
   {
     title: "Thời gian kết thúc",
     dataIndex: "thoi_gian_ket_thuc",
     key: "thoi_gian_ket_thuc",
-    align: "center",
   },
   {
     title: "Xếp loại",
     dataIndex: "xep_loai",
     key: "xep_loai",
-    align: "center",
   },
   {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
-    align: "center",
   },
 ];
 

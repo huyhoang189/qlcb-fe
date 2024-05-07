@@ -118,6 +118,16 @@ const ModalItem = () => {
         property={"ngay_thang_nam_sinh"}
         value={selectedCanBoCoBan?.ngay_thang_nam_sinh}
       />
+      <SelectInput
+        title="Giới tính"
+        onChange={onRecordSelectInputChange}
+        property={"gioi_tinh"}
+        value={selectedCanBoCoBan?.gioi_tinh}
+        options={[
+          { value: "NAM", label: "Nam" },
+          { value: "NU", label: "Nữ" },
+        ]}
+      />
 
       <DateInput
         title="Ngày vào đảng"

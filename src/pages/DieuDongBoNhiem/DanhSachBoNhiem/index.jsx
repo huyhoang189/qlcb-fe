@@ -134,10 +134,11 @@ const prepareData = (data = []) => {
 
     const cap_bac = (
       <HeaderRow
-        items={[
-          e?.can_bo?.cap_bac?.quan_ham,
-          e?.can_bo?.cap_bac?.thoi_gian_nhan,
-        ]}
+        items={
+          e?.can_bo?.cap_bac?.quan_ham
+            ? [e?.can_bo?.cap_bac?.quan_ham, e?.can_bo?.cap_bac?.thoi_gian_nhan]
+            : []
+        }
         // splitBy=";"
         align="center"
       />
@@ -145,11 +146,15 @@ const prepareData = (data = []) => {
 
     const chuc_vu = (
       <HeaderRow
-        items={[
-          e?.can_bo?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu,
-          e?.can_bo?.chuc_vu?.don_vi_full_text,
-          e?.can_bo?.chuc_vu?.thoi_gian_bat_dau,
-        ]}
+        items={
+          e?.can_bo?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu
+            ? [
+                e?.can_bo?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu,
+                e?.can_bo?.chuc_vu?.don_vi_full_text,
+                e?.can_bo?.chuc_vu?.thoi_gian_bat_dau,
+              ]
+            : []
+        }
         // splitBy=";"
       />
     );

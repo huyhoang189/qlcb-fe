@@ -43,7 +43,6 @@ const baseColumns = [
     title: "Chức vụ",
     dataIndex: "chuc_vu_chinh_quyen",
     key: "chuc_vu_chinh_quyen",
-    align: "center",
     render: (text, record) => {
       return record?.chuc_vu_chinh_quyen?.ten_chuc_vu;
     },
@@ -52,25 +51,24 @@ const baseColumns = [
     title: "Thời gian bắt đầu",
     dataIndex: "thoi_gian_bat_dau",
     key: "thoi_gian_bat_dau",
-    align: "center",
   },
   {
     title: "Thời gian kết thúc",
     dataIndex: "thoi_gian_ket_thuc",
     key: "thoi_gian_ket_thuc",
-    align: "center",
+    render: (text, record) => {
+      return record?.thoi_gian_ket_thuc ? record?.thoi_gian_ket_thuc : "Nay";
+    },
   },
   {
     title: "Đơn vị công tác",
     dataIndex: "don_vi_full_text",
     key: "don_vi_full_text",
-    align: "center",
   },
   {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
-    align: "center",
   },
 ];
 

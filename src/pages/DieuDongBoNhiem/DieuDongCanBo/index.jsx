@@ -15,6 +15,7 @@ import {
   UpdateButton,
 } from "../../../components/Button/index.jsx";
 import { HistoryOutlined, SyncOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 const pageHeader = {
   breadcrumb: [
     {
@@ -42,19 +43,16 @@ const baseCanBoColumn = [
     title: "Số hiệu quân nhân",
     dataIndex: "so_hieu_quan_nhan",
     key: "so_hieu_quan_nhan",
-    align: "center",
   },
   {
     title: "Họ và tên khai sinh",
     dataIndex: "ho_ten_khai_sinh",
     key: "ho_ten_khai_sinh",
-    align: "center",
   },
   {
     title: "Cấp bậc",
     dataIndex: "cap_bac",
     key: "cap_bac",
-    align: "center",
     render: (text, record) => {
       return record?.cap_bac?.quan_ham;
     },
@@ -63,7 +61,6 @@ const baseCanBoColumn = [
     title: "Chức vụ",
     dataIndex: "chuc_vu",
     key: "chuc_vu",
-    align: "center",
     render: (text, record) => {
       return record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu;
     },
@@ -78,16 +75,16 @@ const baseCanBoColumn = [
 
 const DieuDongCanBo = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { donVis, selectedDonVi } = useSelector((state) => state.donVis);
-  const { canBoCoBans, pageSize, pageNumber, count, isLoading } = useSelector(
-    (state) => state.canBoCoBans
-  );
+  const { canBoCoBans, pageSize, pageNumber, totalItem, isLoading } =
+    useSelector((state) => state.canBoCoBans);
 
   // const [selectDonVi, setSelectedDonvi, ] = useState();
   const rowSelection = {
     onSelect: (record) => {
       // setSelectedDonvi(record);
+      console.log(record);
       dispatch(donViSlice.actions.updateSelectedDonViInput(record));
     },
     hideDefaultSelections: true,
@@ -116,7 +113,13 @@ const DieuDongCanBo = () => {
             title="Điều động"
             icon={<SyncOutlined />}
           />
-          <DetailButton title="Lịch sử điều động" icon={<HistoryOutlined />} />
+          <DetailButton
+            title="Lịch sử điều động"
+            icon={<HistoryOutlined />}
+            onClick={() => {
+              navigate(`${record.id}/lich-su-dieu-dong`);
+            }}
+          />
         </Space>
       ),
     },
@@ -124,6 +127,16 @@ const DieuDongCanBo = () => {
 
   const handleModal = (_item) => {
     dispatch(dieuDongCanBoSlice.actions.toggleModal(_item));
+  };
+
+  const handlePaginationChange = (current, pageSize) => {
+    dispatch(
+      canBoSlice.actions.getCanBoByMaDonVi({
+        pageSize: pageSize,
+        pageNumber: current,
+        ma_don_vi: selectedDonVi.id,
+      })
+    );
   };
 
   const treeData = useMemo(() => generateTrees(donVis), [donVis]);
@@ -136,13 +149,16 @@ const DieuDongCanBo = () => {
   useEffect(() => {
     if (selectedDonVi?.id) {
       dispatch(
-        canBoSlice.actions.getCanBoByMaDonVi({ ma_don_vi: selectedDonVi.id })
+        canBoSlice.actions.getCanBoByMaDonVi({
+          ma_don_vi: selectedDonVi.id,
+          pageSize: 10,
+        })
       );
     }
   }, [selectedDonVi]);
 
   useEffect(() => {
-    if (treeData) {
+    if (treeData && !selectedDonVi?.id) {
       dispatch(donViSlice.actions.updateSelectedDonViInput(treeData[0]));
     }
   }, [treeData]);
@@ -174,8 +190,8 @@ const DieuDongCanBo = () => {
             pagination={{
               current: pageNumber,
               pageSize: pageSize,
-              total: Math.ceil(count / pageSize),
-              // onChange: handlePaginationChange,
+              total: totalItem,
+              onChange: handlePaginationChange,
             }}
           />
         </Col>
