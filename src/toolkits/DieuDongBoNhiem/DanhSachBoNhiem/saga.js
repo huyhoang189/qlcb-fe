@@ -27,9 +27,7 @@ function* _getAll({ payload }) {
 function* _handleItem({ payload }) {
   try {
     const { actionName, item } = payload;
-    console.log(payload);
     let data, status;
-
     if (actionName === ACTION_NAME.CREATE) {
       ({ data, status } = yield call(create, item));
     } else if (actionName === ACTION_NAME.UPDATE) {

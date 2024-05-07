@@ -1,35 +1,17 @@
-import {  Select, Tag, Space, Typography } from "antd";
+import {  AutoComplete, Tag, Space, Typography } from "antd";
 import PropTypes from "prop-types";
-
-const tagRender = (props) => {
-  const { label, value, closable, onClose } = props;
-  const onPreventMouseDown = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
-  return (
-    <Tag
-      onMouseDown={onPreventMouseDown}
-      closable={closable}
-      onClose={onClose}
-      style={{
-        marginInlineEnd: 4,
-      }}
-    >
-      {label.split("--")?.[0]}
-    </Tag>
-  );
-};
-const SelectMutil = ({
+const AutoCompleteSearch = ({
   title,
   isNull = true,
   property,
   value,
   onChange,
+  onSelect,
   disabled = false,
   size = 0,
   width = 100,
-  options = []
+  options = [],
+  filterOption
 }) => {
   return (
     <Space
@@ -41,24 +23,26 @@ const SelectMutil = ({
         {title}
         {isNull === false ? <span style={{ color: "red" }}>(*)</span> : ""}
       </Typography.Text>
-      {/* <AutoComplete
-      filterOption={(inputValue, option) =>
-        option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-      }
-      
-      popupMatchSelectWidth={250}
-      style={{
-        width: 250,
-      }}
+      <AutoComplete
+      value={value}
+      autoFocus={true}
+      placeholder="Tìm kiếm"
+      filterOption={filterOption}
+      onChange={(data, option) => onChange(data, option)}
+      onSelect={(data, option) => onSelect(data, option)}
       options={options}
-      //size="large"
+      style={{
+        width: '100%',
+      }}
+      //onSelect={onSelect}
     >
-      <Input.Search size="large" placeholder="Tìm và chọn cán bộ" />
-    </AutoComplete> */}
+    </AutoComplete>
   
- <Select
+ {/* <Select
     value={value}
-    mode="multiple"
+    showSearch
+    placeholder="Select a person"
+    optionFilterProp="children"
     tagRender={tagRender}
     onChange={(e) => onChange(e)}
     filterOption={(inputValue, option) =>
@@ -68,11 +52,11 @@ const SelectMutil = ({
       width: '100%',
     }}
     options={options}
-  />
+  /> */}
     </Space>
   );
 };
-SelectMutil.propTypes = {
+AutoCompleteSearch.propTypes = {
   title: PropTypes.string,
   property: PropTypes.string,
   value: PropTypes.string,
@@ -84,4 +68,4 @@ SelectMutil.propTypes = {
   width: PropTypes.number,
   options: PropTypes.array
 }
-export default SelectMutil;
+export default AutoCompleteSearch;

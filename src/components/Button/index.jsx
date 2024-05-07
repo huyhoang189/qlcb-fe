@@ -128,4 +128,34 @@ DeleteButton.propTypes = {
   size: PropTypes.string,
 };
 
-export { CreateButton, UpdateButton, DeleteButton, DetailButton };
+const ButtonBasic = ({
+  onClick,
+  text,
+  disabled = false,
+  size = "normal",
+}) => {
+  return text ? (
+    <Button
+      type="primary"
+      disabled={disabled}
+      onClick={onClick}
+      style={{ marginBottom: 5, marginTop: 5 }}
+      size={size}
+    >
+      {text}
+    </Button>
+  ) : (
+    <Tooltip title={text}>
+      <Button onClick={onClick} disabled={disabled} size={size} />
+    </Tooltip>
+  );
+};
+
+ButtonBasic.propTypes = {
+  onClick: PropTypes.func,
+  text: PropTypes.string,
+  disabled: PropTypes.bool,
+  size: PropTypes.string,
+};
+
+export { CreateButton, UpdateButton, DeleteButton, DetailButton, ButtonBasic };

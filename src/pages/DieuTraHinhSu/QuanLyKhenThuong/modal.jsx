@@ -4,7 +4,7 @@ import quanLyKhenThuongSlice from "../../../toolkits/DieuTraHinhSu/QuanLyKhenThu
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
 import donViSlice from "../../../toolkits/QuanLyDanhMuc/DonVi/slice.js";
 import SelectInput from "../../../components/Form/selectinput.jsx";
-import SelectMutil from "../../../components/Form/selectmutil.jsx";
+import AutoCompleteSearch from "../../../components/Form/autocompletesearch.jsx";
 import { ACTION_NAME } from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
 import { useEffect, useState } from "react";
@@ -13,9 +13,11 @@ import { useParams } from "react-router-dom";
 import DateInput from "../../../components/Form/dateinput.jsx";
 import TableObjKhenThuongKyLuat from "../DanhSachKhenThuongKyLuat/table.jsx";
 import {
+  ButtonBasic,
+} from "../../../components/Button/index.jsx";
+import {
   DATE_FORMAT,
   HINH_THUC_THUONG_KY_LUAT,
-  LOAI_KHEN_THUONG_KY_LUAT,
 } from "../../../utils/common";
 import { Row, Col } from "antd";
 const ModalItem = () => {
@@ -26,15 +28,39 @@ const ModalItem = () => {
     useSelector((state) => state.quanLyKhenThuongs);
   const { canBoCoBans } = useSelector((state) => state.canBoCoBans);
   const { donVis } = useSelector((state) => state.donVis);
+  const [inputValue, setInputValue] = useState('');
+  const [inputOption, setInputOption] = useState();
   const [listObjKhenThuongKyLuat, setListObjKhenThuongKyLuat] = useState({
     ListObjKhenThuongKyLuat: [],
     ids: [],
   });
   const handleModal = (_item) => {
     setListObjKhenThuongKyLuat({ ListObjKhenThuongKyLuat: [], ids: [] });
+    setInputValue('');
+    setInputOption([]);
     dispatch(quanLyKhenThuongSlice.actions.toggleModal(_item));
   };
 
+  const defaultOptionObjKTKL = selectedQuanLyKhenThuong?.hinh_thuc === "CA_NHAN"
+  ? canBoCoBans.map((e) => ({
+      label:
+        e?.so_hieu_quan_nhan +
+        " -- " +
+        e?.ho_ten_khai_sinh +
+        " -- " +
+        e?.don_vi,
+      value: e?.id,
+    }))
+  : donVis.map((e) => ({
+      label:
+        e?.ma_don_vi +
+        " -- " +
+        e?.ten_don_vi +
+        " -- " +
+        e?.don_vi?.ten_don_vi,
+      value: e?.id,
+    }));
+  const [optionObjKhenThuongKyLuat, setOptionObjKhenThuongKyLuat] = useState()
   const handleRecord = (_actionName, _item) => {
     let date = new dayjs();
     let item = Object.assign({}, _item);
@@ -60,25 +86,38 @@ const ModalItem = () => {
       })
     );
     setListObjKhenThuongKyLuat({ ListObjKhenThuong: [], ids: [] });
+    setInputOption([]);
+    setInputValue('');
   };
-  const onRecordSelectObjKhenThuongKyLuatChange = (event) => {
-    const IdObjKhenThuongKyLuatSelect = event;
-    const ObjKhenThuongKyLuat =
-      selectedQuanLyKhenThuong?.hinh_thuc === "CA_NHAN" ? canBoCoBans : donVis;
-    const ObjKhenThuongKyLuatSelected = IdObjKhenThuongKyLuatSelect.map(
-      (item) => {
-        const SelectedItem = ObjKhenThuongKyLuat.find((tg) => tg.id === item);
-        return SelectedItem;
-      }
-    );
-    setListObjKhenThuongKyLuat({
-      ListObjKhenThuongKyLuat: ObjKhenThuongKyLuatSelected,
-      ids: event,
-    });
+  const onChange = (data, option) => {
+    setInputValue(data)
+    setInputOption(option)
   };
+  const onSelect = (data, option) => {
+    setInputValue(option.label)
+    setInputOption(option)
+  };
+  const onRecordSelectObjKhenThuongKyLuatChange = () => {
+    if(!listObjKhenThuongKyLuat.ids.find((id) => id === inputOption.value) && inputOption.value){
+      const IdObjKhenThuongKyLuatSelect = [...listObjKhenThuongKyLuat.ids, inputOption.value];
+      const ObjKhenThuongKyLuat =
+        selectedQuanLyKhenThuong?.hinh_thuc === "CA_NHAN" ? canBoCoBans : donVis;
+      const SelectedItem = ObjKhenThuongKyLuat.find((tg) => tg.id === inputOption.value);
+      const ObjKhenThuongKyLuatSelected = [...listObjKhenThuongKyLuat.ListObjKhenThuongKyLuat,SelectedItem]
+      onChangeOptionObjKhenThuongKyLuat(ObjKhenThuongKyLuatSelected);
+      setListObjKhenThuongKyLuat({
+        ListObjKhenThuongKyLuat: ObjKhenThuongKyLuatSelected,
+        ids: IdObjKhenThuongKyLuatSelect,
+      });
+      setInputValue('');
+      setInputOption([]);
+    }
+  }
   const onRecordSelectInputChange = (key, event) => {
     if (key) {
-      setListObjKhenThuongKyLuat({ ListObjKhenThuong: [], ids: [] });
+      setListObjKhenThuongKyLuat({ ListObjKhenThuongKyLuat: [], ids: [] });
+      setInputOption([]);
+      setInputValue('');
       let clone = Object.assign({}, selectedQuanLyKhenThuong);
       clone[key] = event;
       dispatch(
@@ -104,26 +143,17 @@ const ModalItem = () => {
       );
     }
   };
-  const optionObjKhenThuongKyLuat =
-    selectedQuanLyKhenThuong?.hinh_thuc === "CA_NHAN"
-      ? canBoCoBans.map((e) => ({
-          label:
-            e?.so_hieu_quan_nhan +
-            " -- " +
-            e?.ho_ten_khai_sinh +
-            " -- " +
-            e?.don_vi,
-          value: e?.id,
-        }))
-      : donVis.map((e) => ({
-          label:
-            e?.ma_don_vi +
-            " -- " +
-            e?.ten_don_vi +
-            " -- " +
-            e?.don_vi?.ten_don_vi,
-          value: e?.id,
-        }));
+  const onChangeOptionObjKhenThuongKyLuat = (listSelected) => {
+    const option = defaultOptionObjKTKL.map((e)=>{
+      if(listSelected.find(tg => tg.id === e.value))
+        {
+          return {...e, disabled: 'true'}
+        }
+      else return {...e}
+    })
+    setOptionObjKhenThuongKyLuat(option)
+  }
+    
 
   //side effect
   useEffect(() => {
@@ -140,18 +170,9 @@ const ModalItem = () => {
       })
     );
   }, [dispatch]);
-
   useEffect(() => {
-    if (selectedQuanLyKhenThuong?.id) {
-      let listKT = selectedQuanLyKhenThuong?.chi_tiet?.map((e) =>
-        canBoCoBans.find((item) => item.id === e.ma_can_bo)
-      );
-      let listIdKT = selectedQuanLyKhenThuong?.chi_tiet?.map(
-        (e) => e.ma_can_bo
-      );
-      setListObjKhenThuongKyLuat({ ListObjKhenThuong: listKT, ids: listIdKT });
-    }
-  }, [selectedQuanLyKhenThuong]);
+    setOptionObjKhenThuongKyLuat(defaultOptionObjKTKL)
+  },[selectedQuanLyKhenThuong?.hinh_thuc]);
   return (
     <CustomeModal
       width={1000}
@@ -215,15 +236,32 @@ const ModalItem = () => {
           />
         </Col>
         <Col span={16}>
-          <SelectMutil
-            onChange={onRecordSelectObjKhenThuongKyLuatChange}
+        <Row gutter={[0,8,8,8]} style={{ width: "100%", margin: 0 }}>
+        <Col flex="auto">
+          <AutoCompleteSearch
+            onChange={onChange}
+            onSelect={onSelect}
             title="Danh sách"
             options={optionObjKhenThuongKyLuat}
-            value={listObjKhenThuongKyLuat.ids}
+            value={inputValue}
+            filterOption={(inputValue, option) =>
+              option.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
           />
+          </Col>
+          <Col flex="65px" style={{textAlign:"end", paddingRight:0}}>
+            <div style={{ marginTop: 19, marginBottom: 5}}>
+          <ButtonBasic
+            text = {"Thêm"}
+            onClick={() => onRecordSelectObjKhenThuongKyLuatChange()}
+          />
+          </div>
+          </Col>
+          </Row>
           <TableObjKhenThuongKyLuat
             ListKhenThuongKyLuat={listObjKhenThuongKyLuat}
             SetListKhenThuongKyLuat={setListObjKhenThuongKyLuat}
+            OnChangeOptionObjKhenThuongKyLuat={onChangeOptionObjKhenThuongKyLuat}
             HinhThuc={selectedQuanLyKhenThuong?.hinh_thuc}
           />
         </Col>

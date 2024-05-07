@@ -53,8 +53,8 @@ const CanBoColumns = [
 const DonViColumns = [
   {
     title: "STT",
-    dataIndex: "key",
-    key: "key",
+    dataIndex: "key_table",
+    key: "key_table",
     width: 10,
     align: "center",
   },

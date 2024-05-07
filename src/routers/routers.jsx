@@ -31,7 +31,11 @@ import QuanLyKhenThuong from "../pages/DieuTraHinhSu/QuanLyKhenThuong/index.jsx"
 import QuanLyKyLuat from "../pages/DieuTraHinhSu/QuanLyKyLuat/index.jsx";
 import DanhSachKhenThuongKyLuat from "../pages/DieuTraHinhSu/DanhSachKhenThuongKyLuat/index.jsx";
 import DonVi_V2 from "../pages/QuanLyDanhMuc/DonVi/index_v1.jsx";
+import QuanLyKeHoach from "../pages/QuanLyDaoTao/QuanLyKeHoach/index.jsx"
+import ChiTietKeHoach from "../pages/QuanLyDaoTao/ChiTietKeHoach/index.jsx"
 import DieuDongCanBo from "../pages/DieuDongBoNhiem/DieuDongCanBo/index.jsx";
+import DanhSachDaoTao from "../pages/QuanLyDaoTao/DanhSachDaoTao/index.jsx";
+import QuanLyKyThi from "../pages/QuanLyDaoTao/QuanLyKyThi/index.jsx";
 export const router = createBrowserRouter([
   //   {
   //     path: "login",
@@ -183,6 +187,27 @@ export const router = createBrowserRouter([
           {
             path: "quan-ly-ky-luat/:ma_khen_thuong_ky_luat/:type/danh-sach-ky-luat",
             element: <DanhSachKhenThuongKyLuat />,
+          },
+        ],
+      },
+      {
+        path: "quan-ly-dao-tao",
+        children: [
+          {
+            path: "ke-hoach-dao-tao-boi-duong-can-bo",
+            element: <QuanLyKeHoach />,
+          },
+          {
+            path: "ke-hoach-dao-tao-boi-duong-can-bo/:ma_ke_hoach/chi-tiet-ke-hoach",
+            element: <ChiTietKeHoach />,
+          },
+          {
+            path: "ke-hoach-dao-tao-boi-duong-can-bo/:ma_ke_hoach/chi-tiet-ke-hoach/:ma_chi_tiet_ke_hoach/danh-sach-dao-tao",
+            element: <DanhSachDaoTao />,
+          },
+          {
+            path: "quan-ly-can-bo-tham-gia-thi",
+            element: <QuanLyKyThi />,
           },
         ],
       },

@@ -31,7 +31,11 @@ import danhSachBoNhiemSlice from "./DieuDongBoNhiem/DanhSachBoNhiem/slice.js";
 import quanLyKhenThuongSlice from "./DieuTraHinhSu/QuanLyKhenThuong/slice.js";
 import quanLyKyLuatSlice from "./DieuTraHinhSu/QuanLyKyLuat/slice.js";
 import danhSachKhenThuongKyLuatSlice from "./DieuTraHinhSu/DanhSachKhenThuongKyLuat/slice.js";
+import keHoachSlice from "./QuanLyDaoTao/QuanLyKeHoach/slice.js";
+import chiTietKeHoachSlice from "./QuanLyDaoTao/ChiTietKeHoach/slice.js";
+import danhSachDaoTaoSlice from "./QuanLyDaoTao/DanhSachDaoTao/slice.js";
 import dieuDongCanBoSlice from "./DieuDongBoNhiem/DieuDongCanBo/slice.js";
+import kyThiSlice from "./QuanLyDaoTao/QuanLyKyThi/slice.js";
 import lichSuDieuDongSlice from "./DieuDongBoNhiem/LichSuDieuDong/slice.js";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -67,7 +71,11 @@ export const store = configureStore({
     quanLyKhenThuongs: quanLyKhenThuongSlice.reducer,
     quanLyKyLuats: quanLyKyLuatSlice.reducer,
     danhSachKhenThuongKyLuats: danhSachKhenThuongKyLuatSlice.reducer,
+    keHoachs: keHoachSlice.reducer,
+    chiTietKeHoachs: chiTietKeHoachSlice.reducer,
+    danhSachDaoTaos: danhSachDaoTaoSlice.reducer,
     dieuDongCanBos: dieuDongCanBoSlice.reducer,
+    kyThis: kyThiSlice.reducer,
     lichSuDieuDongs: lichSuDieuDongSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
