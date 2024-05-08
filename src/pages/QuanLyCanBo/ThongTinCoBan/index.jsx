@@ -108,7 +108,7 @@ const baseColumns = [
 const features = [
   {
     label: "Mẫu lý lịch T63",
-    key: "ly-lich-t63",
+    key: "to-khai-t63",
   },
   {
     label: "Lý lịch khoa học",

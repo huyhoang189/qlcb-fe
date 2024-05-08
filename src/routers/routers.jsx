@@ -37,6 +37,7 @@ import DieuDongCanBo from "../pages/DieuDongBoNhiem/DieuDongCanBo/index.jsx";
 import DanhSachDaoTao from "../pages/QuanLyDaoTao/DanhSachDaoTao/index.jsx";
 import QuanLyKyThi from "../pages/QuanLyDaoTao/QuanLyKyThi/index.jsx";
 import LichSuDieuDong from "../pages/DieuDongBoNhiem/LichSuDieuDong/index.jsx";
+import ToKhaiT63 from "../pages/QuanLyCanBo/T63/index.jsx";
 export const router = createBrowserRouter([
   //   {
   //     path: "login",
@@ -150,6 +151,10 @@ export const router = createBrowserRouter([
           {
             path: "danh-sach-can-bo/:ma_can_bo/ly-lich-chuc-danh-phap-ly",
             element: <LyLichChucDanhPhapLy />,
+          },
+          {
+            path: "danh-sach-can-bo/:ma_can_bo/to-khai-t63",
+            element: <ToKhaiT63 />,
           },
         ],
       },
