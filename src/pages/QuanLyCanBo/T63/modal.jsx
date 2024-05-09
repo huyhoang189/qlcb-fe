@@ -6,7 +6,7 @@ import TextInput from "../../../components/Form/textinput.jsx";
 import dayjs from "dayjs";
 import {useParams} from "react-router-dom";
 import DateInput from "../../../components/Form/dateinput.jsx";
-import { DATE_FORMAT } from "../../../utils/common";
+import { DATE_FORMAT } from "../../../utils/common.js";
 const ModalItem = () => {
 
     const dispatch = useDispatch()

@@ -99,9 +99,9 @@ const baseColumns = [
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",
     key: "don_vi",
-    // render: (text, record) => {
-    //   return record?.don_vi?.ten_don_vi;
-    // },
+    render: (text, record) => {
+      return record?.don_vi?.mo_ta_day_du;
+    },
   },
 ];
 

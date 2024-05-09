@@ -51,10 +51,11 @@ const Login = () => {
           align="center"
           justify="center"
         >
-          <Card
+          {/* <div
             style={{ borderWidth: 0, width: "90%" }}
             cover={<img alt="example" src={login_bg} />}
-          />
+          ></div> */}
+          <img alt="example" src={login_bg} width={"90%"} />
         </Flex>
       </Col>
     </Row>

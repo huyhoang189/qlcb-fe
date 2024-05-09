@@ -32,7 +32,7 @@ const Header = () => {
       />
       <Typography.Title
         level={2}
-        style={{ color: "#003866", margin: 0, padding: 0, fontWeight: "bold" }}
+        style={{ color: "#FFFFFF", margin: 0, padding: 0, fontWeight: "bold" }}
       >
         HỆ THỐNG QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA
       </Typography.Title>

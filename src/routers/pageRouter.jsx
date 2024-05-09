@@ -67,7 +67,7 @@ export const publicRouter = [
         label: "Quản lý cán bộ đang thực hiện nhiệm vụ đào tạo",
       },
       {
-        key: "quan-ly-can-bo-tham-gia-thi",
+        key: "quan-ly-ky-thi",
         label:
           "Quản lý cán bộ tham gia thi và kết quả thi chuyên môn nghiệm vụ",
       },
@@ -103,8 +103,20 @@ export const publicRouter = [
     label: "Quản trị danh mục",
     children: [
       {
+        key: "chuc-vu-chinh-quyen",
+        label: "Chức vụ chính quyền",
+      },
+      {
         key: "chuc-danh-khoa-hoc",
         label: "Quản lý chức danh khoa học",
+      },
+      {
+        key: "chuc-danh-phap-ly",
+        label: "Quản lý chức danh pháp lý",
+      },
+      {
+        key: "chung-nhan",
+        label: "Quản lý chứng nhận",
       },
       {
         key: "don-vi",
@@ -123,20 +135,8 @@ export const publicRouter = [
         label: "Loại hình đào tạo",
       },
       {
-        key: "chuc-vu-chinh-quyen",
-        label: "Chức vụ chính quyền",
-      },
-      {
         key: "ngoai-ngu",
         label: "Ngoại ngữ",
-      },
-      {
-        key: "chung-nhan",
-        label: "Quản lý chứng nhận",
-      },
-      {
-        key: "chuc-danh-phap-ly",
-        label: "Quản lý chức danh pháp lý",
       },
     ],
   },

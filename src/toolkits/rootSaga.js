@@ -34,6 +34,7 @@ import keHoachSaga from "./QuanLyDaoTao/QuanLyKeHoach/saga.js";
 import chiTietKeHoachSaga from "./QuanLyDaoTao/ChiTietKeHoach/saga.js";
 import danhSachDaoTaoSaga from "./QuanLyDaoTao/DanhSachDaoTao/saga.js";
 import kyThiSaga from "./QuanLyDaoTao/QuanLyKyThi/saga.js";
+import danhSachThiSinhSaga from "./QuanLyDaoTao/DanhSachThiSinh/saga.js";
 
 export default function* rootSaga() {
   yield all([
@@ -70,6 +71,7 @@ export default function* rootSaga() {
     keHoachSaga(),
     chiTietKeHoachSaga(),
     danhSachDaoTaoSaga(),
-    kyThiSaga()
+    kyThiSaga(),
+    danhSachThiSinhSaga(),
   ]);
 }

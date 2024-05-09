@@ -2,18 +2,18 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
 import CustomeTable from "../../../components/Table/table.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import kyThiSlice from "../../../toolkits/QuanLyDaoTao/QuanLyKyThi/slice.js";
+import danhSachThiSinhSlice from "../../../toolkits/QuanLyDaoTao/DanhSachThiSinh/slice.js";
 import { useEffect, useState } from "react";
-import { Space, Tag } from "antd";
+import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
   UpdateButton,
-  DetailButton,
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import ModalItem from "./modal.jsx";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const pageHeader = {
   breadcrumb: [
@@ -25,7 +25,11 @@ const pageHeader = {
       title: "Quản lý đào tạo",
     },
     {
-      title: "Quản lý kỳ thi chuyên môn nghiệp vụ",
+      title: "Quản lý Kỳ thi",
+      href: "/quan-ly-dao-tao/quan-ly-ky-thi",
+    },
+    {
+      title: "Danh sách cán bộ tham gia thi",
     },
   ],
 };
@@ -40,16 +44,22 @@ const baseColumns = [
   },
 
   {
-    title: "Tên kỳ thi",
-    dataIndex: "ten_ky_thi",
-    key: "ten_ky_thi",
+    title: "Họ tên",
+    dataIndex: "can_bo",
+    key: "can_bo",
     align: "center",
+    render: (text, record) => {
+      return record?.can_bo?.ho_ten_khai_sinh;
+    },
   },
   {
-    title: "Thời gian tổ chức",
-    dataIndex: "thoi_gian_to_chuc",
-    key: "thoi_gian_to_chuc",
+    title: "Đơn vị",
+    dataIndex: "can_bo",
+    key: "can_bo",
     align: "center",
+    render: (text, record) => {
+      return record?.can_bo?.don_vi?.ten_don_vi;
+    },
   },
   {
     title: "Kết quả",
@@ -58,19 +68,10 @@ const baseColumns = [
     align: "center",
   },
   {
-    title: "Trạng thái",
-    dataIndex: "trang_thai",
-    key: "trang_thai",
+    title: "Nội dung thi",
+    dataIndex: "noi_dung_thi",
+    key: "noi_dung_thi",
     align: "center",
-    render: (_, row) => (
-      <>
-        {
-          <Tag color={row.trang_thai ? "green" : "red"}>
-            {row.trang_thai ? "Đang diễn ra" : "Đã diễn ra"}
-          </Tag>
-        }
-      </>
-    ),
   },
   {
     title: "Ghi chú",
@@ -80,12 +81,13 @@ const baseColumns = [
   },
 ];
 
-const QuanLyKyThi = () => {
+const DanhSachThiSinh = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { kyThis, isLoading, totalItem, pageNumber, pageSize } = useSelector(
-    (state) => state.kyThis
-  );
+  const params = useParams();
+  const { ma_ky_thi } = params;
+  const { danhSachThiSinhs, isLoading, totalItem, pageNumber, pageSize } =
+    useSelector((state) => state.danhSachThiSinhs);
 
   const [keyword, setKeyword] = useState("");
 
@@ -95,7 +97,8 @@ const QuanLyKyThi = () => {
 
   const handlePaginationChange = (current, pageSize) => {
     dispatch(
-      kyThiSlice.actions.getKyThis({
+      danhSachThiSinhSlice.actions.getDanhSachThiSinhs({
+        ma_ky_thi,
         keyword,
         pageSize: pageSize,
         pageNumber: current,
@@ -104,7 +107,7 @@ const QuanLyKyThi = () => {
   };
 
   const handleModal = (_item) => {
-    dispatch(kyThiSlice.actions.toggleModal(_item));
+    dispatch(danhSachThiSinhSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -119,16 +122,11 @@ const QuanLyKyThi = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
-          <DetailButton
-            onClick={() => {
-              navigate(`${record.id}/danh-sach-can-bo-tham-gia-thi`);
-            }}
-          />
           <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {
               dispatch(
-                kyThiSlice.actions.handleKyThi({
+                danhSachThiSinhSlice.actions.handleDanhSachThiSinh({
                   item: record,
                   actionName: "DELETE",
                   pageSize: pageSize,
@@ -148,7 +146,8 @@ const QuanLyKyThi = () => {
   //side effect
   useEffect(() => {
     dispatch(
-      kyThiSlice.actions.getKyThis({
+      danhSachThiSinhSlice.actions.getDanhSachThiSinhs({
+        ma_ky_thi,
         keyword,
         pageSize: 10,
         pageNumber: 1,
@@ -171,7 +170,7 @@ const QuanLyKyThi = () => {
             <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={kyThis}
+        data={danhSachThiSinhs}
         columns={columns}
         isLoading={isLoading}
         pagination={{
@@ -187,4 +186,4 @@ const QuanLyKyThi = () => {
   );
 };
 
-export default QuanLyKyThi;
+export default DanhSachThiSinh;

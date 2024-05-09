@@ -69,7 +69,9 @@ const baseCanBoColumn = [
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",
     key: "don_vi",
-    // align: "center",
+    render: (text, record) => {
+      return record?.don_vi?.mo_ta_day_du;
+    },
   },
 ];
 
