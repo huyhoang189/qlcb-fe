@@ -36,10 +36,12 @@ const MainLayout = () => {
       <Footer
         style={{
           textAlign: "center",
+          backgroundColor: "#00569E",
+          color: "#fff",
         }}
       >
-        ©{new Date().getFullYear()} Hệ thống quản lý Cán bộ Điều tra hình sự
-        Quân đội - Cục Điều tra Hình sự - BQP
+        ©{new Date().getFullYear()} Hệ thống quản lý Cán bộ Điều tra hình sự -
+        Cục Điều tra Hình sự - Bộ Quốc Phòng
       </Footer>
     </Layout>
   );

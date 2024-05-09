@@ -10,21 +10,20 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ConfigProvider
     theme={{
       token: {
-        colorBgBase: "#fff",
-        colorBgHeader: "#78b43d",
-        colorBase: "#fff",
+        colorBgBase: "#f1f1f1",
+        colorBgHeader: "#145DA0",
+        colorBase: "#f1f1f1",
         borderRadius: 2,
-        colorBorderSecondary: "#78b43d",
+        colorBorderSecondary: "#145DA0",
         colorBorder: "#d6d9dc",
         fontSize: 12,
-        // fontFamily: "Archivo",
-        colorPrimary: "#3c811e",
+        colorPrimary: "#00569E",
       },
       components: {
         Table: {
           rowHoverBg: "#fff",
           borderColor: "#d6d9dc",
-          headerBg: "#f1f2f3",
+          headerBg: "#f0f8ff",
         },
         Button: {
           primaryShadow: "",
@@ -33,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           contentBg: "#fff",
           headerBg: "#fff",
         },
+        Statistic: {},
       },
     }}
   >

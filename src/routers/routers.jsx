@@ -38,11 +38,12 @@ import DanhSachDaoTao from "../pages/QuanLyDaoTao/DanhSachDaoTao/index.jsx";
 import QuanLyKyThi from "../pages/QuanLyDaoTao/QuanLyKyThi/index.jsx";
 import LichSuDieuDong from "../pages/DieuDongBoNhiem/LichSuDieuDong/index.jsx";
 import ToKhaiT63 from "../pages/QuanLyCanBo/T63/index.jsx";
+import Login from "../pages/DangNhap/index.jsx";
 export const router = createBrowserRouter([
-  //   {
-  //     path: "login",
-  //     element: <Auth />,
-  //   },
+  {
+    path: "dang-nhap",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <MainLayout />,

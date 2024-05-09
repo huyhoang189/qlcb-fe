@@ -3,19 +3,14 @@ const { RangePicker } = DatePicker;
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
-const RangeDate = ({
-  title,
-  property,
-  isNull = true,
-  value,
-  onChange,
-}) => {
-  const _value = value.split("-").map(item=>
-    dayjs(item ? item : "").toString() !==
-    "Invalid Date"
-      ? dayjs(item ? item : "")
-      : ""
-)
+const RangeDate = ({ title, property, isNull = true, value, onChange }) => {
+  const _value = value
+    .split("-")
+    .map((item) =>
+      dayjs(item ? item : "").toString() !== "Invalid Date"
+        ? dayjs(item ? item : "")
+        : ""
+    );
   return (
     <Space
       direction="vertical"
@@ -26,16 +21,13 @@ const RangeDate = ({
         {isNull === false ? <span style={{ color: "red" }}>(*)</span> : ""}
       </Typography.Text>
       <RangePicker
-        style={{ width: "100%"}}
+        style={{ width: "100%" }}
         picker="year"
         id={{
-            start: 'startInput',
-            end: 'endInput',
+          start: "startInput",
+          end: "endInput",
         }}
-        placeholder={[
-            'Năm bắt đầu',
-            'Năm kết thúc'
-        ]}
+        placeholder={["Năm bắt đầu", "Năm kết thúc"]}
         onChange={(e) => onChange(property, e)}
         value={_value}
         // onFocus={(_, info) => {
@@ -44,7 +36,7 @@ const RangeDate = ({
         // onBlur={(_, info) => {
         //     console.log('Blur:', info.range);
         // }}
-    />
+      />
     </Space>
   );
 };
@@ -55,5 +47,5 @@ RangeDate.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   isNull: PropTypes.bool,
-}
+};
 export default RangeDate;

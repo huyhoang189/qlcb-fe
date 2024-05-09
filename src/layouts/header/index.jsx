@@ -25,14 +25,14 @@ const Header = () => {
       align="center"
     >
       <Button
-        icon={<MenuOutlined style={{ color: "#3c811e" }} />}
+        icon={<MenuOutlined style={{ color: "#003866" }} />}
         type="none"
-        style={{ border: "2px solid #3c811e" }}
+        style={{ border: "2px solid #003866" }}
         onClick={collapseSiderbar}
       />
       <Typography.Title
         level={2}
-        style={{ color: "#3c811e", margin: 0, padding: 0 }}
+        style={{ color: "#003866", margin: 0, padding: 0, fontWeight: "bold" }}
       >
         HỆ THỐNG QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA
       </Typography.Title>
