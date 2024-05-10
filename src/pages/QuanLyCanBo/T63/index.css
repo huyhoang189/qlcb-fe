@@ -1,0 +1,21 @@
+.header{
+    font-size: "16px" !important;
+    font-weight:bold;
+    text-align: center;
+    font-family:"serif"
+}
+.text{
+    font-family:"serif"
+}
+.info{
+    border: 1px solid #d6d9dc;
+    border-radius: 5px;
+    padding: 12px 30px 12px 30px;
+    .ant-row {
+        /* //=text-align: center; */
+        margin-bottom: 4px;
+        .note{
+            font-size: 10px;
+        }
+    }
+}
