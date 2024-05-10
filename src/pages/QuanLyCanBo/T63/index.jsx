@@ -1,6 +1,6 @@
 import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
-import CustomeTable from "../../../components/Table/table.jsx";
+import TabsInput from "../../../components/Form/tabsinput.jsx";
 import { useDispatch, useSelector } from "react-redux";
 // import baoHiemSlice from "../../../toolkits/QuanLyCanBo/BaoHiem/slice.js";
 import canBoCoBanSlice from "../../../toolkits/QuanLyCanBo/ThongTinCoBan/slice.js";
@@ -13,8 +13,10 @@ import {
 } from "../../../components/Button/index.jsx";
 import Header from "../../../components/Table/header.jsx";
 import { useParams } from "react-router-dom";
-import ModalItem from "./modal.jsx";
-
+import BanThan from "./banthan.jsx";
+import TinhHinhKTCTGD from "./tinhhinhktctgd.jsx";
+import TinhHinhKTCTVC from "./tinhhinhktctvc.jsx";
+import QuaTrinhCongTac from "./quatrinhcongtac.jsx"
 const pageHeader = {
   breadcrumb: [
     {
@@ -90,6 +92,33 @@ const ToKhaiT63 = () => {
 
   const handleModal = (_item) => {};
 
+  const itemsTab = [
+    {
+      key: "tab1",
+      label: "I. BẢN THÂN",
+      children: <BanThan />,
+    },
+    {
+      key: "tab2",
+      label: "II. TÌNH HÌNH KT – CT CỦA GIA ĐÌNH",
+      children: <TinhHinhKTCTGD />,
+    },
+    {
+      key: "tab3",
+      label: "III. TÌNH HÌNH KT – CT CỦA GIA ĐÌNH VỢ, VỢ (CHỒNG)",
+      children: <TinhHinhKTCTVC />,
+    },
+    {
+      key: "tab4",
+      label: "IV. TÓM TẮT NHẬN XÉT",
+      //children: <Tab2 />,
+    },
+    {
+      key: "tab5",
+      label: "V. QUÁ TRÌNH CÔNG TÁC",
+      children: <QuaTrinhCongTac />,
+    },
+  ]
   //side effect
   useEffect(() => {
     dispatch(canBoCoBanSlice.actions.getCanBoCoBanById({ id: ma_can_bo }));
@@ -105,6 +134,10 @@ const ToKhaiT63 = () => {
             title: `${selectedCanBoCoBan?.ho_ten_khai_sinh} - Số hiệu: ${selectedCanBoCoBan?.so_hieu_quan_nhan}`,
           },
         ]}
+      />
+      
+      <TabsInput
+      items={itemsTab}
       />
     </ContentWrapper>
   );
