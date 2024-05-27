@@ -69,7 +69,7 @@ const ModalItem = () => {
   useEffect(() => {
     const initialOption = canBoCoBans.map((e) => ({
       label:
-        e?.so_hieu_quan_nhan + " / " + e?.ho_ten_khai_sinh + " / " + e?.don_vi,
+        e?.so_hieu_quan_nhan + " / " + e?.ho_ten_khai_sinh + " / " + e?.don_vi?.mo_ta_day_du,
       value: e?.id,
     }));
     let OptionCurrent = initialOption.map((e) => {

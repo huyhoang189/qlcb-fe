@@ -48,7 +48,7 @@ const ModalItem = () => {
         " -- " +
         e?.ho_ten_khai_sinh +
         " -- " +
-        e?.don_vi,
+        e?.don_vi?.mo_ta_day_du,
       value: e?.id,
     }))
   : donVis.map((e) => ({
