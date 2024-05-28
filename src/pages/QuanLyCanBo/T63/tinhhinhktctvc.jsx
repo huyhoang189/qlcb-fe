@@ -3,18 +3,13 @@ import { Content } from "antd/es/layout/layout.js";
 import './index.css'
 const TinhHinhKTCTVC = () => {
   return (
-    <Content
-    style={{
-        padding: '0 48px',
-        
-      }}
+    <Row
+    style={{ width: "100%", padding: '0 48px'}}
     >
-    <Row align="middle">
-    <Col span={24} offset={8}>
-        <span className="header" style={{fontSize:"16px"}}>III. TÌNH HÌNH KT – CT CỦA GIA ĐÌNH VỢ, VỢ (CHỒNG)</span>
-    </Col>
-    </Row>
-    <div className="info">
+    <div style={{ width: "100%", textAlign:"center"}}>
+    <span className="header" style={{fontSize:"16px"}}>III. TÌNH HÌNH KT – CT CỦA GIA ĐÌNH VỢ, VỢ (CHỒNG)</span>
+    </div>
+    <div className="info" style={{ width: "100%" }}>
     <Row gutter={8}>
         <Col span={8}>
             <span>Họ tên cha: </span>
@@ -63,15 +58,21 @@ const TinhHinhKTCTVC = () => {
     </Row>
     <Row gutter={8}>
         <Col span={24}>
-            <span>Cha mẹ sinh được : 4 người con (1 trai, 3 gái ),  đồng chí : Trang,  là thứ : 1	: </span>
+            <span>Cha mẹ sinh được : 4 người con (1 trai, 3 gái ),  vợ (chồng) là thứ: Trang,  là thứ : 1	: </span>
             <span></span>
         </Col>
     </Row>
     <Row gutter={8}>
         <Col span={24}>
-            <span>Tình hình KT – CT của gia đình: </span>
+            <span className="header">Tình hình KT – CT của gia đình vợ (chồng), bản thân vợ (chồng): </span>
             <span></span>
         </Col>
+    </Row>
+    <Row gutter={8}>
+    <span>- Kinh tế: </span>
+    </Row>
+    <Row gutter={8}>
+    <span>- Chính trị: </span>
     </Row>
     <Row gutter={8}>
         <Col span={24}>
@@ -102,7 +103,7 @@ const TinhHinhKTCTVC = () => {
         </Col>
     </Row>
     </div>
-    </Content>
+    </Row>
   );
 };
 

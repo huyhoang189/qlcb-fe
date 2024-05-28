@@ -1,20 +1,14 @@
 import { Row, Col} from "antd";
-import { Content } from "antd/es/layout/layout.js";
 import './index.css'
 const BanThan = () => {
   return (
-    <Content
-    style={{
-        padding: '0 48px',
-        
-      }}
+    <Row
+    style={{ width: "100%", padding: '0 48px'}}
     >
-    <Row align="middle">
-    <Col span={24} offset={12}>
-        <span className="header" style={{fontSize:"16px"}}>I. BẢN THÂN</span>
-    </Col>
-    </Row>
-    <div className="info">
+    <div style={{ width: "100%", textAlign:"center"}}>
+    <span className="header" style={{fontSize:"16px"}}>I. BẢN THÂN</span>
+    </div>
+    <div className="info" style={{ width: "100%" }}>
     <Row gutter={8}>
         <Col span={8}>
             <span>Sinh ngày: </span>
@@ -186,7 +180,7 @@ const BanThan = () => {
         </Col>
     </Row>
     </div>
-    </Content>
+    </Row>
   );
 };
 export default BanThan;

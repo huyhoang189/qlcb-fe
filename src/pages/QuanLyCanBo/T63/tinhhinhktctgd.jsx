@@ -5,18 +5,13 @@ const TinhHinhKTCTGD = () => {
  
 
   return (
-    <Content
-    style={{
-        padding: '0 48px',
-        
-      }}
+    <Row
+    style={{ width: "100%", padding: '0 48px'}}
     >
-    <Row align="middle">
-    <Col span={24} offset={8}>
+    <div style={{ width: "100%", textAlign:"center"}}>
         <span className="header" style={{fontSize:"16px"}}>II. TÌNH HÌNH KT – CT CỦA GIA ĐÌNH</span>
-    </Col>
-    </Row>
-    <div className="info">
+    </div>
+    <div className="info" style={{ width: "100%" }}>
     <Row gutter={8}>
         <Col span={8}>
             <span>Họ tên cha: </span>
@@ -71,12 +66,17 @@ const TinhHinhKTCTGD = () => {
     </Row>
     <Row gutter={8}>
         <Col span={24}>
-            <span>Tình hình KT – CT của gia đình: </span>
-            <span></span>
+            <span className="header">Tình hình KT – CT của gia đình: </span>  
         </Col>
     </Row>
+    <Row gutter={8}>
+    <span>- Kinh tế: </span>
+    </Row>
+    <Row gutter={8}>
+    <span>- Chính trị: </span>
+    </Row>
     </div>
-    </Content>
+    </Row>
   );
 };
 
