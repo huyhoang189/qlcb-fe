@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ConfigProvider
     theme={{
       token: {
-        colorBgBase: "#f1f1f1",
+        colorBgBase: "#fff",
         colorBgHeader: "#145DA0",
         colorBase: "#f1f1f1",
         borderRadius: 2,
@@ -33,6 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           headerBg: "#fff",
         },
         Statistic: {},
+        Menu: {},
       },
     }}
   >

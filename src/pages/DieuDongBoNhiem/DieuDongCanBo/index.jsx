@@ -45,32 +45,35 @@ const baseCanBoColumn = [
     key: "so_hieu_quan_nhan",
   },
   {
-    title: "Họ và tên khai sinh",
+    title: "Họ và tên khai sinh, quân hàm, chức vụ",
     dataIndex: "ho_ten_khai_sinh",
     key: "ho_ten_khai_sinh",
-  },
-  {
-    title: "Cấp bậc",
-    dataIndex: "cap_bac",
-    key: "cap_bac",
     render: (text, record) => {
-      return record?.cap_bac?.quan_ham;
+      return `${record?.ho_ten_khai_sinh}, ${record?.cap_bac?.quan_ham}, ${record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu}`;
     },
   },
-  {
-    title: "Chức vụ",
-    dataIndex: "chuc_vu",
-    key: "chuc_vu",
-    render: (text, record) => {
-      return record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu;
-    },
-  },
+  // {
+  //   title: "Cấp bậc",
+  //   dataIndex: "cap_bac",
+  //   key: "cap_bac",
+  //   render: (text, record) => {
+  //     return record?.cap_bac?.quan_ham;
+  //   },
+  // },
+  // {
+  //   title: "Chức vụ",
+  //   dataIndex: "chuc_vu",
+  //   key: "chuc_vu",
+  //   render: (text, record) => {
+  //     return record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu;
+  //   },
+  // },
   {
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",
     key: "don_vi",
     render: (text, record) => {
-      return record?.don_vi?.mo_ta_day_du;
+      return `${record?.don_vi?.mo_ta_day_du}`;
     },
   },
 ];
@@ -86,13 +89,13 @@ const DieuDongCanBo = () => {
   const rowSelection = {
     onSelect: (record) => {
       // setSelectedDonvi(record);
-      console.log(record);
+      // console.log(record);
       dispatch(donViSlice.actions.updateSelectedDonViInput(record));
     },
     hideDefaultSelections: true,
     type: "radio",
     getCheckboxProps: (record) => ({
-      disabled: record.ma_don_vi === "BQP",
+      // disabled: record.ma_don_vi === "BQP",
       // // Column configuration not to be checked
       title: record.title,
     }),

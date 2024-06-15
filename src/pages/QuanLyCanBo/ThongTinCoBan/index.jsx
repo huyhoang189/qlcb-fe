@@ -63,38 +63,38 @@ const baseColumns = [
       return record?.gioi_tinh === "NAM" ? "Nam" : "Nữ";
     },
   },
-  {
-    title: "Ngày vào đảng",
-    dataIndex: "ngay_vao_dang",
-    key: "ngay_vao_dang",
-  },
-  {
-    title: "Ngày vào đảng CT",
-    dataIndex: "ngay_chinh_thuc",
-    key: "ngay_chinh_thuc",
-  },
-  {
-    title: "Ngày nhập ngũ",
-    dataIndex: "ngay_nhap_ngu",
-    key: "ngay_nhap_ngu",
-  },
+  // {
+  //   title: "Ngày vào đảng",
+  //   dataIndex: "ngay_vao_dang",
+  //   key: "ngay_vao_dang",
+  // },
+  // {
+  //   title: "Ngày vào đảng CT",
+  //   dataIndex: "ngay_chinh_thuc",
+  //   key: "ngay_chinh_thuc",
+  // },
+  // {
+  //   title: "Ngày nhập ngũ",
+  //   dataIndex: "ngay_nhap_ngu",
+  //   key: "ngay_nhap_ngu",
+  // },
   {
     title: "Quê quán",
     dataIndex: "que_quan",
     key: "que_quan",
     // align: "center",
   },
-  {
-    title: "Nơi ở hiện nay",
-    dataIndex: "noi_o_hien_nay",
-    key: "noi_o_hien_nay",
-    // align: "center",
-  },
-  {
-    title: "Trình độ GDPT",
-    dataIndex: "trinh_do_giao_duc_pho_thong",
-    key: "trinh_do_giao_duc_pho_thong",
-  },
+  // {
+  //   title: "Nơi ở hiện nay",
+  //   dataIndex: "noi_o_hien_nay",
+  //   key: "noi_o_hien_nay",
+  //   // align: "center",
+  // },
+  // {
+  //   title: "Trình độ GDPT",
+  //   dataIndex: "trinh_do_giao_duc_pho_thong",
+  //   key: "trinh_do_giao_duc_pho_thong",
+  // },
   {
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",
