@@ -13,7 +13,7 @@ export const TableWrapper = styled(Table)`
 
   .ant-table-thead > tr > th {
     // background: #f9f9f9;
-    font-weight: bold;
+    font-weight: 500;
     // text-transform: uppercase;
   }
 

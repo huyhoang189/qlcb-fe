@@ -24,6 +24,10 @@ export const publicRouter = [
         key: "danh-sach-can-bo",
         label: "Danh sách cán bộ",
       },
+      {
+        key: "tim-kiem-nang-cao",
+        label: "Tìm kiếm nâng cao",
+      },
     ],
   },
   {
