@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         colorBgHeader: "#145DA0",
         colorBase: "#f1f1f1",
         borderRadius: 2,
-        colorBorderSecondary: "#145DA0",
+        colorBorderSecondary: "#d6d9dc",
         colorBorder: "#d6d9dc",
         fontSize: 12,
         colorPrimary: "#00569E",
@@ -34,6 +34,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         },
         Statistic: {},
         Menu: {},
+        Divider: {
+          colorBgBase: "#d6d9dc",
+        },
       },
     }}
   >

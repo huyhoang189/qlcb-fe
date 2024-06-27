@@ -54,6 +54,9 @@ const baseColumns = [
     title: "Ngày tháng năm sinh",
     dataIndex: "ngay_thang_nam_sinh",
     key: "ngay_thang_nam_sinh",
+    render: (text, record) => {
+      return new Date(text).toISOString().split("T")[0];
+    },
   },
   {
     title: "Giới tính",

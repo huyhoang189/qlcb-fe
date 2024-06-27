@@ -18,15 +18,15 @@ const pageHeader = {
       href: "/",
     },
     {
-      title: "Quản lý đào tạo",
+      title: "Quản trị hệ thống",
     },
     {
-      title: "Quản lý cán bộ đang thực hiện nhiệm vụ đào tạo",
+      title: "Quản lý phân quyền nhóm người dùng",
     },
   ],
 };
 
-const CanBoDangThucHienNhiemVu = () => {
+const QuanLyPhanQuyen = () => {
   return (
     <ContentWrapper>
       <CustomBreadcrumb items={pageHeader.breadcrumb} />
@@ -44,16 +44,25 @@ const CanBoDangThucHienNhiemVu = () => {
         }
         data={[
           {
-            key_table: 1,
-            truong_hoc: "Học viện cảnh sát nhân dân",
-            chuyen_nganh: "Điều tra hình sự",
-            so_luong: 20,
+            ten_nhom_quyen: "Quản trị viên cao nhất",
+            loai_nhom_quyen: "Hệ thống",
+            pham_vi: "Toàn hệ thống",
+            so_luong_quyen: 10,
+            nguoi_tao: "Administrator",
           },
           {
-            key_table: 2,
-            truong_hoc: "Học viện An ninh nhân dân",
-            chuyen_nganh: "An ninh điều tra",
-            so_luong: 20,
+            ten_nhom_quyen: "Trợ lý chính trị",
+            loai_nhom_quyen: "Người dùng",
+            pham_vi: "Cá nhân",
+            so_luong_quyen: 5,
+            nguoi_tao: "Administrator",
+          },
+          {
+            ten_nhom_quyen: "Cục điều tra hình sự",
+            loai_nhom_quyen: "Hệ thống",
+            pham_vi: "Cá nhân",
+            so_luong_quyen: 7,
+            nguoi_tao: "Administrator",
           },
         ]}
         columns={[
@@ -66,22 +75,34 @@ const CanBoDangThucHienNhiemVu = () => {
           },
 
           {
-            title: "Tên cơ sở đào tạo",
-            dataIndex: "truong_hoc",
-            key: "truong_hoc",
+            title: "Tên nhóm quyền",
+            dataIndex: "ten_nhom_quyen",
+            key: "ten_nhom_quyen",
             align: "center",
           },
           {
-            title: "Chuyên ngành",
-            dataIndex: "chuyen_nganh",
-            key: "chuyen_nganh",
+            title: "Loại nhóm quyền",
+            dataIndex: "loai_nhom_quyen",
+            key: "loai_nhom_quyen",
+            align: "center",
+          },
+          {
+            title: "Phạm vi",
+            dataIndex: "pham_vi",
+            key: "pham_vi",
+            align: "center",
+          },
+          {
+            title: "Số lượng quyền",
+            dataIndex: "so_luong_quyen",
+            key: "so_luong_quyen",
             align: "center",
           },
 
           {
-            title: "Số lượng",
-            dataIndex: "so_luong",
-            key: "so_luong",
+            title: "Người tạo",
+            dataIndex: "nguoi_tao",
+            key: "nguoi_tao",
             align: "center",
           },
           {
@@ -94,11 +115,6 @@ const CanBoDangThucHienNhiemVu = () => {
                 direction="horizontal"
                 style={{ width: "100%", justifyContent: "center" }}
               >
-                <DetailButton
-                // onClick={() => {
-                //   navigate(`${record.id}/chi-tiet-ke-hoach`);
-                // }}
-                />
                 <UpdateButton />
                 <DeleteButton />
               </Space>
@@ -117,4 +133,4 @@ const CanBoDangThucHienNhiemVu = () => {
   );
 };
 
-export default CanBoDangThucHienNhiemVu;
+export default QuanLyPhanQuyen;

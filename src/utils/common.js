@@ -7,7 +7,7 @@ export const ACTION_NAME = {
 
 export const DATE_FORMAT = {
   DDMMYYYY: "DD/MM/YYYY",
-  YYYYMMDD: "YYYY/MM/DD",
+  YYYYMMDD: "YYYY-MM-DD",
   YYYY: "YYYY",
 };
 
@@ -30,10 +30,9 @@ export const LOAI_CHUC_DANH_PHAP_LY = [
 export const HINH_THUC_THUONG_KY_LUAT = [
   { value: "TAP_THE", label: "Tập thể" },
   { value: "CA_NHAN", label: "Cá nhân" },
-  ];
+];
 
 export const LOAI_KHEN_THUONG_KY_LUAT = {
   KHEN_THUONG: "KHEN_THUONG",
   KY_LUAT: "KY_LUAT",
 };
-
