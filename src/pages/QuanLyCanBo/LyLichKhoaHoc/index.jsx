@@ -50,7 +50,11 @@ const baseColumns = [
     dataIndex: "thoi_gian",
     key: "thoi_gian",
     render: (text, record) => {
-      return new Date(text).toISOString().split("T")[0];
+      return text ? (
+        new Date(text).toISOString().split("T")[0]
+      ) : (
+        <span style={{ color: "red" }}>Không có</span>
+      );
     },
   },
   {
