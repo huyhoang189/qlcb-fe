@@ -31,7 +31,7 @@ const ModalItem = () => {
   const handleRecord = (_actionName, _item) => {
     let date = new dayjs();
     let item = Object.assign({}, _item);
-    date = date.format(DATE_FORMAT.DDMMYYYY);
+    date = date.format(DATE_FORMAT.YYYYMMDD);
     item.thoi_gian_bat_dau =
       item.thoi_gian_bat_dau === "" ? date : item.thoi_gian_bat_dau;
     item.thoi_gian_ket_thuc =
@@ -77,7 +77,7 @@ const ModalItem = () => {
   const onRecordDateInputChange = (key, event) => {
     if (key) {
       let clone = Object.assign({}, selectedLyLichChucDanhPhapLy);
-      clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+      clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
       dispatch(
         lyLichChucDanhPhapLySlice.actions.updateSelectedLyLichChucDanhPhapLyInput(
           clone
@@ -162,6 +162,14 @@ const ModalItem = () => {
         onChange={onRecordDateInputChange}
         property={"thoi_gian_bat_dau"}
         value={selectedLyLichChucDanhPhapLy?.thoi_gian_bat_dau}
+      />
+
+      <DateInput
+        title="Thời gian kết thúc"
+        placeholder="Nhập vào thời gian kết thúc"
+        onChange={onRecordDateInputChange}
+        property={"thoi_gian_ket_thuc"}
+        value={selectedLyLichChucDanhPhapLy?.thoi_gian_ket_thuc}
       />
       {requestTimeEnd()}
       <TextInput

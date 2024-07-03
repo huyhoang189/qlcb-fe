@@ -10,7 +10,7 @@ const DateInput = ({
   isNull = true,
   disable = false,
   status = "",
-  format = DATE_FORMAT.DDMMYYYY,
+  format = DATE_FORMAT.YYYYMMDD,
   picker,
   direction="vertical",
   boldText = true,

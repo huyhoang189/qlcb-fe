@@ -25,7 +25,7 @@ const ModalItem = () => {
     const handleRecord = (_actionName, _item) => {
         let date = new dayjs();
         let item = Object.assign({}, _item);
-        date = date.format(DATE_FORMAT.DDMMYYYY);
+        date = date.format(DATE_FORMAT.YYYYMMDD);
         item.thoi_gian = item.thoi_gian===''?date:item.thoi_gian;
         dispatch(
             kyLuatSlice.actions.handleKyLuat({
@@ -51,7 +51,7 @@ const ModalItem = () => {
     const onRecordDateInputChange = (key, event) => {
         if (key) {
           let clone = Object.assign({}, selectedKyLuat);
-          clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+          clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
           dispatch(
             kyLuatSlice.actions.updateSelectedKyLuatInput(clone)
           );
