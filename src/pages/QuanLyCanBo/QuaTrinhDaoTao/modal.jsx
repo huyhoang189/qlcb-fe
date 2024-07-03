@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import SelectInput from "../../../components/Form/selectinput.jsx";
 import { useParams } from "react-router-dom";
 import DateInput from "../../../components/Form/dateinput.jsx";
-
+import dayjs from "dayjs";
 const ModalItem = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -27,6 +27,15 @@ const ModalItem = () => {
 
   const handleRecord = (_actionName, _item) => {
     let item = Object.assign({}, _item);
+    console.log(item,"tt")
+    let date = new dayjs();
+    date = date.format(DATE_FORMAT.YYYYMMDD);
+    item.thoi_gian_bat_dau =
+      item.thoi_gian_bat_dau === "" || item.thoi_gian_bat_dau? date : item.thoi_gian_bat_dau;
+    item.thoi_gian_ket_thuc =
+      item.thoi_gian_ket_thuc === "" || item.thoi_gian_ket_thuc === null
+        ? date
+        : item.thoi_gian_ket_thuc;
     dispatch(
       quaTrinhDaoTaoSlice.actions.handleQuaTrinhDaoTao({
         item: {
@@ -62,8 +71,10 @@ const ModalItem = () => {
 
   const onRecordDateInputChange = (key, event) => {
     if (key) {
+
       let clone = Object.assign({}, selectedQuaTrinhDaoTao);
-      clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+      clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
+      console.log(clone,"clone")
       dispatch(
         quaTrinhDaoTaoSlice.actions.updateSelectedQuaTrinhDaoTaoInput(clone)
       );

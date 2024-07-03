@@ -13,6 +13,7 @@ const CreateButton = ({
   icon = <PlusOutlined />,
   disabled = false,
   size = "normal",
+  color
 }) => {
   return text ? (
     <Button
@@ -20,7 +21,7 @@ const CreateButton = ({
       icon={icon}
       disabled={disabled}
       onClick={onClick}
-      style={{ marginBottom: 5, marginTop: 5 }}
+      style={{ marginBottom: 5, marginTop: 5,  background:`${color}` }}
       size={size}
     >
       {text}
@@ -38,6 +39,7 @@ CreateButton.propTypes = {
   icon: PropTypes.element,
   disabled: PropTypes.bool,
   size: PropTypes.string,
+  color: PropTypes.string
 };
 
 const DetailButton = ({
@@ -133,13 +135,16 @@ const ButtonBasic = ({
   text,
   disabled = false,
   size = "normal",
+  color,
+  icon
 }) => {
   return text ? (
     <Button
       type="primary"
+      icon={icon}
       disabled={disabled}
       onClick={onClick}
-      style={{ marginBottom: 5, marginTop: 5 }}
+      style={{ marginBottom: 5, marginTop: 5 , background:`${color}`}}
       size={size}
     >
       {text}
@@ -156,6 +161,8 @@ ButtonBasic.propTypes = {
   text: PropTypes.string,
   disabled: PropTypes.bool,
   size: PropTypes.string,
+  color:PropTypes.string,
+  icon: PropTypes.element,
 };
 
 export { CreateButton, UpdateButton, DeleteButton, DetailButton, ButtonBasic };

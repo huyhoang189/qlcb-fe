@@ -11,14 +11,18 @@ const TextInput = ({
   disabled = false,
   size = 0,
   width = 100,
+  direction="vertical",
+  boldText = true,
+  align
 }) => {
   return (
     <Space
-      direction="vertical"
+      direction={direction}
+      align={align}
       style={{ width: `${width}%`, marginTop: 5, marginBottom: 5 }}
       size={size}
     >
-      <Typography.Text style={{ fontWeight: "500" }}>
+      <Typography.Text style={boldText?{ fontWeight: "500" }:{marginRight: 5}}>
         {title}
         {isNull === false ? <span style={{ color: "red" }}>(*)</span> : ""}
       </Typography.Text>
@@ -42,6 +46,9 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   size: PropTypes.number,
   width: PropTypes.number,
+  direction: PropTypes.string,
+  boldText: PropTypes.bool,
+  align:PropTypes.string
 };
 
 export default TextInput;

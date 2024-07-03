@@ -1,14 +1,16 @@
 import CustomeModal from "../../../components/Form/modal.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import kyLuatSlice from "../../../toolkits/QuanLyCanBo/KyLuat/slice.js"
-import ngoaiNguSlice from "../../../toolkits/QuanLyDanhMuc/NgoaiNgu/slice.js";
 import {ACTION_NAME} from "../../../utils/common.js";
 import TextInput from "../../../components/Form/textinput.jsx";
-import {useEffect} from "react";
+import SelectInput from "../../../components/Form/selectinput.jsx";
 import dayjs from "dayjs";
+import hinhThucKhenThuongSlice from "../../../toolkits/QuanLyDanhMuc/HinhThucKhenThuong/slice.js";
+import loaiDanhHieuThiDuaSlice from "../../../toolkits/QuanLyDanhMuc/LoaiDanhHieuThiDua/slice.js";
 import {useParams} from "react-router-dom";
 import DateInput from "../../../components/Form/dateinput.jsx";
 import { DATE_FORMAT } from "../../../utils/common";
+import {useEffect} from "react";
 const ModalItem = () => {
 
     const dispatch = useDispatch()
@@ -18,11 +20,12 @@ const ModalItem = () => {
     const handleModal = (_item) => {
         dispatch(kyLuatSlice.actions.toggleModal(_item))
     }
-
+    const {hinhThucKhenThuongs} = useSelector(state => state.hinhThucKhenThuongs)
+    const {loaiDanhHieuThiDuas} = useSelector(state => state.loaiDanhHieuThiDuas)
     const handleRecord = (_actionName, _item) => {
-        let date = new dayjs(); 
+        let date = new dayjs();
         let item = Object.assign({}, _item);
-        date = date.format(DATE_FORMAT.DDMMYYYY);
+        date = date.format(DATE_FORMAT.YYYYMMDD);
         item.thoi_gian = item.thoi_gian===''?date:item.thoi_gian;
         dispatch(
             kyLuatSlice.actions.handleKyLuat({
@@ -48,13 +51,35 @@ const ModalItem = () => {
     const onRecordDateInputChange = (key, event) => {
         if (key) {
           let clone = Object.assign({}, selectedKyLuat);
-          clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+          clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
           dispatch(
             kyLuatSlice.actions.updateSelectedKyLuatInput(clone)
           );
         }
       };
 
+      const onRecordSelectInputChange = (key, event) => {
+        if (key) {
+            let clone = Object.assign({}, selectedKyLuat);
+            clone[key] = event;
+            dispatch(selectedKyLuat.actions.updateSelectedKyLuatInput(clone));
+        }
+    }
+
+    //side effect
+    useEffect(() => {
+        dispatch(hinhThucKhenThuongSlice.actions.getHinhThucKhenThuongs({
+            pageSize: 1000,
+            pageNumber: 1
+        }))
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(loaiDanhHieuThiDuaSlice.actions.getLoaiDanhHieuThiDuas({
+            pageSize: 1000,
+            pageNumber: 1
+        }))
+    }, [dispatch]);
     return <CustomeModal
         open={modalActive}
         onCancel={() => handleModal(null)}
@@ -68,13 +93,35 @@ const ModalItem = () => {
         cancelText="Từ chối"
 
     >
-        <TextInput
+        {/* <TextInput
             title="Hình thức"
             placeholder="Nhập vào hình thức"
             onChange={onRecordInputChange}
             property={"hinh_thuc"}
             value={selectedKyLuat?.hinh_thuc}
-        />
+        /> */}
+        <SelectInput
+        title="Hình thức khen thưởng"
+        onChange={onRecordSelectInputChange}
+        property={"ma_hinh_thuc_ky_luat"}
+        value={selectedKyLuat?.ma_hinh_thuc_khen_thuong}
+        options={hinhThucKhenThuongs.map((e) => ({
+          label: e?.ten,
+          value: e?.id,
+        }))}
+        isNull={false}
+      />
+      {/* <SelectInput
+        title="Loại danh hiệu thi đua"
+        onChange={onRecordSelectInputChange}
+        property={"ma_loai_danh_hieu_thi_dua"}
+        value={selectedKyLuat?.ma_loai_danh_hieu_thi_dua}
+        options={loaiDanhHieuThiDuas.map((e) => ({
+          label: e?.ten,
+          value: e?.id,
+        }))}
+        isNull={false}
+      /> */}
         <TextInput
             title="Nội dung"
             placeholder="Nhập vào nội dung"

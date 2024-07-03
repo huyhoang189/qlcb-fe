@@ -24,7 +24,7 @@ const ModalItem = () => {
   const handleRecord = (_actionName, _item) => {
     let date = new dayjs();
     let item = Object.assign({}, _item);
-    date = date.format(DATE_FORMAT.DDMMYYYY);
+    date = date.format(DATE_FORMAT.YYYYMMDD);
     item.thoi_gian_bat_dau =
       item.thoi_gian_bat_dau === "" ? date : item.thoi_gian_bat_dau;
     item.thoi_gian_ket_thuc =
@@ -66,7 +66,7 @@ const ModalItem = () => {
   const onRecordDateInputChange = (key, event) => {
     if (key) {
       let clone = Object.assign({}, selectedQuaTrinhCongTac);
-      clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+      clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
       dispatch(
         quaTrinhCongTacSlice.actions.updateSelectedQuaTrinhCongTacInput(clone)
       );

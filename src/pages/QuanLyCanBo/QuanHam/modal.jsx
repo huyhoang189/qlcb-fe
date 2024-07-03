@@ -20,7 +20,7 @@ const ModalItem = () => {
     const handleRecord = (_actionName, _item) => {
         let date = new dayjs(); 
         let item = Object.assign({}, _item);
-        date = date.format(DATE_FORMAT.DDMMYYYY);
+        date = date.format(DATE_FORMAT.YYYYMMDD);
         item.thoi_gian_nhan = item.thoi_gian_nhan===''?date:item.thoi_gian_nhan;
         dispatch(
             quanHamSlice.actions.handleQuanHam({
@@ -46,7 +46,7 @@ const ModalItem = () => {
     const onRecordDateInputChange = (key, event) => {
         if (key) {
           let clone = Object.assign({}, selectedQuanHam);
-          clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+          clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
           dispatch(
             quanHamSlice.actions.updateSelectedQuanHamInput(clone)
           );

@@ -8,6 +8,7 @@ import {useEffect} from "react";
 import SelectInput from "../../../components/Form/selectinput.jsx";
 import {useParams} from "react-router-dom";
 import RangeDate from "../../../components/Form/rangedate.jsx";
+import DateInput from "../../../components/Form/dateinput.jsx";
 import { DATE_FORMAT } from "../../../utils/common";
 const ModalItem = () => {
 
@@ -50,6 +51,16 @@ const ModalItem = () => {
             dispatch(trinhDoNgoaiNguSlice.actions.updateSelectedTrinhDoNgoaiNguInput(clone));
         }
     }
+
+    const onRecordDateInputChange = (key, event) => {
+        if (key) {
+          let clone = Object.assign({}, selectedTrinhDoNgoaiNgu);
+          clone[key] = event.format(DATE_FORMAT.YYYYMMDD);
+          dispatch(
+            trinhDoNgoaiNguSlice.actions.updateSelectedTrinhDoNgoaiNguInput(clone)
+          );
+        }
+      };
 
     const onRecordSelectInputChange = (key, event) => {
         if (key) {
@@ -99,12 +110,19 @@ const ModalItem = () => {
             property={"trinh_do"}
             value={selectedTrinhDoNgoaiNgu?.trinh_do}
         />
-        <RangeDate
+        {/* <RangeDate
             title="Thời gian"
             property={"thoi_gian"}
             onChange={onRecordRangeDateChange}
             value={selectedTrinhDoNgoaiNgu?.thoi_gian}
-    />
+    /> */}
+        <DateInput
+            title="Thời gian"
+            placeholder="Nhập vào thời gian"
+            onChange={onRecordDateInputChange}
+            property={"thoi_gian"}
+            value={selectedTrinhDoNgoaiNgu?.thoi_gian}
+        />
         <TextInput
             title="Ghi chú"
             placeholder="Nhập vào ghi chú"

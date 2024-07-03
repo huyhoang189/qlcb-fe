@@ -12,6 +12,9 @@ const DateInput = ({
   status = "",
   format = DATE_FORMAT.YYYYMMDD,
   picker,
+  direction="vertical",
+  boldText = true,
+  align
 }) => {
   const _value =
     dayjs(value ? value : dayjs(), format).toString() !== "Invalid Date"
@@ -20,11 +23,12 @@ const DateInput = ({
   console.log();
   return (
     <Space
-      direction="vertical"
+      direction={direction}
+      align={align}
       style={{ width: "100%", marginTop: 5, marginBottom: 5 }}
       size={0}
     >
-      <Typography.Text style={{ fontWeight: "500" }}>
+      <Typography.Text style={boldText?{ fontWeight: "bold" }:{marginRight: 1,}}>
         {title}
         {isNull === false ? <span style={{ color: "red" }}>(*)</span> : ""}
       </Typography.Text>

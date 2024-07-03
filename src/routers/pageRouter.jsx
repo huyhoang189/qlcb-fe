@@ -142,6 +142,18 @@ export const publicRouter = [
         key: "ngoai-ngu",
         label: "Ngoại ngữ",
       },
+      {
+        key: "hinh-thuc-khen-thuong",
+        label: "Hình thức khen thưởng",
+      },
+      {
+        key: "hinh-thuc-ky-luat",
+        label: "Hình thức kỷ luật",
+      },
+      {
+        key: "loai-danh-hieu-thi-dua",
+        label: "Loại danh hiệu thi đua",
+      },
     ],
   },
   {

@@ -65,6 +65,24 @@ const baseColumns = [
     align: "center",
   },
   {
+    title: "Danh hiệu thi đua",
+    dataIndex: "loai_danh_hieu_thi_dua",
+    key: "loai_danh_hieu_thi_dua",
+    align: "center",
+    render: (text, record) => {
+      return record?.loai_danh_hieu_thi_dua?.ten;
+    },
+  },
+  {
+    title: "Hình thức khen thưởng",
+    dataIndex: "hinh_thuc_khen_thuong",
+    key: "hinh_thuc_khen_thuong",
+    align: "center",
+    render: (text, record) => {
+      return record?.hinh_thuc_khen_thuong?.ten;
+    },
+  },
+  {
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
