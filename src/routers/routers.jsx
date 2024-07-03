@@ -21,6 +21,9 @@ import QuanLyChucDanhKhoaHoc from "../pages/QuanLyDanhMuc/ChucDanhKhoaHoc/index.
 import QuanLyChucVuChinhQuyen from "../pages/QuanLyDanhMuc/ChucVuChinhQuyen/index.jsx";
 import QuanLyChuyenNganh from "../pages/QuanLyDanhMuc/ChuyenNganh/index.jsx";
 import QuanLyLoaiHinhDaoTao from "../pages/QuanLyDanhMuc/LoaiHinhDaoTao/index.jsx";
+import QuanLyHinhThucKhenThuong from "../pages/QuanLyDanhMuc/HinhThucKhenThuong/index.jsx";
+import QuanLyHinhThucKyLuat from "../pages/QuanLyDanhMuc/HinhThucKyLuat/index.jsx";
+import LoaiDanhHieuThiDua from "../pages/QuanLyDanhMuc/LoaiDanhHieuThiDua/index.jsx";
 import QuaTrinhDaoTao from "../pages/QuanLyCanBo/QuaTrinhDaoTao/index.jsx";
 import QuanLyNgoaiNgu from "../pages/QuanLyDanhMuc/NgoaiNgu/index.jsx";
 import QuanLyChungNhan from "../pages/QuanLyDanhMuc/ChungNhan/index.jsx";
@@ -80,6 +83,18 @@ export const router = createBrowserRouter([
           {
             path: "loai-hinh-dao-tao",
             element: <QuanLyLoaiHinhDaoTao />,
+          },
+          {
+            path: "hinh-thuc-khen-thuong",
+            element: <QuanLyHinhThucKhenThuong />,
+          },
+          {
+            path: "hinh-thuc-ky-luat",
+            element: <QuanLyHinhThucKyLuat />,
+          },
+          {
+            path: "loai-danh-hieu-thi-dua",
+            element: <LoaiDanhHieuThiDua />,
           },
           {
             path: "ngoai-ngu",

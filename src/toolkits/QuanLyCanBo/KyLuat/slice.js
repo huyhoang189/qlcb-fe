@@ -5,7 +5,7 @@ const initialState = {
     kyLuat: {
         id: "",
         ma_can_bo: "",
-        hinh_thuc: "",
+        ma_hinh_thuc_khen_thuong:"",
         noi_dung: "",
         thoi_gian: "",
         so_quyet_dinh: "",

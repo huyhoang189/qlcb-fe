@@ -163,7 +163,6 @@ const ModalItem = () => {
         title={selectedQuanLyKyLuat?.id ? "Cập nhật dữ liệu" : "Thêm mới dữ liệu"}
         okText="Chấp nhận"
         cancelText="Từ chối"
-
     >
         <Row gutter={16} style={{ width: '100%' }}>
         <Col span={8}>

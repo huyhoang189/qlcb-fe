@@ -18,6 +18,9 @@ import lyLichChucDanhPhapLySaga from "./QuanLyCanBo/LyLichChucDanhPhapLy/saga.js
 import chucVuChinhQuyenSaga from "./QuanLyDanhMuc/ChucVuChinhQuyen/saga.js";
 import truongHocSaga from "./QuanLyDanhMuc/TruongHoc/saga.js";
 import loaiHinhDaoTaoSaga from "./QuanLyDanhMuc/LoaiHinhDaoTao/saga.js";
+import hinhThucKhenThuongSaga from "./QuanLyDanhMuc/HinhThucKhenThuong/saga.js";
+import hinhThucKyLuatSaga from "./QuanLyDanhMuc/HinhThucKyLuat/saga.js";
+import loaiDanhHieuThiDuaSaga from "./QuanLyDanhMuc/LoaiDanhHieuThiDua/saga.js";
 import chuyenNganhSaga from "./QuanLyDanhMuc/ChuyenNganh/saga.js";
 import ngoaiNguSaga from "./QuanLyDanhMuc/NgoaiNgu/saga.js";
 import chungNhanSaga from "./QuanLyDanhMuc/ChungNhan/saga.js";
@@ -35,7 +38,11 @@ import chiTietKeHoachSaga from "./QuanLyDaoTao/ChiTietKeHoach/saga.js";
 import danhSachDaoTaoSaga from "./QuanLyDaoTao/DanhSachDaoTao/saga.js";
 import kyThiSaga from "./QuanLyDaoTao/QuanLyKyThi/saga.js";
 import danhSachThiSinhSaga from "./QuanLyDaoTao/DanhSachThiSinh/saga.js";
-
+import TinhHinhKTCTGDSaga from "./T63/TinhHinhKTCTGD/saga.js";
+import TinhHinhKTCTCCSaga from "./T63/TinhHinhKTCTCC/saga.js";
+import TinhHinhKTCTVCSaga from "./T63/TinhHinhKTCTVC/saga.js";
+import QuaTrinhCongTacSaga from "./T63/QuaTrinhCongTac/saga.js";
+import BanThanSaga from "./T63/BanThan/saga.js";
 export default function* rootSaga() {
   yield all([
     chucDanhKhoaHocSaga(),
@@ -56,6 +63,9 @@ export default function* rootSaga() {
     lyLichChucDanhPhapLySaga(),
     truongHocSaga(),
     loaiHinhDaoTaoSaga(),
+    hinhThucKhenThuongSaga(),
+    hinhThucKyLuatSaga(),
+    loaiDanhHieuThiDuaSaga(),
     chuyenNganhSaga(),
     ngoaiNguSaga(),
     chungNhanSaga(),
@@ -73,5 +83,10 @@ export default function* rootSaga() {
     danhSachDaoTaoSaga(),
     kyThiSaga(),
     danhSachThiSinhSaga(),
+    TinhHinhKTCTGDSaga(),
+    TinhHinhKTCTVCSaga(),
+    QuaTrinhCongTacSaga(),
+    TinhHinhKTCTCCSaga(),
+    BanThanSaga()
   ]);
 }
