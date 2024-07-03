@@ -17,8 +17,7 @@ const DateInput = ({
   align
 }) => {
   const _value =
-    dayjs(value ? value : dayjs(), format).toString() !==
-    "Invalid Date"
+    dayjs(value ? value : dayjs(), format).toString() !== "Invalid Date"
       ? dayjs(value ? value : dayjs(), format)
       : dayjs();
   console.log();
@@ -27,6 +26,7 @@ const DateInput = ({
       direction={direction}
       align={align}
       style={{ width: "100%", marginTop: 5, marginBottom: 5 }}
+      size={0}
     >
       <Typography.Text style={boldText?{ fontWeight: "bold" }:{marginRight: 1,}}>
         {title}

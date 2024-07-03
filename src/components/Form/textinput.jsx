@@ -22,7 +22,7 @@ const TextInput = ({
       style={{ width: `${width}%`, marginTop: 5, marginBottom: 5 }}
       size={size}
     >
-      <Typography.Text style={boldText?{ fontWeight: "bold" }:{marginRight: 5}}>
+      <Typography.Text style={boldText?{ fontWeight: "500" }:{marginRight: 5}}>
         {title}
         {isNull === false ? <span style={{ color: "red" }}>(*)</span> : ""}
       </Typography.Text>

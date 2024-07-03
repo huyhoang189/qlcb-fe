@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { generateTrees } from "../../../utils/tree.js";
 import TreeInput from "../../../components/Form/treeInput.jsx";
 import DateInput from "../../../components/Form/dateinput.jsx";
-
+import dayjs from "dayjs";
 const ModalItem = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -60,7 +60,7 @@ const ModalItem = () => {
   const onRecordDateInputChange = (key, event) => {
     if (key) {
       let clone = Object.assign({}, selectedCanBoCoBan);
-      clone[key] = event.format(DATE_FORMAT.DDMMYYYY);
+      clone[key] = new Date(dayjs(event).format("YYYY-MM-DD")).toISOString();
       dispatch(canBoCoBanSlice.actions.updateSelectedCanBoCoBanInput(clone));
     }
   };

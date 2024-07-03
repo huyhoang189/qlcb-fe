@@ -1,18 +1,28 @@
 import styled from "styled-components";
-import {Drawer} from "antd";
+import { Layout } from "antd";
+const { Sider } = Layout;
+export const SiderWrapper = styled(Sider)`
+  .ant-menu-light.ant-menu-root.ant-menu-inline {
+    border-inline-end: 0px;
+  }
 
-export const DrawerWrapper = styled(Drawer)`
+  .ant-layout-sider-children {
+    border-right: 1px solid #d6d9dc;
+  }
 
-    .ant-drawer-body {
-        padding: 10px;
-    }
+  // .ant-menu-title-content {
+  //   font-weight: 500;
+  // }
 
-    .ant-menu-inline {
-        border-inline-end: 0 !important;
-    }
+  // .ant-menu > li > .ant-menu-title-content {
+  //   font-weight: 500;
+  // }
 
-    .ant-menu-title-content {
-        font-family: "Archivo", sans-serif;
-        
-    }
+  .ant-flex > .ant-menu > li > span {
+    font-weight: 600;
+  }
+
+  .ant-flex > .ant-menu > li > div > span {
+    font-weight: 600;
+  }
 `;

@@ -21,18 +21,22 @@ const MainLayout = () => {
       }}
     >
       <Header />
-      <Siderbar />
-      <Content
-        style={{
-          margin: 10,
-          padding: 10,
-          background: "#FFFFFF",
-          // borderColor: token.colorBorderSecondary,
-          border: "1px solid #d6d9dc",
-        }}
-      >
-        <Outlet />
-      </Content>
+      <Layout>
+        <Siderbar />
+
+        <Content
+          style={{
+            margin: 10,
+            padding: 10,
+            background: "#FFFFFF",
+            // borderColor: token.colorBorderSecondary,
+            border: "1px solid #d6d9dc",
+          }}
+        >
+          <Outlet />
+        </Content>
+      </Layout>
+
       <Footer
         style={{
           textAlign: "center",

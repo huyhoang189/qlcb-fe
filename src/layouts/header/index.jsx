@@ -1,8 +1,8 @@
-import { Button, Flex, theme, Typography } from "antd";
+import { Button, Flex, Image, theme, Typography } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import appSlice from "../../toolkits/App/slice.js";
-
+import logo from "../../assets/dths.png";
 const { useToken } = theme;
 const Header = () => {
   const { token } = useToken();
@@ -24,17 +24,18 @@ const Header = () => {
       justify="flex-start"
       align="center"
     >
-      <Button
+      {/* <Button
         icon={<MenuOutlined style={{ color: "#003866" }} />}
         type="none"
         style={{ border: "2px solid #003866" }}
         onClick={collapseSiderbar}
-      />
+      /> */}
+      <Image src={logo} preview={false} width={45} />
       <Typography.Title
-        level={2}
+        level={3}
         style={{ color: "#FFFFFF", margin: 0, padding: 0, fontWeight: "bold" }}
       >
-        HỆ THỐNG QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA
+        HỆ THỐNG CSDL QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA HÌNH SỰ
       </Typography.Title>
     </Flex>
   );

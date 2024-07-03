@@ -14,7 +14,7 @@ import Header from "../../../components/Table/header.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeOutlined } from "@ant-design/icons";
-import ModalItem from "./modal.jsx";
+import SearchBox from "./searchBox.jsx";
 
 const pageHeader = {
   breadcrumb: [
@@ -26,7 +26,7 @@ const pageHeader = {
       title: "Quản lý hồ sơ cán bộ",
     },
     {
-      title: "Danh sách cán bộ điều tra",
+      title: "Tìm kiếm nâng cao",
     },
   ],
 };
@@ -54,9 +54,6 @@ const baseColumns = [
     title: "Ngày tháng năm sinh",
     dataIndex: "ngay_thang_nam_sinh",
     key: "ngay_thang_nam_sinh",
-    render: (text, record) => {
-      return new Date(text).toISOString().split("T")[0];
-    },
   },
   {
     title: "Giới tính",
@@ -108,68 +105,7 @@ const baseColumns = [
   },
 ];
 
-const features = [
-  {
-    label: "Mẫu lý lịch T63",
-    key: "to-khai-t63",
-  },
-  {
-    label: "Lý lịch khoa học",
-    key: "ly-lich-khoa-hoc",
-  },
-  {
-    label: "Quá trình công tác",
-    key: "qua-trinh-cong-tac",
-  },
-  {
-    label: "Quá trình đào tạo",
-    key: "qua-trinh-dao-tao",
-  },
-  {
-    label: "Lý lịch chức danh pháp lý",
-    key: "ly-lich-chuc-danh-phap-ly",
-  },
-  {
-    label: "Khen thưởng",
-    key: "khen-thuong",
-  },
-  {
-    label: "Kỷ luật",
-    key: "ky-luat",
-  },
-  {
-    label: "Trình độ ngoại ngữ",
-    key: "trinh-do-ngoai-ngu",
-  },
-
-  {
-    label: "Lịch sử đi nước ngoài",
-    key: "lich-su-di-nuoc-ngoai",
-  },
-  {
-    label: "Tình trạng sức khoẻ",
-    key: "tinh-trang-suc-khoe",
-  },
-  {
-    label: "Bảo hiểm",
-    key: "bao-hiem",
-  },
-  {
-    label: "Tình hình nhà ở",
-    key: "tinh-hinh-nha-o",
-  },
-
-  {
-    label: "Chứng nhận đã cấp",
-    key: "chung-nhan-da-cap",
-  },
-  {
-    label: "Quân hàm",
-    key: "quan-ham",
-  },
-];
-
-const CanBoCoBan = () => {
+const TimKiemNangCao = () => {
   const dispatch = useDispatch();
   const { canBoCoBans, isLoading, totalItem, pageNumber, pageSize } =
     useSelector((state) => state.canBoCoBans);
@@ -202,54 +138,9 @@ const CanBoCoBan = () => {
       key: "feature",
       align: "center",
       render: (text, record) => (
-        <Dropdown
-          menu={{
-            items: features.map((e, i) => ({
-              ...e,
-              label: (
-                <Link to={`${record?.id}/${e?.key}`}>{`${i + 1}. ${
-                  e?.label
-                }`}</Link>
-              ),
-            })),
-          }}
-          placement="bottomRight"
-          arrow
-        >
-          <Button icon={<EyeOutlined />} />
-        </Dropdown>
-      ),
-    },
-    {
-      title: "Công cụ",
-      key: "tool",
-      align: "center",
-      width: 140,
-      render: (text, record) => (
-        <Space
-          direction="horizontal"
-          style={{ width: "100%", justifyContent: "center" }}
-        >
-          {/*<DetailButton onClick={() => {*/}
-          {/*    navigate(`${record?.id}/ly-lich-khoa-hoc/`)*/}
-          {/*}}/>*/}
-          <UpdateButton onClick={() => handleModal(record)} />
-          <DeleteButton
-            onConfirm={() => {
-              dispatch(
-                canBoCoBanSlice.actions.handleCanBoCoBan({
-                  item: record,
-                  actionName: "DELETE",
-                  pageSize: pageSize,
-                  pageNumber:
-                    record?.key === pageSize * (pageNumber - 1) + 1
-                      ? Math.max(pageNumber - 1, 1)
-                      : pageNumber,
-                })
-              );
-            }}
-          />
-        </Space>
+        // <Dropdown menu={[]} placement="bottomRight" arrow>
+        <Button icon={<EyeOutlined />} />
+        // </Dropdown>
       ),
     },
   ];
@@ -269,17 +160,7 @@ const CanBoCoBan = () => {
     <ContentWrapper>
       <CustomBreadcrumb items={pageHeader.breadcrumb} />
       <CustomeTable
-        header={
-          <Header>
-            <TextInput
-              placeholder={"Nhập vào từ khoá tìm kiếm"}
-              onChange={onChangeKeywordInput}
-              property={"keyword"}
-              width={20}
-            />
-            <CreateButton onClick={() => handleModal(null)} />
-          </Header>
-        }
+        header={<SearchBox />}
         data={canBoCoBans}
         columns={columns}
         isLoading={isLoading}
@@ -290,10 +171,8 @@ const CanBoCoBan = () => {
           onChange: handlePaginationChange,
         }}
       />
-
-      <ModalItem />
     </ContentWrapper>
   );
 };
 
-export default CanBoCoBan;
+export default TimKiemNangCao;

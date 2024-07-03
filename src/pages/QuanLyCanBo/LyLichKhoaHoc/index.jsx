@@ -44,19 +44,23 @@ const baseColumns = [
     title: "Chuyên ngành",
     dataIndex: "chuyen_nganh",
     key: "chuyen_nganh",
-    align: "center",
   },
   {
     title: "Thời gian",
     dataIndex: "thoi_gian",
     key: "thoi_gian",
-    align: "center",
+    render: (text, record) => {
+      return text ? (
+        new Date(text).toISOString().split("T")[0]
+      ) : (
+        <span style={{ color: "red" }}>Không có</span>
+      );
+    },
   },
   {
     title: "Chức danh",
     dataIndex: "chuc_danh_khoa_hoc",
     key: "chuc_danh_khoa_hoc",
-    align: "center",
     render: (text, record) => {
       return record?.chuc_danh_khoa_hoc?.ten_chuc_danh;
     },
@@ -65,7 +69,6 @@ const baseColumns = [
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
-    align: "center",
   },
 ];
 
