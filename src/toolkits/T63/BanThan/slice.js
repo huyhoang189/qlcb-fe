@@ -3,10 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   banThans: [],
   banThan: {
-    ma_can_bo: "",
-    ma_chuc_vu_chinh_quyen: "",
-    thoi_gian_bat_dau: "",
-    don_vi_full_text : ""
+    ho_ten_khai_sinh: "",
+    so_hieu_quan_nhan: "",
+    ngay_thang_nam_sinh: "",
+    ngay_chinh_thuc: "",
+    ngay_vao_dang: "",
+    ngay_nhap_ngu: "",
+    que_quan: "",
+    noi_o_hien_nay: "",
+    trinh_do_giao_duc_pho_thong: ""
   },
   selectedBanThan: {},
   errorMassage: false,
