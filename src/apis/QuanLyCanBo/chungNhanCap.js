@@ -18,6 +18,7 @@ export const create = (payload) => {
     url: `/cap-chung-nhan`,
     method: "POST",
     data: payload,
+    headers: { "Content-Type": "multipart/form-data" },
   });
 };
 
@@ -26,6 +27,7 @@ export const update = (payload) => {
     url: `/cap-chung-nhan/${payload?.id}`,
     method: "PUT",
     data: payload,
+    headers: { "Content-Type": "multipart/form-data" },
   });
 };
 
