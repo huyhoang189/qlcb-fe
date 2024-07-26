@@ -16,6 +16,7 @@ const initialState = {
   selectedBanThan: {},
   errorMassage: false,
   isLoading: false,
+  modalActive: false,
   count: 0,
   pageSize: 10,
   pageNumber: 1,
@@ -26,11 +27,17 @@ const reducer = createSlice({
   name: "banThans",
   initialState,
   reducers: {
+    toggleModal: (state, action) => {
+      state.modalActive = !state.modalActive;
+      // state.selectedBanThan =
+      //   action.payload !== null ? action.payload : initialState.banThan;
+  },
     openTab: (state, action) => {
       state.selectedBanThan =
         action.payload !== null ? action.payload : initialState.banThan;
     },
     getBanThanById: (state, action) => {
+      state.modalActive = false;
       state.errorMassage = false;
       state.isLoading = true;
       state.pageSize = action.payload.pageSize;
@@ -46,6 +53,7 @@ const reducer = createSlice({
         : state.banThan;
     },
     getBanThans: (state, action) => {
+      state.modalActive = false;
       state.errorMassage = false;
       state.isLoading = true;
     },
@@ -67,6 +75,7 @@ const reducer = createSlice({
     },
     handleBanThan: (state, action) => {},
     handleBanThanSuccess: (state, action) => {
+      state.modalActive = false;
       state.errorMassage = false;
       state.selectedBanThan = action.payload;
     },
