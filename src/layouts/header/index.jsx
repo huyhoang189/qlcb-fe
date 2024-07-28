@@ -11,6 +11,7 @@ const Header = () => {
   const collapseSiderbar = () => {
     dispatch(appSlice.actions.toggleSiderbar());
   };
+
   return (
     <Flex
       style={{
@@ -56,9 +57,19 @@ const Header = () => {
               ),
             },
           ],
+          onClick: (e) => {
+            const { key } = e;
+            if (key === "LOGOUT") {
+              // dispatch(authSlice.actions.logout());
+            } else if (key === "PROFILE") {
+              console.log(key);
+            }
+          },
         }}
         placement="bottom"
         arrow
+        // onClick={navigatePath}
+        trigger={["click"]}
       >
         <Flex align="center" gap={10}>
           <Avatar
