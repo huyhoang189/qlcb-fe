@@ -15,7 +15,11 @@ export const LOAI_TRUONG_HOC = [
   { value: "trong_quan_doi", label: "TRƯỜNG QUÂN ĐỘI" },
   { value: "ngoai_quan_doi", label: "TRƯỜNG NGOÀI QUÂN ĐỘI" },
 ];
-
+export const LOAI_TRINH_DO_CHINH_TRI = [
+  { value: "Sơ cấp", label: "Sơ cấp" },
+  { value: "Trung cấp", label: "Trung cấp" },
+  { value: "Cao cấp", label: "Cao cấp" },
+];
 export const LOAI_CHUC_DANH_PHAP_LY = [
   { value: "TT_PTT_CAP_1", label: "TT, PTT cấp thứ nhất" },
   { value: "TT_PTT_CAP_2", label: "TT, PTT cấp thứ hai" },
@@ -36,3 +40,8 @@ export const LOAI_KHEN_THUONG_KY_LUAT = {
   KHEN_THUONG: "KHEN_THUONG",
   KY_LUAT: "KY_LUAT",
 };
+
+export const GIOI_TINH = [
+  { value: "Nam", label: "Nam" },
+  { value: "Nữ", label: "Nữ" },
+];
