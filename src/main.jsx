@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         borderRadius: 2,
         colorBorderSecondary: "#d6d9dc",
         colorBorder: "#d6d9dc",
-        fontSize: 12,
+        fontSize: 10,
         colorPrimary: "#00569E",
       },
       components: {
