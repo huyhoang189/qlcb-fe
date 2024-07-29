@@ -1,16 +1,19 @@
 import { Avatar, Button, Dropdown, Flex, Image, theme, Typography } from "antd";
 import { LogoutOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import appSlice from "../../toolkits/App/slice.js";
+import authSlice from "../../toolkits/Auth/slice.js";
 import logo from "../../assets/dths.png";
+import { useEffect } from "react";
 const { useToken } = theme;
 const Header = () => {
   const { token } = useToken();
   const dispatch = useDispatch();
+  const { sessionUser } = useSelector((state) => state.auths);
 
-  const collapseSiderbar = () => {
-    dispatch(appSlice.actions.toggleSiderbar());
-  };
+  useEffect(() => {
+    dispatch(authSlice.actions.checkAuthentication());
+  }, [dispatch]);
 
   return (
     <Flex
@@ -60,7 +63,7 @@ const Header = () => {
           onClick: (e) => {
             const { key } = e;
             if (key === "LOGOUT") {
-              // dispatch(authSlice.actions.logout());
+              dispatch(authSlice.actions.logout());
             } else if (key === "PROFILE") {
               console.log(key);
             }
@@ -80,12 +83,12 @@ const Header = () => {
           />
           <Flex vertical style={{ width: 150 }}>
             <Typography.Text
-              style={{ fontSize: 15, color: "#fff", fontWeight: 600 }}
+              style={{ fontSize: 15, color: "#FFFFFF", fontWeight: 600 }}
             >
-              Vũ Quốc Hoàng
+              {sessionUser?.full_name || "Nothing"}
             </Typography.Text>
-            <Typography.Text style={{ fontSize: 10, color: "#fff" }}>
-              Quản trị viên
+            <Typography.Text style={{ fontSize: 10, color: "#FFFFFF" }}>
+              {sessionUser?.groups || "Nothing"}
             </Typography.Text>
           </Flex>
         </Flex>

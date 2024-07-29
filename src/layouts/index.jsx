@@ -44,8 +44,8 @@ const MainLayout = () => {
           color: "#fff",
         }}
       >
-        ©{new Date().getFullYear()} Hệ thống quản lý Cán bộ Điều tra hình sự -
-        Cục Điều tra Hình sự - Bộ Quốc Phòng
+        ©{new Date().getFullYear()} HỆ THỐNG CSDL QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA
+        HÌNH SỰ - CỤC ĐIỀU TRA HÌNH SỰ - BQP
       </Footer>
     </Layout>
   );

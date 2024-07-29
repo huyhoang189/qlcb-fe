@@ -45,3 +45,5 @@ export const GIOI_TINH = [
   { value: "Nam", label: "Nam" },
   { value: "Nữ", label: "Nữ" },
 ];
+
+export const TOKEN_VERIFY = "AxfBtrtrsDYChkh";

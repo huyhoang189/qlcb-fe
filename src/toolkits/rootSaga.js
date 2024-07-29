@@ -43,6 +43,7 @@ import TinhHinhKTCTCCSaga from "./T63/TinhHinhKTCTCC/saga.js";
 import TinhHinhKTCTVCSaga from "./T63/TinhHinhKTCTVC/saga.js";
 import QuaTrinhCongTacSaga from "./T63/QuaTrinhCongTac/saga.js";
 import BanThanSaga from "./T63/BanThan/saga.js";
+import authSaga from "./Auth/saga";
 export default function* rootSaga() {
   yield all([
     chucDanhKhoaHocSaga(),
@@ -87,6 +88,7 @@ export default function* rootSaga() {
     TinhHinhKTCTVCSaga(),
     QuaTrinhCongTacSaga(),
     TinhHinhKTCTCCSaga(),
-    BanThanSaga()
+    BanThanSaga(),
+    authSaga(),
   ]);
 }

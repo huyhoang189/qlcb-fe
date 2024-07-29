@@ -46,6 +46,7 @@ import tinhHinhKTCTCCSlice from "./T63/TinhHinhKTCTCC/slice.js";
 import tinhHinhKTCTVCSlice from "./T63/TinhHinhKTCTVC/slice.js";
 import quaTrinhCongTacT63Slice from "./T63/QuaTrinhCongTac/slice.js";
 import banThanSlice from "./T63/BanThan/slice.js";
+import authSlice from "./Auth/slice";
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
@@ -86,7 +87,7 @@ export const store = configureStore({
     kyThis: kyThiSlice.reducer,
     lichSuDieuDongs: lichSuDieuDongSlice.reducer,
     danhSachThiSinhs: danhSachThiSinhSlice.reducer,
-    hinhThucKhenThuongs: hinhThucKhenThuongSlice.reducer, 
+    hinhThucKhenThuongs: hinhThucKhenThuongSlice.reducer,
     hinhThucKyLuats: hinhThucKyLuatSlice.reducer,
     loaiDanhHieuThiDuas: loaiDanhHieuThiDuaSlice.reducer,
     tinhHinhKTCTGDs: tinhHinhKTCTGDSlice.reducer,
@@ -94,6 +95,7 @@ export const store = configureStore({
     quaTrinhCongTacT63s: quaTrinhCongTacT63Slice.reducer,
     tinhHinhKTCTCCs: tinhHinhKTCTCCSlice.reducer,
     banThans: banThanSlice.reducer,
+    auths: authSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

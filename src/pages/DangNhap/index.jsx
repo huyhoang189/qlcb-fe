@@ -1,64 +1,119 @@
-import { Button, Card, Col, Flex, Image, Row, Space, Typography } from "antd";
-import login_bg from "../../assets/image/login_2.jpeg";
+import {
+  Button,
+  Card,
+  Col,
+  Flex,
+  Image,
+  Input,
+  Row,
+  Space,
+  Typography,
+} from "antd";
 import logo from "../../assets/dths.png";
-import TextInput from "../../components/Form/textinput";
-import { useNavigate } from "react-router-dom";
+import bg from "../../assets/image/bg.jpg";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import authSlice from "../../toolkits/Auth/slice";
 const Login = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const { errorMessage } = useSelector((state) => state.auths);
+
+  const onSubmit = () => {
+    dispatch(
+      authSlice.actions.login({
+        user_name: username,
+        password: password,
+      })
+    );
+  };
+
   return (
-    <Row style={{ height: "100vh" }}>
-      <Col span={8}>
+    <Flex
+      style={{
+        height: "100vh",
+        width: "100%",
+        backgroundColor: "#00569E",
+        boxShadow: `10px 10px 15px rgba(0, 0, 0, 0.3)`,
+      }}
+      justify="center"
+      align="center"
+    >
+      <Flex
+        style={{
+          width: 800,
+          height: 500,
+          backgroundColor: "#f1f1f1",
+          borderRadius: 10,
+        }}
+      >
         <Flex
-          vertical="horizontal"
-          style={{
-            height: "100%",
-          }}
+          vertical
+          style={{ width: 300, padding: "20px 20px" }}
+          justify="space-between"
           align="center"
-          justify="center"
         >
-          <Space direction="vertical" style={{ width: "80%" }}>
-            <Flex
-              vertical="horizonal"
-              justify={"space-between"}
-              align={"center"}
-            >
-              <Image src={logo} preview={false} width={100} />
-              <Typography.Title
-                style={{ textAlign: "center", fontWeight: "bold" }}
-                level={4}
+          <div></div>
+          <Space direction="vertical" style={{ width: "100%" }} size={(10, 10)}>
+            <Flex vertical gap={5} justify="center" align="center">
+              <Image src={logo} width={60} height={60} preview={false} />
+              <Typography.Text
+                style={{
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
               >
-                HỆ THỐNG QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA
-              </Typography.Title>
+                HỆ THỐNG CƠ SỞ DỮ LIỆU <br />
+                QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA HÌNH SỰ
+              </Typography.Text>
             </Flex>
-            <TextInput title={"Tên tài khoản"} />
-            <TextInput title={"Mật khẩu"} />
-            <Button
-              type="primary"
-              style={{ width: "100%" }}
-              onClick={() => navigate("/")}
-            >
+            <Input
+              placeholder="Tên đăng nhập ?"
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+              value={username}
+            />
+            <Input.Password
+              placeholder="Mật khẩu"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              value={password}
+            />
+
+            <Button block type="primary" onClick={onSubmit}>
               Đăng nhập
             </Button>
+
+            {errorMessage !== false && (
+              <Typography.Text type="danger">{errorMessage}</Typography.Text>
+            )}
           </Space>
+          <Flex vertical gap={5} justify="center" align="center">
+            <Typography.Text
+              style={{
+                textAlign: "center",
+                fontStyle: "italic",
+              }}
+            >
+              © Phát triển bởi Cục Điều tra Hình sự - BQP
+            </Typography.Text>
+          </Flex>
         </Flex>
-      </Col>
-      <Col span={16} style={{ backgroundColor: "##fff" }}>
-        <Flex
-          vertical="horizontal"
-          style={{
-            height: "100%",
-          }}
-          align="center"
-          justify="center"
-        >
-          {/* <div
-            style={{ borderWidth: 0, width: "90%" }}
-            cover={<img alt="example" src={login_bg} />}
-          ></div> */}
-          <img alt="example" src={login_bg} width={"90%"} />
-        </Flex>
-      </Col>
-    </Row>
+        <Image
+          src={bg}
+          preview={false}
+          width={500}
+          height={"100%"}
+          style={{ borderTopRightRadius: 10, borderBottomRightRadius: 10 }}
+        />
+      </Flex>
+    </Flex>
   );
 };
 
