@@ -13,28 +13,27 @@ const Siderbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //   const onToggleSider = () => {
-  //     dispatch(appSlice.actions.toggleSiderbar());
-  //   };
   const onClickSelectItem = (e) => {
     const url = e?.keyPath.reverse().join("\\");
     navigate(url);
-    dispatch(appSlice.actions.toggleSiderbar());
+    // dispatch(appSlice.actions.toggleSiderbar());
   };
   return (
     <SiderWrapper
       width="250px"
       style={{
         backgroundColor: token?.colorBgBase,
+        padding: "1px 0",
       }}
+      collapsed={menuCollapse}
     >
-      <Flex vertical="horizonal" justify={"space-between"} align={"center"}>
-        {/* <Image src={logo} preview={false} width={100} />
-        <Typography.Text style={{ textAlign: "center", fontWeight: "bold" }}>
-          HỆ THỐNG QUẢN LÝ <br /> CÁN BỘ NGÀNH ĐIỀU TRA
-        </Typography.Text> */}
-        <Menu items={publicRouter} mode="inline" onClick={onClickSelectItem} />
-      </Flex>
+      <Menu
+        items={publicRouter}
+        mode="inline"
+        onClick={onClickSelectItem}
+        theme="dark"
+        style={{ height: "100%" }}
+      />
     </SiderWrapper>
   );
 };

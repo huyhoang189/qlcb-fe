@@ -18,11 +18,11 @@ export const SiderWrapper = styled(Sider)`
   //   font-weight: 500;
   // }
 
-  .ant-flex > .ant-menu > li > span {
+  .ant-menu > li > span {
     font-weight: 600;
   }
 
-  .ant-flex > .ant-menu > li > div > span {
+  .ant-menu > li > div > span {
     font-weight: 600;
   }
 `;

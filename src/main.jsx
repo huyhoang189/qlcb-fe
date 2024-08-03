@@ -11,19 +11,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     theme={{
       token: {
         colorBgBase: "#fff",
-        colorBgHeader: "#145DA0",
-        colorBase: "#f1f1f1",
+        colorBgHeader: "#006666",
         borderRadius: 2,
         colorBorderSecondary: "#d6d9dc",
         colorBorder: "#d6d9dc",
         fontSize: 10,
-        colorPrimary: "#00569E",
+        colorPrimary: "#008080",
       },
       components: {
         Table: {
           rowHoverBg: "#fff",
           borderColor: "#d6d9dc",
-          headerBg: "#f0f8ff",
+          headerBg: "#008080",
+          headerColor: "#fff",
         },
         Button: {
           primaryShadow: "",
@@ -33,7 +33,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           headerBg: "#fff",
         },
         Statistic: {},
-        Menu: {},
+        Menu: {
+          darkItemBg: "#006666",
+          darkSubMenuItemBg: "#008080",
+          darkItemColor: "#fff",
+          darkItemHoverBg: "#00b3b3",
+          darkPopupBg: "#008080",
+        },
         Divider: {
           colorBgBase: "#d6d9dc",
         },

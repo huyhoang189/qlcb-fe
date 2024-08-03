@@ -5,10 +5,9 @@ import Siderbar from "./sidebar";
 import { Outlet } from "react-router-dom";
 import useWindowSize from "../hooks/useWindowSize";
 
-const { useToken } = theme;
 const { Content, Footer } = Layout;
 const MainLayout = () => {
-  const token = useToken();
+  const token = theme.useToken();
   const { width, height } = useWindowSize();
   console.log(height);
   return (
@@ -40,12 +39,12 @@ const MainLayout = () => {
       <Footer
         style={{
           textAlign: "center",
-          backgroundColor: "#00569E",
+          backgroundColor: "#006666",
           color: "#fff",
         }}
       >
-        ©{new Date().getFullYear()} HỆ THỐNG CSDL QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA
-        HÌNH SỰ - CỤC ĐIỀU TRA HÌNH SỰ - BQP
+        ©HỆ THỐNG CSDL QUẢN LÝ CÁN BỘ NGÀNH ĐIỀU TRA HÌNH SỰ - CỤC ĐIỀU TRA HÌNH
+        SỰ - BQP
       </Footer>
     </Layout>
   );

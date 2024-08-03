@@ -45,29 +45,19 @@ const baseCanBoColumn = [
     key: "so_hieu_quan_nhan",
   },
   {
-    title: "Họ và tên khai sinh, quân hàm, chức vụ",
+    title: "Thông tin cá nhân",
     dataIndex: "ho_ten_khai_sinh",
     key: "ho_ten_khai_sinh",
     render: (text, record) => {
-      return `${record?.ho_ten_khai_sinh}, ${record?.cap_bac?.quan_ham}, ${record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu}`;
+      return [
+        record?.ho_ten_khai_sinh,
+        record?.cap_bac?.quan_ham,
+        record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu,
+      ]
+        .filter(Boolean)
+        .join(", ");
     },
   },
-  // {
-  //   title: "Cấp bậc",
-  //   dataIndex: "cap_bac",
-  //   key: "cap_bac",
-  //   render: (text, record) => {
-  //     return record?.cap_bac?.quan_ham;
-  //   },
-  // },
-  // {
-  //   title: "Chức vụ",
-  //   dataIndex: "chuc_vu",
-  //   key: "chuc_vu",
-  //   render: (text, record) => {
-  //     return record?.chuc_vu?.chuc_vu_chinh_quyen?.ten_chuc_vu;
-  //   },
-  // },
   {
     title: "Đơn vị hiện tại",
     dataIndex: "don_vi",

@@ -11,6 +11,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const { sessionUser } = useSelector((state) => state.auths);
 
+  const collapseSiderbar = () => {
+    dispatch(appSlice.actions.toggleSiderbar());
+  };
+
   useEffect(() => {
     dispatch(authSlice.actions.checkAuthentication());
   }, [dispatch]);
@@ -27,6 +31,16 @@ const Header = () => {
       justify="space-between"
     >
       <Flex gap="middle" justify="flex-start" align="center">
+        <Button
+          icon={
+            <MenuOutlined
+              style={{ color: "#fff", border: "1px solid #fff", padding: 5 }}
+            />
+          }
+          type="none"
+          style={{ width: 60 }}
+          onClick={collapseSiderbar}
+        />
         <Image src={logo} preview={false} width={45} />
         <Typography.Title
           level={3}

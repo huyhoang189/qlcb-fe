@@ -37,8 +37,7 @@ const Login = () => {
       style={{
         height: "100vh",
         width: "100%",
-        backgroundColor: "#00569E",
-        boxShadow: `10px 10px 15px rgba(0, 0, 0, 0.3)`,
+        backgroundColor: "#202947",
       }}
       justify="center"
       align="center"
@@ -49,6 +48,7 @@ const Login = () => {
           height: 500,
           backgroundColor: "#f1f1f1",
           borderRadius: 10,
+          boxShadow: `10px 10px 15px rgba(0, 0, 0, 0.3)`,
         }}
       >
         <Flex
