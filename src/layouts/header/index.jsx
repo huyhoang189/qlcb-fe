@@ -34,7 +34,11 @@ const Header = () => {
         <Button
           icon={
             <MenuOutlined
-              style={{ color: "#fff", border: "1px solid #fff", padding: 5 }}
+              style={{
+                color: "#fff",
+                border: "1px solid #fff",
+                padding: "5px 5px",
+              }}
             />
           }
           type="none"

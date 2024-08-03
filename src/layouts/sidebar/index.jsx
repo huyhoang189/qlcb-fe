@@ -16,7 +16,6 @@ const Siderbar = () => {
   const onClickSelectItem = (e) => {
     const url = e?.keyPath.reverse().join("\\");
     navigate(url);
-    // dispatch(appSlice.actions.toggleSiderbar());
   };
   return (
     <SiderWrapper
