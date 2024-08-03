@@ -165,9 +165,14 @@ export const publicRouter = [
         label: "Quản lý người sử dụng",
       },
       {
-        key: "phan-quyen-he-thong",
-        label: "Phân cấp, phân quyền",
+        key: "nhom-quyen",
+        label: "Quản lý nhóm quyền",
       },
+      {
+        key: "quyen",
+        label: "Danh mục quyền hệ thống",
+      },
+
       {
         key: "sao-luu-du-lieu",
         label: "Sao lưu",

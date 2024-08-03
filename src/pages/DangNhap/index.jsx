@@ -37,7 +37,7 @@ const Login = () => {
       style={{
         height: "100vh",
         width: "100%",
-        backgroundColor: "#202947",
+        backgroundColor: "#009999",
       }}
       justify="center"
       align="center"

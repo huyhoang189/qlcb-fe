@@ -62,7 +62,7 @@ const baseColumns = [
     title: "Ghi chú",
     dataIndex: "ghi_chu",
     key: "ghi_chu",
-    width: "30%",
+    // width: "30%",
     // align: "center",
   },
 ];
@@ -99,7 +99,7 @@ const DonVi_V2 = () => {
                 ten_don_vi: "",
                 ma_don_vi_cha: record?.id,
                 ghi_chu: "",
-                so_thu_tu: 0,
+                so_thu_tu: 1,
                 trang_thai: true,
               })
             }
@@ -145,6 +145,21 @@ const DonVi_V2 = () => {
     <ContentWrapper>
       <CustomBreadcrumb items={pageHeader.breadcrumb} />
       <CustomeTable
+        header={
+          <CreateButton
+            onClick={() =>
+              handleModal({
+                id: "",
+                ma_don_vi: "",
+                ten_don_vi: "",
+                ma_don_vi_cha: null,
+                ghi_chu: "",
+                so_thu_tu: 1,
+                trang_thai: true,
+              })
+            }
+          />
+        }
         columns={columns}
         bordered
         data={trees}

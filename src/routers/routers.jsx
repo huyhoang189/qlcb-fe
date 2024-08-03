@@ -46,8 +46,9 @@ import DanhSachThiSinh from "../pages/QuanLyDaoTao/DanhSachThiSinh/index.jsx";
 import TimKiemNangCao from "../pages/QuanLyCanBo/TimKiemNangCao/index.jsx";
 import CanBoDangThucHienNhiemVu from "../pages/QuanLyDaoTao/CanBoThucHienNhiemVu/index.jsx";
 import QuanLyNguoiDung from "../pages/QuanTriHeThong/QuanLyNguoiDung/index.jsx";
-import QuanLyPhanQuyen from "../pages/QuanTriHeThong/PhanQuyen/index.jsx";
+import QuanLyPhanQuyen from "../pages/QuanTriHeThong/DanhMucQuyen/index.jsx";
 import ThietLapThamSo from "../pages/QuanTriHeThong/ThietLapThamSo/index.jsx";
+import Group from "../pages/QuanTriHeThong/QuanLyNhomQuyen/index.jsx";
 export const router = createBrowserRouter([
   {
     path: "dang-nhap",
@@ -263,8 +264,12 @@ export const router = createBrowserRouter([
             element: <QuanLyNguoiDung />,
           },
           {
-            path: "phan-quyen-he-thong",
+            path: "quyen",
             element: <QuanLyPhanQuyen />,
+          },
+          {
+            path: "nhom-quyen",
+            element: <Group />,
           },
           {
             path: "thiet-lap-tham-so",

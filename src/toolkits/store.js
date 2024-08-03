@@ -46,7 +46,12 @@ import tinhHinhKTCTCCSlice from "./T63/TinhHinhKTCTCC/slice.js";
 import tinhHinhKTCTVCSlice from "./T63/TinhHinhKTCTVC/slice.js";
 import quaTrinhCongTacT63Slice from "./T63/QuaTrinhCongTac/slice.js";
 import banThanSlice from "./T63/BanThan/slice.js";
+
 import authSlice from "./Auth/slice";
+import roleSlice from "./QuanTriHeThong/Role/slice.js";
+import groupSlice from "./QuanTriHeThong/Group/slice.js";
+import permissionSlice from "./QuanTriHeThong/Permission/slice.js";
+
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
@@ -96,6 +101,9 @@ export const store = configureStore({
     tinhHinhKTCTCCs: tinhHinhKTCTCCSlice.reducer,
     banThans: banThanSlice.reducer,
     auths: authSlice.reducer,
+    roles: roleSlice.reducer,
+    groups: groupSlice.reducer,
+    permissions: permissionSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

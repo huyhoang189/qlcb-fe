@@ -17,6 +17,7 @@ const Siderbar = () => {
     const url = e?.keyPath.reverse().join("\\");
     navigate(url);
   };
+
   return (
     <SiderWrapper
       width="250px"
@@ -32,6 +33,7 @@ const Siderbar = () => {
         onClick={onClickSelectItem}
         theme="dark"
         style={{ height: "100%" }}
+        selectedKeys={location.pathname.split("/").filter(Boolean)}
       />
     </SiderWrapper>
   );

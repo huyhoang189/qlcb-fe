@@ -38,6 +38,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           darkSubMenuItemBg: "#008080",
           darkItemColor: "#fff",
           darkItemHoverBg: "#009999",
+          darkItemSelectedBg: "#009999",
+          itemSelectedBg: "#009999",
           darkPopupBg: "#008080",
         },
         Divider: {
