@@ -51,6 +51,7 @@ import authSlice from "./Auth/slice";
 import roleSlice from "./QuanTriHeThong/Role/slice.js";
 import groupSlice from "./QuanTriHeThong/Group/slice.js";
 import permissionSlice from "./QuanTriHeThong/Permission/slice.js";
+import userSlice from "./QuanTriHeThong/User/slice.js";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -104,6 +105,7 @@ export const store = configureStore({
     roles: roleSlice.reducer,
     groups: groupSlice.reducer,
     permissions: permissionSlice.reducer,
+    users: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

@@ -48,6 +48,7 @@ import authSaga from "./Auth/saga";
 import roleSaga from "./QuanTriHeThong/Role/saga.js";
 import groupSaga from "./QuanTriHeThong/Group/saga.js";
 import permissionSaga from "./QuanTriHeThong/Permission/saga.js";
+import userSaga from "./QuanTriHeThong/User/saga.js";
 
 export default function* rootSaga() {
   yield all([
@@ -98,5 +99,6 @@ export default function* rootSaga() {
     roleSaga(),
     groupSaga(),
     permissionSaga(),
+    userSaga(),
   ]);
 }

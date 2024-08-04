@@ -3,6 +3,7 @@ export const ACTION_NAME = {
   CREATE: "CREATE",
   DELETE: "DELETE",
   VIEW: "VIEW",
+  ACTIVE: "ACTIVE",
 };
 
 export const DATE_FORMAT = {

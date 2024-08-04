@@ -1,7 +1,7 @@
 import { Input, Space, Typography } from "antd";
 import PropTypes from "prop-types";
 
-const TextInput = ({
+const PasswordInput = ({
   title,
   property,
   value,
@@ -28,7 +28,7 @@ const TextInput = ({
         {title}
         {isNull === false ? <span style={{ color: "red" }}>(*)</span> : ""}
       </Typography.Text>
-      <Input
+      <Input.Password
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(property, e)}
@@ -38,7 +38,7 @@ const TextInput = ({
   );
 };
 
-TextInput.propTypes = {
+PasswordInput.propTypes = {
   title: PropTypes.string,
   property: PropTypes.string,
   value: PropTypes.string,
@@ -53,4 +53,4 @@ TextInput.propTypes = {
   align: PropTypes.string,
 };
 
-export default TextInput;
+export default PasswordInput;

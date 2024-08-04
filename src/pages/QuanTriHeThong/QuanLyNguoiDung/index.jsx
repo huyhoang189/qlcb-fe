@@ -1,15 +1,26 @@
-import { ContentWrapper } from "../../../assets/styles/contentWrapper.style";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Button, Space, Tag } from "antd";
 import {
   CreateButton,
   DeleteButton,
-  DetailButton,
   UpdateButton,
-} from "../../../components/Button";
-import TextInput from "../../../components/Form/textinput";
-import CustomeTable from "../../../components/Table/table";
-import CustomBreadcrumb from "../../../components/breadcrumb";
+} from "../../../components/Button/index.jsx";
+import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
+import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
+import CustomeTable from "../../../components/Table/table.jsx";
+import TextInput from "../../../components/Form/textinput.jsx";
+import userSlice from "../../../toolkits/QuanTriHeThong/User/slice.js";
+import ModalItem from "./modal.jsx";
 import Header from "../../../components/Table/header.jsx";
-import { Space } from "antd";
+import { convertUTCtoAsianTime } from "../../../utils/time.js";
+import {
+  LockFilled,
+  LockOutlined,
+  UnlockFilled,
+  UnlockOutlined,
+} from "@ant-design/icons";
+import { ACTION_NAME } from "../../../utils/common.js";
 
 const pageHeader = {
   breadcrumb: [
@@ -21,12 +32,163 @@ const pageHeader = {
       title: "Quản trị hệ thống",
     },
     {
-      title: "Quản lý người dùng hệ thống",
+      title: "Danh mục quyền hệ thống",
     },
   ],
 };
 
-const QuanLyNguoiDung = () => {
+const baseColumns = [
+  {
+    title: "STT",
+    dataIndex: "key_table",
+    key: "key_table",
+    width: 50,
+    align: "center",
+  },
+
+  {
+    title: "Tên người dùng",
+    dataIndex: "full_name",
+    key: "full_name",
+    align: "center",
+  },
+  {
+    title: "Tên tài khoản",
+    dataIndex: "user_name",
+    key: "user_name",
+    align: "center",
+  },
+  {
+    title: "Nhóm người dùng",
+    dataIndex: "group",
+    key: "group",
+    align: "center",
+    render: (text, record) => {
+      return record?.auth_group?.name;
+    },
+  },
+  {
+    title: "Trạng thái hoạt động",
+    dataIndex: "is_active",
+    key: "is_active",
+    align: "center",
+    render: (text, record) => {
+      return text ? (
+        <Tag color="green">Đang hoạt động</Tag>
+      ) : (
+        <Tag color="red">Khoá</Tag>
+      );
+    },
+  },
+  {
+    title: "Đăng nhập gần nhất",
+    dataIndex: "lastest_login",
+    key: "lastest_login",
+    align: "center",
+    render: (text, record) => {
+      return convertUTCtoAsianTime(text);
+    },
+  },
+
+  {
+    title: "Thời gian tạo",
+    dataIndex: "created_at",
+    key: "created_at",
+    align: "center",
+    render: (text, record) => {
+      return convertUTCtoAsianTime(text);
+    },
+  },
+];
+
+const User = () => {
+  const dispatch = useDispatch();
+  const { users, isLoading, totalItem, pageNumber, pageSize } = useSelector(
+    (state) => state.users
+  );
+
+  const [keyword, setKeyword] = useState("");
+
+  const onChangeKeywordInput = (key, event) => {
+    setKeyword(event.target.value);
+  };
+
+  const handlePaginationChange = (current, pageSize) => {
+    dispatch(
+      userSlice.actions.getUsers({
+        keyword,
+        pageSize: pageSize,
+        pageNumber: current,
+      })
+    );
+  };
+
+  const handleModal = (_item) => {
+    dispatch(userSlice.actions.toggleModal(_item));
+  };
+
+  const columns = [
+    ...baseColumns,
+    {
+      title: "Công cụ",
+      key: "tool",
+      align: "center",
+      width: 140,
+      render: (text, record) => (
+        <Space
+          direction="horizontal"
+          style={{ width: "100%", justifyContent: "center" }}
+        >
+          <UpdateButton
+            title={record?.is_active ? "Khoá" : "Mở khoá"}
+            icon={
+              record?.is_active ? (
+                <LockFilled style={{ color: "red" }} />
+              ) : (
+                <UnlockFilled style={{ color: "green" }} />
+              )
+            }
+            onClick={() => {
+              dispatch(
+                userSlice.actions.handleUser({
+                  item: record,
+                  actionName: ACTION_NAME.ACTIVE,
+                })
+              );
+            }}
+          />
+          <UpdateButton onClick={() => handleModal(record)} />
+          <DeleteButton
+            onConfirm={() => {
+              dispatch(
+                userSlice.actions.handleUser({
+                  item: record,
+                  actionName: "DELETE",
+                  pageSize: pageSize,
+                  pageNumber:
+                    record?.key === pageSize * (pageNumber - 1) + 1
+                      ? Math.max(pageNumber - 1, 1)
+                      : pageNumber,
+                })
+              );
+            }}
+          />
+        </Space>
+      ),
+    },
+  ];
+
+  //side effect
+  useEffect(() => {
+    dispatch(
+      userSlice.actions.getUsers({
+        keyword,
+        pageSize: 10,
+        pageNumber: 1,
+      })
+    );
+  }, [dispatch, keyword]);
+
   return (
     <ContentWrapper>
       <CustomBreadcrumb items={pageHeader.breadcrumb} />
@@ -35,121 +197,27 @@ const QuanLyNguoiDung = () => {
           <Header>
             <TextInput
               placeholder={"Nhập vào từ khoá tìm kiếm"}
-              // onChange={onChangeKeywordInput}
+              onChange={onChangeKeywordInput}
               property={"keyword"}
               width={20}
             />
-            <CreateButton />
+            <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
-        data={[
-          {
-            ten_tai_khoan: "administrator",
-            ten_nguoi_dung: "Quản trị viên cao nhất",
-            ngay_tao: "2022-01-15",
-            dang_nhap_cuoi: "2024-06-18",
-            nhom_quyen: "Admin",
-            trang_thai: "Hoạt động",
-            don_vi: "Cục điều tra hình sự",
-          },
-          {
-            ten_tai_khoan: "hoangvq",
-            ten_nguoi_dung: "Vũ Quốc Hoàng",
-            ngay_tao: "2022-02-20",
-            dang_nhap_cuoi: "2024-06-17",
-            nhom_quyen: "User",
-            trang_thai: "Khóa",
-            don_vi: "Phòng ĐTHS / QK4",
-          },
-          {
-            ten_tai_khoan: "trolychinhtridthsqk4",
-            ten_nguoi_dung: "Trợ lý chính trị",
-            ngay_tao: "2023-05-10",
-            dang_nhap_cuoi: "2024-06-19",
-            nhom_quyen: "Moderator",
-            trang_thai: "Hoạt động",
-            don_vi: "Phòng ĐTHS / QK4",
-          },
-        ]}
-        columns={[
-          {
-            title: "STT",
-            dataIndex: "key_table",
-            key: "key_table",
-            width: 50,
-            align: "center",
-          },
-
-          {
-            title: "Tên tài khoản",
-            dataIndex: "ten_tai_khoan",
-            key: "ten_tai_khoan",
-            align: "center",
-          },
-          {
-            title: "Tên người dùng",
-            dataIndex: "ten_nguoi_dung",
-            key: "ten_nguoi_dung",
-            align: "center",
-          },
-          {
-            title: "Đơn vị",
-            dataIndex: "don_vi",
-            key: "don_vi",
-            align: "center",
-          },
-
-          {
-            title: "Ngày tạo",
-            dataIndex: "ngay_tao",
-            key: "ngay_tao",
-            align: "center",
-          },
-
-          {
-            title: "Đăng nhập lần cuối",
-            dataIndex: "dang_nhap_cuoi",
-            key: "dang_nhap_cuoi",
-            align: "center",
-          },
-          {
-            title: "Nhóm quyền",
-            dataIndex: "nhom_quyen",
-            key: "nhom_quyen",
-            align: "center",
-          },
-          {
-            title: "Trạng thái",
-            dataIndex: "trang_thai",
-            key: "trang_thai",
-            align: "center",
-          },
-          {
-            title: "Công cụ",
-            key: "tool",
-            align: "center",
-            width: 140,
-            render: (text, record) => (
-              <Space
-                direction="horizontal"
-                style={{ width: "100%", justifyContent: "center" }}
-              >
-                <UpdateButton />
-                <DeleteButton />
-              </Space>
-            ),
-          },
-        ]}
-        // isLoading={isLoading}
+        data={users}
+        columns={columns}
+        isLoading={isLoading}
         pagination={{
-          current: 1,
-          pageSize: 10,
-          total: 3,
-          //onChange: handlePaginationChange,
+          current: pageNumber,
+          pageSize: pageSize,
+          total: totalItem,
+          onChange: handlePaginationChange,
         }}
       />
+
+      <ModalItem />
     </ContentWrapper>
   );
 };
 
-export default QuanLyNguoiDung;
+export default User;

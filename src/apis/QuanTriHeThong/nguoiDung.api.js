@@ -19,10 +19,25 @@ export const create = (payload) => {
   });
 };
 
+export const update = (payload) => {
+  return api.makeRequest({
+    url: `/nguoi-dung/${payload?.id}`,
+    method: "PUT",
+    data: payload,
+  });
+};
+
 export const deleteItem = (payload) => {
   return api.makeRequest({
     url: `/nguoi-dung/${payload?.id}`,
     method: "DELETE",
+  });
+};
+
+export const changeActive = (payload) => {
+  return api.makeRequest({
+    url: `/nguoi-dung/change-active/${payload?.id}`,
+    method: "GET",
   });
 };
 
