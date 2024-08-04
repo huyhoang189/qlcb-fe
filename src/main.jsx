@@ -35,10 +35,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         Statistic: {},
         Menu: {
           darkItemBg: "#006666",
-          darkSubMenuItemBg: "#008080",
+          darkSubMenuItemBg: "#006666",
           darkItemColor: "#fff",
           darkItemHoverBg: "#009999",
-          darkItemSelectedBg: "#009999",
+          darkItemSelectedBg: "#008080",
           itemSelectedBg: "#009999",
           darkPopupBg: "#008080",
         },

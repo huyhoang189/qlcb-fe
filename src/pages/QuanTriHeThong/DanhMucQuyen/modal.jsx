@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomeModal from "../../../components/Form/modal";
 import TextInput from "../../../components/Form/textinput";
 import roleSlice from "../../../toolkits/QuanTriHeThong/Role/slice";
-import { ACTION_NAME } from "../../../utils/common";
+import {
+  ACTION_NAME,
+  convertVietnameseToUpperUnderscore,
+} from "../../../utils/common";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
@@ -27,9 +30,10 @@ const ModalItem = () => {
   };
 
   const onRecordInputChange = (key, event) => {
-    if (key) {
+    if (key && key === "description") {
       let clone = Object.assign({}, selectedRole);
       clone[key] = event.target.value;
+      clone["name"] = convertVietnameseToUpperUnderscore(event.target.value);
       dispatch(roleSlice.actions.updateSelectedRoleInput(clone));
     }
   };
@@ -48,18 +52,19 @@ const ModalItem = () => {
       cancelText="Từ chối"
     >
       <TextInput
-        title="Tên quyền"
-        placeholder="Nhập vào tên chức danh"
-        onChange={onRecordInputChange}
-        property={"name"}
-        value={selectedRole?.name}
-      />
-      <TextInput
         title="Mô tả"
-        placeholder="Nhập vào ghi chú"
+        placeholder="Nhập vào mô tả"
         onChange={onRecordInputChange}
         property={"description"}
         value={selectedRole?.description}
+      />
+      <TextInput
+        disabled={true}
+        title="Tên quyền"
+        placeholder="Nhập vào tên quyền"
+        onChange={onRecordInputChange}
+        property={"name"}
+        value={selectedRole?.name}
       />
     </CustomeModal>
   );

@@ -35,7 +35,11 @@ function* _login({ payload }) {
     // console.log(data);
     if (status === 200 || status === 201) {
       yield put(authSlice.actions.loginSuccess(metadata?.data));
-      insertCookieToken(TOKEN_VERIFY, metadata?.data?.acccessToken);
+      insertCookieToken(
+        TOKEN_VERIFY,
+        metadata?.data?.acccessToken,
+        metadata?.data?.timeExpired
+      );
       window.location.pathname = "./";
     }
   } catch (error) {

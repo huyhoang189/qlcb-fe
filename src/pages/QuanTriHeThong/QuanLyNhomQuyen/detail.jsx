@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Space } from "antd";
+import { Checkbox, Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
+  DetailButton,
   UpdateButton,
 } from "../../../components/Button/index.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
@@ -11,8 +12,9 @@ import CustomBreadcrumb from "../../../components/breadcrumb.jsx";
 import CustomeTable from "../../../components/Table/table.jsx";
 import TextInput from "../../../components/Form/textinput.jsx";
 import permissionSlice from "../../../toolkits/QuanTriHeThong/Permission/slice.js";
-import ModalItem from "./modal.jsx";
 import Header from "../../../components/Table/header.jsx";
+import { useParams } from "react-router-dom";
+import { ACTION_NAME } from "../../../utils/common.js";
 
 const pageHeader = {
   breadcrumb: [
@@ -24,7 +26,10 @@ const pageHeader = {
       title: "Quản trị hệ thống",
     },
     {
-      title: "Danh sách nhóm quyền",
+      title: "Nhóm quyền",
+    },
+    {
+      title: "Chi tiết",
     },
   ],
 };
@@ -38,22 +43,24 @@ const baseColumns = [
     align: "center",
   },
 
-  {
-    title: "Tên nhóm",
-    dataIndex: "name",
-    key: "name",
-    align: "center",
-  },
+  // {
+  //   title: "Tên nhóm",
+  //   dataIndex: "name",
+  //   key: "name",
+  //   align: "center",
+  // },
   {
     title: "Mô tả",
     dataIndex: "description",
     key: "description",
-    align: "center",
+    // align: "center",
   },
 ];
 
 const Permission = () => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const { id } = params;
   const { permissions, isLoading, totalItem, pageNumber, pageSize } =
     useSelector((state) => state.permissions);
 
@@ -69,12 +76,9 @@ const Permission = () => {
         keyword,
         pageSize: pageSize,
         pageNumber: current,
+        group_id: id,
       })
     );
-  };
-
-  const handleModal = (_item) => {
-    dispatch(permissionSlice.actions.toggleModal(_item));
   };
 
   const columns = [
@@ -89,21 +93,19 @@ const Permission = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
-          <UpdateButton onClick={() => handleModal(record)} />
-          <DeleteButton
-            onConfirm={() => {
+          <Checkbox
+            checked={record?.status}
+            onChange={() =>
               dispatch(
                 permissionSlice.actions.handlePermission({
                   item: record,
-                  actionName: "DELETE",
-                  pageSize: pageSize,
-                  pageNumber:
-                    record?.key === pageSize * (pageNumber - 1) + 1
-                      ? Math.max(pageNumber - 1, 1)
-                      : pageNumber,
+                  group_id: id,
+                  actionName: record?.status
+                    ? ACTION_NAME.DELETE
+                    : ACTION_NAME.CREATE,
                 })
-              );
-            }}
+              )
+            }
           />
         </Space>
       ),
@@ -117,6 +119,7 @@ const Permission = () => {
         keyword,
         pageSize: 10,
         pageNumber: 1,
+        group_id: id,
       })
     );
   }, [dispatch, keyword]);
@@ -133,7 +136,6 @@ const Permission = () => {
               property={"keyword"}
               width={20}
             />
-            <CreateButton onClick={() => handleModal(null)} />
           </Header>
         }
         data={permissions}
@@ -146,8 +148,6 @@ const Permission = () => {
           onChange: handlePaginationChange,
         }}
       />
-
-      <ModalItem />
     </ContentWrapper>
   );
 };

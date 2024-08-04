@@ -25,4 +25,8 @@ export const SiderWrapper = styled(Sider)`
   .ant-menu > li > div > span {
     font-weight: 600;
   }
+
+  .ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    background-color: #004d4d;
+  }
 `;

@@ -47,3 +47,47 @@ export const GIOI_TINH = [
 ];
 
 export const TOKEN_VERIFY = "AxfBtrtrsDYChkh";
+
+export const GROUP_TYPE = [
+  { value: "ADMIN", label: "Quản trị hệ thống" },
+  { value: "MOD", label: "Quản trị viên" },
+  { value: "USER", label: "Người dùng" },
+];
+
+const removeAccents = (str) => {
+  // Tạo một đối tượng ánh xạ các ký tự có dấu sang không dấu
+  const accentsMap = {
+    a: "áàạảãâấầậẩẫăắằặẳẵ",
+    e: "éèẹẻẽêếềệểễ",
+    i: "íìịỉĩ",
+    o: "óòọỏõôốồộổỗơớờợởỡ",
+    u: "úùụủũưứừựửữ",
+    y: "ýỳỵỷỹ",
+    d: "đ",
+    A: "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+    E: "ÉÈẸẺẼÊẾỀỆỂỄ",
+    I: "ÍÌỊỈĨ",
+    O: "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+    U: "ÚÙỤỦŨƯỨỪỰỬỮ",
+    Y: "ÝỲỴỶỸ",
+    D: "Đ",
+  };
+
+  // Thay thế các ký tự có dấu bằng ký tự không dấu
+  for (const key in accentsMap) {
+    const accents = accentsMap[key];
+    for (let i = 0; i < accents.length; i++) {
+      str = str.replace(new RegExp(accents[i], "g"), key);
+    }
+  }
+
+  return str;
+};
+
+export const convertVietnameseToUpperUnderscore = (str) => {
+  // Loại bỏ dấu
+  str = removeAccents(str);
+
+  // Chuyển đổi chuỗi thành chữ in hoa và thay thế khoảng trắng bằng dấu gạch dưới
+  return str.toUpperCase().replace(/\s+/g, "_");
+};

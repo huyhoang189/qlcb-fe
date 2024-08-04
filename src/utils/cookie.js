@@ -14,8 +14,11 @@ const clearCookieToken = (_cookieKey) => {
   document.cookie = `${_cookieKey}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
 
-const insertCookieToken = (_cookieKey, payload) => {
-  const expirationDate = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
+const insertCookieToken = (_cookieKey, payload, timeExpired) => {
+  const timeExpiredSeconds = parseInt(timeExpired, 10); // Convert the string to an integer
+  const expirationTime = timeExpiredSeconds * 1000; // Convert seconds to milliseconds
+  const expirationDate = new Date(Date.now() + expirationTime); // Calculate the expiration date
+
   document.cookie = `${_cookieKey}=${JSON.stringify(
     payload
   )}; expires=${expirationDate.toUTCString()}; path=/;`;

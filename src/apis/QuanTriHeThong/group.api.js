@@ -21,7 +21,7 @@ export const create = (payload) => {
 
 export const update = (payload) => {
   return api.makeRequest({
-    url: `/group`,
+    url: `/group/${payload?.id}`,
     method: "PUT",
     data: payload,
   });

@@ -21,7 +21,7 @@ export const create = (payload) => {
 
 export const update = (payload) => {
   return api.makeRequest({
-    url: `/permission`,
+    url: `/permission/${payload?.id}`,
     method: "PUT",
     data: payload,
   });
@@ -30,6 +30,21 @@ export const update = (payload) => {
 export const deleteItem = (payload) => {
   return api.makeRequest({
     url: `/permission/${payload?.id}`,
+    method: "DELETE",
+  });
+};
+
+export const checkPermission = (payload) => {
+  return api.makeRequest({
+    url: `/permission/check-permission?group_id=${payload?.group_id}&role_id=${payload?.role_id}`,
+    method: "PUT",
+    data: payload,
+  });
+};
+
+export const deletePermission = (payload) => {
+  return api.makeRequest({
+    url: `/permission/delete-permission?group_id=${payload?.group_id}&role_id=${payload?.role_id}`,
     method: "DELETE",
   });
 };

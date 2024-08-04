@@ -42,13 +42,11 @@ const baseColumns = [
     title: "Tên quyền",
     dataIndex: "name",
     key: "name",
-    align: "center",
   },
   {
     title: "Mô tả",
     dataIndex: "description",
     key: "description",
-    align: "center",
   },
 ];
 

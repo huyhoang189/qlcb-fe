@@ -18,4 +18,10 @@ export const ContentWrapper = styled("div")`
   .ant-table-container > .ant-table-content > table > thead > tr > th {
     text-align: center;
   }
+
+  // .ant-menu-dark .ant-menu-submenu-selected >.ant-menu-submenu-title {
+  //   background-color: #000 !important;
+  // }
+
+  .
 `;

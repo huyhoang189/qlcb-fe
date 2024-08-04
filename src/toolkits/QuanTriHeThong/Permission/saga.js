@@ -3,7 +3,7 @@ import permissionSlice from "./slice.js";
 import { ACTION_NAME } from "../../../utils/common.js";
 import {
   create,
-  deleteItem,
+  deletePermission,
   getAll,
   update,
 } from "../../../apis/QuanTriHeThong/permission.api.js";
@@ -24,15 +24,19 @@ function* _getAll({ payload }) {
 
 function* _handleItem({ payload }) {
   try {
-    const { actionName, item } = payload;
+    const { actionName, item, group_id } = payload;
     let data, status;
 
     if (actionName === ACTION_NAME.CREATE) {
-      ({ data, status } = yield call(create, item));
-    } else if (actionName === ACTION_NAME.UPDATE) {
-      ({ data, status } = yield call(update, item));
+      ({ data, status } = yield call(create, {
+        role_id: item?.id,
+        group_id: group_id,
+      }));
     } else if (actionName === ACTION_NAME.DELETE) {
-      ({ data, status } = yield call(deleteItem, { id: item.id }));
+      ({ data, status } = yield call(deletePermission, {
+        role_id: item?.id,
+        group_id: group_id,
+      }));
     }
 
     const isSuccess = status === 200 || status === 201;

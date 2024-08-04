@@ -21,7 +21,7 @@ export const create = (payload) => {
 
 export const update = (payload) => {
   return api.makeRequest({
-    url: `/role`,
+    url: `/role/${payload?.id}`,
     method: "PUT",
     data: payload,
   });

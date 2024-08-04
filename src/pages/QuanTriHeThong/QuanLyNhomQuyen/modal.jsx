@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomeModal from "../../../components/Form/modal";
 import TextInput from "../../../components/Form/textinput";
 import groupSlice from "../../../toolkits/QuanTriHeThong/Group/slice";
-import { ACTION_NAME } from "../../../utils/common";
+import { ACTION_NAME, GROUP_TYPE } from "../../../utils/common";
+import SelectInput from "../../../components/Form/selectinput";
 
 const ModalItem = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,14 @@ const ModalItem = () => {
     }
   };
 
+  const onRecordSelectedInputChange = (key, event) => {
+    if (key) {
+      let clone = Object.assign({}, selectedGroup);
+      clone[key] = event;
+      dispatch(groupSlice.actions.updateSelectedGroupInput(clone));
+    }
+  };
+
   return (
     <CustomeModal
       open={modalActive}
@@ -60,6 +69,13 @@ const ModalItem = () => {
         onChange={onRecordInputChange}
         property={"description"}
         value={selectedGroup?.description}
+      />
+      <SelectInput
+        title="Loại quyền người dùng"
+        onChange={onRecordSelectedInputChange}
+        property={"type"}
+        value={selectedGroup?.type}
+        options={GROUP_TYPE}
       />
     </CustomeModal>
   );

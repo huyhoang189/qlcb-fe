@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  menuCollapse: false,
+  menuCollapse: true,
 };
 
 const reducer = createSlice({

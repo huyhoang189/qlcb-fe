@@ -4,6 +4,7 @@ import { Space } from "antd";
 import {
   CreateButton,
   DeleteButton,
+  DetailButton,
   UpdateButton,
 } from "../../../components/Button/index.jsx";
 import { ContentWrapper } from "../../../assets/styles/contentWrapper.style.js";
@@ -13,6 +14,8 @@ import TextInput from "../../../components/Form/textinput.jsx";
 import groupSlice from "../../../toolkits/QuanTriHeThong/Group/slice.js";
 import ModalItem from "./modal.jsx";
 import Header from "../../../components/Table/header.jsx";
+import { GROUP_TYPE } from "../../../utils/common.js";
+import { useNavigate } from "react-router-dom";
 
 const pageHeader = {
   breadcrumb: [
@@ -50,10 +53,20 @@ const baseColumns = [
     key: "description",
     align: "center",
   },
+  {
+    title: "Loại quyền",
+    dataIndex: "type",
+    key: "type",
+    align: "center",
+    render: (text, record) => {
+      return GROUP_TYPE.find((e) => e?.value === text)?.label;
+    },
+  },
 ];
 
 const Group = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { groups, isLoading, totalItem, pageNumber, pageSize } = useSelector(
     (state) => state.groups
   );
@@ -90,6 +103,11 @@ const Group = () => {
           direction="horizontal"
           style={{ width: "100%", justifyContent: "center" }}
         >
+          <DetailButton
+            onClick={() => {
+              navigate(`${record.id}`);
+            }}
+          />
           <UpdateButton onClick={() => handleModal(record)} />
           <DeleteButton
             onConfirm={() => {

@@ -49,6 +49,7 @@ import QuanLyNguoiDung from "../pages/QuanTriHeThong/QuanLyNguoiDung/index.jsx";
 import QuanLyPhanQuyen from "../pages/QuanTriHeThong/DanhMucQuyen/index.jsx";
 import ThietLapThamSo from "../pages/QuanTriHeThong/ThietLapThamSo/index.jsx";
 import Group from "../pages/QuanTriHeThong/QuanLyNhomQuyen/index.jsx";
+import Permission from "../pages/QuanTriHeThong/QuanLyNhomQuyen/detail.jsx";
 export const router = createBrowserRouter([
   {
     path: "dang-nhap",
@@ -271,6 +272,11 @@ export const router = createBrowserRouter([
             path: "nhom-quyen",
             element: <Group />,
           },
+          {
+            path: "nhom-quyen/:id",
+            element: <Permission />,
+          },
+
           {
             path: "thiet-lap-tham-so",
             element: <ThietLapThamSo />,
