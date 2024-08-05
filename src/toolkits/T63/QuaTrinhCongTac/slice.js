@@ -11,7 +11,6 @@ const initialState = {
   selectedQuaTrinhCongTacT63: {},
   errorMassage: false,
   isLoading: false,
-  modalActive: false,
   count: 0,
   pageSize: 10,
   pageNumber: 1,
@@ -23,12 +22,10 @@ const reducer = createSlice({
   initialState,
   reducers: {
     toggleModal: (state, action) => {
-      state.modalActive = !state.modalActive;
       state.selectedQuaTrinhCongTacT63 =
         action.payload !== null ? action.payload : initialState.quaTrinhCongTacT63;
     },
     getQuaTrinhCongTacT63ById: (state, action) => {
-      state.modalActive = false;
       state.errorMassage = false;
       state.isLoading = true;
       state.pageSize = action.payload.pageSize;
@@ -44,7 +41,6 @@ const reducer = createSlice({
         : state.quaTrinhCongTacT63;
     },
     getQuaTrinhCongTacT63s: (state, action) => {
-      state.modalActive = false;
       state.errorMassage = false;
       state.isLoading = true;
     },
@@ -66,7 +62,6 @@ const reducer = createSlice({
     },
     handleQuaTrinhCongTacT63: (state, action) => {},
     handleQuaTrinhCongTacT63Success: (state, action) => {
-      state.modalActive = false;
       state.errorMassage = false;
       state.selectedQuaTrinhCongTacT63 = action.payload;
     },

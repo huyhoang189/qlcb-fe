@@ -142,9 +142,6 @@ const ModalItem = () => {
             value={selectedBanThan?.cap_bac}
         />
     <DateInput
-            direction=""
-            boldText={false}
-            align={"center"}
             title="Sinh ngày:"
             placeholder="Nhập vào ngày sinh"
             onChange={onRecordDateInputChange}
